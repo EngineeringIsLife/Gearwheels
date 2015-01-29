@@ -1,11 +1,16 @@
-#include <QCoreApplication>
 #include <math.h>
-//#include <iostream>
 #include "zahnrad.h"
 
 #define DEG (M_PI/180.0)
 
-void Zahnrad::calcDurchmesser(void)
+Zahnraddaten::Zahnraddaten(float alpha, float rho, float c, float m, float x, float k, int z)
+    : alpha(alpha), rho(rho), c(c), m(m), x(x), k(k), z(z)
+{
+    itersteps = 10;
+    calcDurchmesser();
+}
+
+void Zahnraddaten::calcDurchmesser(void)
 {
     float h = 0; // TODO: ??
     float h_a = m * (1 + x - h);
@@ -22,7 +27,7 @@ void Zahnrad::calcDurchmesser(void)
     float alpha_strich = pow(3 * inv_a, 1.0/3.0);
 
     // Iteration (siehe Wikipedia)
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < itersteps; i++)
         alpha_strich += ((alpha_strich + inv_a) / tan(alpha_strich) - 1) / tan(alpha_strich);
 
     durchmesser.d_max = durchmesser.d * cos(alpha * DEG) / cos(alpha_strich);

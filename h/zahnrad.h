@@ -1,8 +1,12 @@
 #ifndef ZAHNRAD_H
 #define ZAHNRAD_H
 
-class Zahnrad
+class Zahnraddaten
 {
+private:
+    int itersteps;
+    void calcDurchmesser(void);
+
 public:
     float alpha;        // Profilwinkel
     float rho;          // Fussrundungsradius
@@ -24,11 +28,7 @@ public:
         float d_max; // Maximaler Aussendurchmesser
     } durchmesser;
 
-    Zahnrad(float alpha, float rho, float c, float m, float x, float k, int z)
-        : alpha(alpha), rho(rho), c(c), m(m), x(x), k(k), z(z) { calcDurchmesser(); }
-
-private:
-    void calcDurchmesser(void);
+    Zahnraddaten(float alpha, float rho, float c, float m, float x, float k, int z);
 
 };
 
