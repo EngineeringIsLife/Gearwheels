@@ -27,42 +27,4 @@ public:
     void printProfileToMatlab(std::ostream &stream);
 };
 
-
-class Zahnradprofil
-{
-private:
-    float* winkel;
-    float* laenge;
-
-    int iteratX, iteratY;
-
-public:
-    Zahnradprofil(int elemente);
-    Zahnradprofil(Zahnradprofil& rhs);
-    ~Zahnradprofil(void);
-
-    int elemente;
-
-    void setCartesian(int pos_id, float x, float y);
-    void setPolar(int pos_id, float length, float angle);
-
-    //void setAngle(int pos_id, float angle);
-    //void setLength(int pos_id, float angle);
-    void setX(int pos_id, float x);
-    void setY(int pos_id, float y);
-
-    float getAngle(int pos_id);
-    float getLength(int pos_id);
-    float getX(int pos_id);
-    float getY(int pos_id);
-
-    void resetIterator(void);
-    bool iteratorEndReached(void);
-    float getNextX(void);
-    float getNextY(void);
-};
-
-
-
-
 #endif // BEZUGSPROFIL_H

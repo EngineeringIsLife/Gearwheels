@@ -4,7 +4,7 @@
 #include "zahnradmath.h"
 #include "gearwheeloutput.h"
 
-GearwheelOutput::GearwheelOutput(Zahnradprofil& profile)
+GearwheelOutput::GearwheelOutput(Profil& profile)
     : profil(profile)
 {
     //std::cout << "Output Konstruktor" << std::endl;

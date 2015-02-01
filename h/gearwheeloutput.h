@@ -4,10 +4,10 @@
 class GearwheelOutput
 {
 private:
-    Zahnradprofil& profil;
+    Profil& profil;
 
 public:
-    GearwheelOutput(Zahnradprofil& profile);
+    GearwheelOutput(Profil& profile);
 
     void printProfile(std::ostream &stream);
     void printProfileToMatlab(std::ostream &stream);

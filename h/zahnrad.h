@@ -4,7 +4,7 @@
 class Zahnraddaten
 {
 private:
-    int itersteps;
+    const int itersteps;
     void calcDurchmesser(void);
 
 public:

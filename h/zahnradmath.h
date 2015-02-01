@@ -7,6 +7,8 @@ public:
     ZahnradMath();
 };*/
 
+#include "zahnradprofil.h"
+
 class ProfilMathematisch
 {
 private:
@@ -31,7 +33,7 @@ public:
     int parts_per_tooth;
     int parts_per_flank;
 
-    Zahnradprofil zahnprofil;
+    Profil zahnprofil;
     ProfilMathematisch(Zahnraddaten zahnrad, int genauigkeit);
 
     void resetIterator(void);

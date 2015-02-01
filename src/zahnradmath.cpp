@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "bezugsprofil.h"
+#include "zahnradprofil.h"
 #include "zahnrad.h"
 #include "zahnradmath.h"
 
@@ -42,8 +43,8 @@ void ProfilMathematisch::calcLeftFlank(void)
         float x = (cos(alpha) + alpha * sin(alpha)) * zahnrad.durchmesser.d_b / 2;
         float y = (sin(alpha) - alpha * cos(alpha)) * zahnrad.durchmesser.d_b / 2;
 
-        zahnprofil.setX(i, x);
-        zahnprofil.setY(i, y);
+        zahnprofil.setCartesian(i, x, y);
+        //zahnprofil.setPolar(i, zahnrad.durchmesser.d_b/2, -alpha);
     }
 }
 
@@ -52,11 +53,7 @@ void ProfilMathematisch::calcHead(void)
     for (int i = 0; i < parts_per_flank; i++)
     {
         float alpha = 4 * (limits[1] - limits[0]) / parts_per_tooth * i + limits[0];
-        float x = cos(alpha) * zahnrad.durchmesser.d_a / 2;
-        float y = sin(alpha) * zahnrad.durchmesser.d_a / 2;
-
-        zahnprofil.setX(i + parts_per_flank, x);
-        zahnprofil.setY(i + parts_per_flank, y);
+        zahnprofil.setPolar(i + parts_per_flank, zahnrad.durchmesser.d_a / 2, alpha);
     }
 }
 
@@ -73,8 +70,7 @@ void ProfilMathematisch::calcRightFlank(void)
         float phi = atan2(y,x);
         float r = sqrt(x*x + y*y);
 
-        zahnprofil.setX(3 * parts_per_flank - 1 - i, cos(limits[2] + phi) * r);
-        zahnprofil.setY(3 * parts_per_flank - 1 - i, sin(limits[2] + phi) * r);
+        zahnprofil.setCartesian(3 * parts_per_flank - 1 - i, cos(limits[2] + phi) * r, sin(limits[2] + phi) * r);
     }
 }
 
@@ -116,8 +112,7 @@ void ProfilMathematisch::calcFoot(void)
             float x = cos(alpha) * d_M;
             float y = sin(alpha) * d_M;
 
-            zahnprofil.setX(parts_per_tooth - 1 - i, x + x_M);
-            zahnprofil.setY(parts_per_tooth - 1 - i, y + y_M);
+            zahnprofil.setCartesian(parts_per_tooth - 1 - i, x + x_M, y + y_M);
         }
     }
 
@@ -136,8 +131,7 @@ void ProfilMathematisch::calcFoot(void)
             float x = cos(alpha) * zahnrad.durchmesser.d_f / 2;
             float y = sin(alpha) * zahnrad.durchmesser.d_f / 2;
 
-            zahnprofil.setX(parts_per_flank * 3 + i, x);
-            zahnprofil.setY(parts_per_flank * 3 + i, y);
+            zahnprofil.setCartesian(parts_per_flank * 3 + i, x, y);
         }
     }
 }
@@ -153,8 +147,7 @@ void ProfilMathematisch::calcFullXY(void)
             float y = zahnprofil.getY(i);
 
             // Rotation
-            zahnprofil.setX(i + j * parts_per_tooth, cos(gamma * j * DEG) * x - sin(gamma * j * DEG) * y);
-            zahnprofil.setY(i + j * parts_per_tooth, sin(gamma * j * DEG) * x + cos(gamma * j * DEG) * y);
+            zahnprofil.setCartesian(i + j * parts_per_tooth, cos(gamma * j * DEG) * x - sin(gamma * j * DEG) * y, sin(gamma * j * DEG) * x + cos(gamma * j * DEG) * y);
         }
     }
 }
@@ -162,9 +155,6 @@ void ProfilMathematisch::calcFullXY(void)
 // Grenzen des viergeteilten Zahns
 void ProfilMathematisch::calcLimits(void)
 {
-    //float h_a = zahnrad.m * (1 + zahnrad.x - h);
-    //float h_f = zahnrad.m * (1 - zahnrad.x + zahnrad.c);
-
     float gamma = 360.0 / zahnrad.z;
     float s = zahnrad.m * (M_PI_2 + 2 * zahnrad.x * tan(zahnrad.alpha * DEG));
 
@@ -186,22 +176,7 @@ void ProfilMathematisch::calcLimits(void)
     limits[3] = gamma * DEG;
 }
 
-void ProfilMathematisch::resetIterator(void)
-{
-    zahnprofil.resetIterator();
-}
-
-bool ProfilMathematisch::iteratorEndReached(void)
-{
-    return zahnprofil.iteratorEndReached();
-}
-
-float ProfilMathematisch::getNextX(void)
-{
-    return zahnprofil.getNextX();
-}
-
-float ProfilMathematisch::getNextY(void)
-{
-    return zahnprofil.getNextY();
-}
+void ProfilMathematisch::resetIterator(void) { zahnprofil.resetIterator(); }
+bool ProfilMathematisch::iteratorEndReached(void) { return zahnprofil.iteratorEndReached(); }
+float ProfilMathematisch::getNextX(void) { return zahnprofil.getNextX(); }
+float ProfilMathematisch::getNextY(void) { return zahnprofil.getNextY(); }

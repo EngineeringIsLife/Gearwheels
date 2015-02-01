@@ -1,6 +1,7 @@
-#include <QCoreApplication>
+//#include <QCoreApplication>
 #include <math.h>
 #include <iostream>
+#include <stdlib.h>
 #include "bezugsprofil.h"
 
 void Bezugsprofil::calcBezugsprofil(void)
@@ -90,112 +91,4 @@ void Bezugsprofil::printProfileToMatlab(std::ostream &stream)
         stream << profilx[i] << ", " << profil[i] << ";" << std::endl;
     }
     stream << profilx[genauigkeit-1] << ", " << profil[genauigkeit-1] << "];";
-}
-
-Zahnradprofil::Zahnradprofil(int elemente)
-    : elemente(elemente)
-{
-    std::cout << "Berechnete Elemente Konstruktor: " << elemente << std::endl;
-    winkel = (float*)calloc(elemente, sizeof(float));
-    laenge = (float*)calloc(elemente, sizeof(float));
-    iteratX = -1;
-    iteratY = -1;
-}
-
-Zahnradprofil::Zahnradprofil(Zahnradprofil& rhs)
-{
-    elemente = rhs.elemente;
-    winkel = (float*)calloc(elemente, sizeof(float));
-    laenge = (float*)calloc(elemente, sizeof(float));
-    iteratX = -1;
-    iteratY = -1;
-
-    rhs.resetIterator();
-    int i = 0;
-    while(!rhs.iteratorEndReached())
-    {
-        // TODO: Einsetzen sobald vorhanden
-        //profil.setCartesian(i++, rhs.getNextX(), rhs.getNextY());
-        setX(i, rhs.getNextX());
-        setY(i++, rhs.getNextY());
-    }
-}
-
-Zahnradprofil::~Zahnradprofil(void)
-{
-    free(winkel);
-    free(laenge);
-}
-
-void Zahnradprofil::setX(int pos_id, float x)
-{
-    // TODO: Index pruefen und Umrechnung in Polarkoordinaten / Exception werfen
-    if (pos_id >= elemente)
-    {
-        std::cout << "Fehler beim Setzen von x. ID: " << pos_id << " - Value: " << x << std::endl;
-        return;
-    }
-    winkel[pos_id] = x;
-}
-
-void Zahnradprofil::setY(int pos_id, float y)
-{
-    // TODO: Index pruefen und Umrechnung in Polarkoordinaten
-    if (pos_id >= elemente)
-    {
-        std::cout << "Fehler beim Setzen von y. ID: " << pos_id << " - Value: " << y << std::endl;
-        return;
-    }
-    laenge[pos_id] = y;
-}
-
-// TODO: Aendern
-float Zahnradprofil::getX(int pos_id)
-{
-    return winkel[pos_id];
-}
-
-float Zahnradprofil::getY(int pos_id)
-{
-    return laenge[pos_id];
-}
-
-void Zahnradprofil::resetIterator(void)
-{
-    iteratX = 0;
-    iteratY = 0;
-}
-
-bool Zahnradprofil::iteratorEndReached(void)
-{
-    if (iteratX >= elemente || iteratY >= elemente)
-        return true;
-    else
-        return false;
-}
-
-float Zahnradprofil::getNextX(void)
-{
-    if (iteratX < elemente)
-        return getX(iteratX++);
-    else
-    {
-        iteratX++;
-        // TODO: Exception
-        return -1;
-    }
-}
-
-float Zahnradprofil::getNextY(void)
-{
-    if (iteratY < elemente)
-    {
-        return getY(iteratY++);
-    }
-    else
-    {
-        iteratY++;
-        // TODO: Exception
-        return -1;
-    }
 }

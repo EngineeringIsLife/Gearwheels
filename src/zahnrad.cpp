@@ -4,9 +4,8 @@
 #define DEG (M_PI/180.0)
 
 Zahnraddaten::Zahnraddaten(float alpha, float rho, float c, float m, float x, float k, int z)
-    : alpha(alpha), rho(rho), c(c), m(m), x(x), k(k), z(z)
+    : itersteps(10), alpha(alpha), rho(rho), c(c), m(m), x(x), k(k), z(z)
 {
-    itersteps = 10;
     calcDurchmesser();
 }
 
