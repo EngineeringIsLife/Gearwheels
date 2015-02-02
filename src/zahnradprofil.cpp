@@ -1,98 +1,86 @@
 #include <math.h>
 #include <iostream>
 #include <stdlib.h>
+#include <stdexcept>
 #include "zahnradprofil.h"
-//#include "bezugsprofil.h"
 
 Profil::Profil(int elemente)
     : elemente(elemente)
 {
-    std::cout << "Berechnete Elemente Konstruktor: " << elemente << std::endl;
     points = (struct PointsPolar*)calloc(elemente, sizeof(struct PointsPolar));
-    iteratX = -1;
-    iteratY = -1;
+    iteratX = 0;
+    iteratY = 0;
 }
 
 Profil::Profil(Profil& rhs)
+    : Profil(rhs.elemente)
 {
-    elemente = rhs.elemente;
-    points = (struct PointsPolar*)calloc(elemente, sizeof(struct PointsPolar));
-    iteratX = -1;
-    iteratY = -1;
-
     rhs.resetIterator();
     int i = 0;
     while(!rhs.iteratorEndReached())
     {
-        // TODO: Einsetzen sobald vorhanden
         rhs.setCartesian(i++, rhs.getNextX(), rhs.getNextY());
-        //setX(i, rhs.getNextX());
-        //setY(i++, rhs.getNextY());
     }
 }
 
 Profil::~Profil(void)
 {
-    //free(angle_);
-    //free(length_);
     free(points);
 }
 
+int Profil::getElementCount(void) { return elemente; }
+
 void Profil::setCartesian(int pos_id, float x, float y)
 {
+    checkForIndexError(pos_id);
     points[pos_id] = cartesianToPolar(x, y);
 }
 
 void Profil::setPolar(int pos_id, float length, float angle)
 {
-    points[pos_id].angle_ = angle;
-    points[pos_id].length_ = length;
+    checkForIndexError(pos_id);
+    points[pos_id].angle = angle;
+    points[pos_id].length = length;
 }
 
 void Profil::setLength(int pos_id, float length)
 {
-    if (pos_id >= elemente)
-    {
-        // throw exception
-        return;
-    }
-    points[pos_id].length_ = length;
+    checkForIndexError(pos_id);
+    points[pos_id].length = length;
 }
 
 void Profil::setAngle(int pos_id, float angle)
 {
-    if (pos_id >= elemente)
-    {
-        // throw exception
-        return;
-    }
-    points[pos_id].angle_ = angle;
+    checkForIndexError(pos_id);
+    points[pos_id].angle = angle;
 }
 
 float Profil::getX(int pos_id)
 {
-    PointsCartesian temp = polarToCartesian(points[pos_id]);
-    return temp.x;
+    checkForIndexError(pos_id);
+    return polarToCartesian(points[pos_id]).x;
 }
 
 float Profil::getY(int pos_id)
 {
-    PointsCartesian temp = polarToCartesian(points[pos_id]);
-    return temp.y;
+    checkForIndexError(pos_id);
+    return polarToCartesian(points[pos_id]).y;
 }
 
 float Profil::getAngle(int pos_id)
 {
-    return points[pos_id].angle_;
+    checkForIndexError(pos_id);
+    return points[pos_id].angle;
 }
 
 float Profil::getLength(int pos_id)
 {
-    return points[pos_id].length_;
+    checkForIndexError(pos_id);
+    return points[pos_id].length;
 }
 
 void Profil::resetIterator(void)
-{
+{   
     iteratX = 0;
     iteratY = 0;
 }
@@ -112,7 +100,6 @@ float Profil::getNextX(void)
     else
     {
         iteratX++;
-        // TODO: Exception
         return -1;
     }
 }
@@ -126,25 +113,23 @@ float Profil::getNextY(void)
     else
     {
         iteratY++;
-        // TODO: Exception
         return -1;
     }
 }
 
-
 struct PointsCartesian Profil::polarToCartesian(float length, float angle)
 {
     struct PointsPolar pol;
-    pol.angle_ = angle;
-    pol.length_ = length;
+    pol.angle = angle;
+    pol.length = length;
     return polarToCartesian(pol);
 }
 
 struct PointsCartesian Profil::polarToCartesian(struct PointsPolar in)
 {
     struct PointsCartesian out;
-    out.x = in.length_ * cos(in.angle_);
-    out.y = in.length_ * sin(in.angle_);
+    out.x = in.length * cos(in.angle);
+    out.y = in.length * sin(in.angle);
     return out;
 }
 
@@ -159,10 +144,18 @@ struct PointsPolar Profil::cartesianToPolar(float x, float y)
 struct PointsPolar Profil::cartesianToPolar(struct PointsCartesian in)
 {
     struct PointsPolar out;
-    out.length_ = sqrt(in.x*in.x + in.y*in.y);
-    if (in.y >= 0)
-        out.angle_ = acos(in.x / out.length_);
+    out.length = sqrt(in.x*in.x + in.y*in.y);
+    if (out.length == 0)
+        out.angle = 0;
+    else if (in.y >= 0)
+        out.angle = acos(in.x / out.length);
     else
-        out.angle_ = -acos(in.x / out.length_);
+        out.angle = -acos(in.x / out.length);
     return out;
+}
+
+void Profil::checkForIndexError(int id)
+{
+    if (id < 0 || id >= elemente)
+        throw std::out_of_range ("Index error: Out of range");
 }

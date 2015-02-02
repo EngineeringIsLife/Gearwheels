@@ -50,13 +50,15 @@ SOURCES       = ../Gearwheel/main.cpp \
 		../../src/bezugsprofil.cpp \
 		../../src/zahnrad.cpp \
 		../../src/zahnradmath.cpp \
-		../../src/gearwheeloutput.cpp moc_mainwindow.cpp
+		../../src/gearwheeloutput.cpp \
+		../../src/zahnradprofil.cpp moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		bezugsprofil.o \
 		zahnrad.o \
 		zahnradmath.o \
 		gearwheeloutput.o \
+		zahnradprofil.o \
 		moc_mainwindow.o
 DIST          = /usr/lib/i386-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/i386-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
@@ -121,7 +123,8 @@ DIST          = /usr/lib/i386-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../../src/bezugsprofil.cpp \
 		../../src/zahnrad.cpp \
 		../../src/zahnradmath.cpp \
-		../../src/gearwheeloutput.cpp
+		../../src/gearwheeloutput.cpp \
+		../../src/zahnradprofil.cpp
 QMAKE_TARGET  = Gearwheel
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = Gearwheel
@@ -286,7 +289,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/Gearwheel1.0.0 || mkdir -p .tmp/Gearwheel1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/Gearwheel1.0.0/ && $(COPY_FILE) --parents ../Gearwheel/mainwindow.h ../../h/bezugsprofil.h ../../h/zahnrad.h ../../h/zahnradmath.h ../../h/gearwheeloutput.h .tmp/Gearwheel1.0.0/ && $(COPY_FILE) --parents ../Gearwheel/main.cpp ../Gearwheel/mainwindow.cpp ../../src/bezugsprofil.cpp ../../src/zahnrad.cpp ../../src/zahnradmath.cpp ../../src/gearwheeloutput.cpp .tmp/Gearwheel1.0.0/ && $(COPY_FILE) --parents ../Gearwheel/mainwindow.ui .tmp/Gearwheel1.0.0/ && (cd `dirname .tmp/Gearwheel1.0.0` && $(TAR) Gearwheel1.0.0.tar Gearwheel1.0.0 && $(COMPRESS) Gearwheel1.0.0.tar) && $(MOVE) `dirname .tmp/Gearwheel1.0.0`/Gearwheel1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Gearwheel1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/Gearwheel1.0.0/ && $(COPY_FILE) --parents ../Gearwheel/mainwindow.h ../../h/bezugsprofil.h ../../h/zahnrad.h ../../h/zahnradmath.h ../../h/gearwheeloutput.h ../../h/zahnradprofil.h .tmp/Gearwheel1.0.0/ && $(COPY_FILE) --parents ../Gearwheel/main.cpp ../Gearwheel/mainwindow.cpp ../../src/bezugsprofil.cpp ../../src/zahnrad.cpp ../../src/zahnradmath.cpp ../../src/gearwheeloutput.cpp ../../src/zahnradprofil.cpp .tmp/Gearwheel1.0.0/ && $(COPY_FILE) --parents ../Gearwheel/mainwindow.ui .tmp/Gearwheel1.0.0/ && (cd `dirname .tmp/Gearwheel1.0.0` && $(TAR) Gearwheel1.0.0.tar Gearwheel1.0.0 && $(COMPRESS) Gearwheel1.0.0.tar) && $(MOVE) `dirname .tmp/Gearwheel1.0.0`/Gearwheel1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Gearwheel1.0.0
 
 
 clean:compiler_clean 
@@ -343,7 +346,8 @@ mainwindow.o: ../Gearwheel/mainwindow.cpp ../Gearwheel/mainwindow.h \
 		ui_mainwindow.h \
 		../../h/bezugsprofil.h \
 		../../h/zahnrad.h \
-		../../h/zahnradmath.h
+		../../h/zahnradmath.h \
+		../../h/gearwheeloutput.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Gearwheel/mainwindow.cpp
 
 bezugsprofil.o: ../../src/bezugsprofil.cpp ../../h/bezugsprofil.h \
@@ -358,9 +362,14 @@ zahnradmath.o: ../../src/zahnradmath.cpp ../../h/bezugsprofil.h \
 		../../h/zahnradmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o zahnradmath.o ../../src/zahnradmath.cpp
 
-gearwheeloutput.o: ../../src/gearwheeloutput.cpp ../../h/zahnradmath.h \
+gearwheeloutput.o: ../../src/gearwheeloutput.cpp ../../h/bezugsprofil.h \
+		../../h/zahnrad.h \
+		../../h/zahnradmath.h \
 		../../h/gearwheeloutput.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gearwheeloutput.o ../../src/gearwheeloutput.cpp
+
+zahnradprofil.o: ../../src/zahnradprofil.cpp ../../h/zahnradprofil.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o zahnradprofil.o ../../src/zahnradprofil.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

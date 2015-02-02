@@ -23,29 +23,16 @@ void MainWindow::paintEvent(QPaintEvent *)
 {
     Zahnraddaten zahnrad(20, .38, .25, 2.0, 0.0, 0.0, 5);
     ProfilMathematisch prof(zahnrad, 100);
+    Bezugsprofil bezugsprofil(zahnrad, 2, 20);
 
     QPainter painter(this);
     painter.setPen(Qt::blue);
 
-    const int startx = 200;
-    const int starty = 200;
+    GearwheelOutputQt output(prof.zahnprofil);
+    //GearwheelOutputQt output(bezugsprofil.profil_neu);
+    output.printToDisplay(painter, 200, 200, 10);
 
-    float scale = 10;
 
-    prof.resetIterator();
-    int p1=startx, p2=starty;
-
-    for (int i = 0; i < prof.zahnprofil.elemente; i++)
-    {
-        int p3 = (int)(prof.getNextX() * scale) + startx;
-        int p4 = (int)(prof.getNextY() * scale) + starty;
-        painter.drawLine(p1,p2,p3,p4);
-        p1 = p3;
-        p2 = p4;
-    }
-
-    GearwheelOutput output(prof.zahnprofil);
-    //output.printProfile(std::cout);
 }
 
 graphicsView::graphicsView(QWidget *parent)

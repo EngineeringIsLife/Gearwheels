@@ -1,4 +1,5 @@
 #include <iostream>
+#include <qpainter.h>
 
 #include "bezugsprofil.h"
 #include "zahnradmath.h"
@@ -7,27 +8,21 @@
 GearwheelOutput::GearwheelOutput(Profil& profile)
     : profil(profile)
 {
-    //std::cout << "Output Konstruktor" << std::endl;
-}
-
-/*
-void GearwheelOutput::printProfile(std::ostream &stream)
-{
-    // TODO: Auf komplettes Profil anpassen (2 entfernen)
-    for (int i = 0; i < zahnrad.parts_per_tooth; i++)
-    {
-        stream << zahnprofil.getX(i) << " " << zahnprofil.getY(i) << std::endl;
-    }
+    std::cout << "Output Konstruktor" << std::endl;
 }
 
 void GearwheelOutput::printProfileToMatlab(std::ostream &stream)
 {
-    stream << "profil = [" << std::endl;
-    for (int i = 0; i < parts_per_tooth*zahnrad.z - 1; i++)
-         stream << zahnprofil.getX(i) << ", " << zahnprofil.getY(i) << ";" << std::endl;
-    stream << zahnprofil.getX(parts_per_tooth - 1) << ", " << zahnprofil.getY(parts_per_tooth - 1) << "];";
+    stream << "zahnrad = [" << std::endl;
+    profil.resetIterator();
+
+    stream << profil.getNextX() << ", " << profil.getNextY();
+    while (!profil.iteratorEndReached())
+    {
+        stream << ";" << std::endl << profil.getNextX() << ", " << profil.getNextY() << ";" << std::endl;
+    }
+    stream << "]";
 }
-*/
 
 void GearwheelOutput::printProfile(std::ostream &stream)
 {
@@ -37,4 +32,22 @@ void GearwheelOutput::printProfile(std::ostream &stream)
         stream << profil.getNextX() << " " << profil.getNextY() << std::endl;
     }
     profil.resetIterator();
+}
+
+// ------------
+
+void GearwheelOutputQt::printToDisplay(QPainter& painter, int center_x, int center_y, float scale)
+{
+    profil.resetIterator();
+    int p1 = center_x;
+    int p2 = center_y;
+
+    while(!profil.iteratorEndReached())
+    {
+        int p3 = (int)(profil.getNextX() * scale) + center_x;
+        int p4 = (int)(profil.getNextY() * scale) + center_y;
+        painter.drawLine(p1, p2, p3, p4);
+        p1 = p3;
+        p2 = p4;
+    }
 }

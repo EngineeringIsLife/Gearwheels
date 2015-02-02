@@ -2,7 +2,20 @@
 #include <math.h>
 #include <iostream>
 #include <stdlib.h>
+#include "zahnradprofil.h"
 #include "bezugsprofil.h"
+
+Bezugsprofil::Bezugsprofil(Zahnraddaten zahnrad, float schrittweite, float genauigkeit)
+    : zahnrad(zahnrad), schrittweite(schrittweite), profil(genauigkeit+1)
+{
+    calcBezugsprofil();
+}
+
+Bezugsprofil::Bezugsprofil(float alpha, float rho, float c, float schrittweite, float genauigkeit, float m, float x, float k, int z)
+    : zahnrad(alpha, rho, c, m, x, k, z), schrittweite(schrittweite), profil(genauigkeit)
+{
+    calcBezugsprofil();
+}
 
 void Bezugsprofil::calcBezugsprofil(void)
 {
@@ -12,10 +25,7 @@ void Bezugsprofil::calcBezugsprofil(void)
     float h_f = zahnrad.m * (1 + zahnrad.c);
     float s_p = M_PI_2 * zahnrad.m;
     float p = M_PI * zahnrad.m;
-    float skalierung = genauigkeit / p;
-
-    profil = (float *) calloc(genauigkeit + 1, sizeof(float));
-    profilx = (float *) calloc(genauigkeit + 1, sizeof(float));
+    float skalierung = profil.getElementCount() / p;
 
     // Linke Fussrundung
     float x_B = (h_f - rho_f * (1 - cos(alpha2 * DEG))) / tan(alpha2*DEG) + s_p;
@@ -44,41 +54,43 @@ void Bezugsprofil::calcBezugsprofil(void)
     float grenze_rundung1 = x_M                  * skalierung;
     float grenze_rundung2 = x_M2                 * skalierung;
 
-    for (int i = 0; i < genauigkeit; i++)
+    for (int i = 0; i < profil.getElementCount(); i++)
     {
         // Algorithmus fuer Bezugsprofil
         float x = i / skalierung;
 
-        if      (i < grenze[0]) profil[i] = tan(alpha2 * DEG) * x;
-        else if (i < grenze[1]) profil[i] = h_a;
-        else if (i < grenze[3]) profil[i] = -tan(alpha2 * DEG) * x + tan(alpha2 * DEG) * s_p;
+        if      (i < grenze[0]) profil.setCartesian(i, x, tan(alpha2 * DEG) * x);
+        else if (i < grenze[1]) profil.setCartesian(i, x, h_a);
+        else if (i < grenze[3]) profil.setCartesian(i, x, -tan(alpha2 * DEG) * x + tan(alpha2 * DEG) * s_p);
         else if (i < grenze[4]) {
-            if (i < grenze_rundung1) profil[i] = rho_f - h_f - rho_f * cos(asin((x_M - x)/rho_f));    // Fussbereich unterteilt in Rundungsbereich und Gerade
-            else if (i < grenze_rundung2) profil[i] = -h_f;
-            else profil[i] = rho_f - h_f - rho_f * cos(asin((x - x_M2)/rho_f));
+            if (i < grenze_rundung1)
+                profil.setCartesian(i, x, rho_f - h_f - rho_f * cos(asin((x_M - x)/rho_f)));    // Fussbereich unterteilt in Rundungsbereich und Gerade
+            else if (i < grenze_rundung2)
+                profil.setCartesian(i, x, -h_f);
+            else
+                profil.setCartesian(i, x, rho_f - h_f - rho_f * cos(asin((x - x_M2)/rho_f)));
         }
-        else profil[i] = tan(alpha2 * DEG) * x - tan(alpha2 * DEG) * p;
+        else profil.setCartesian(i, x, tan(alpha2 * DEG) * x - tan(alpha2 * DEG) * p);
 
-        profilx[i] = x;
-
-        //cout << i << ": " << (x_M-x)/rho_f << " " << profilx[i] << " " << profil[i] << endl;
+        //std::cout << i << ": " << x << " " << profil_neu.getX(i) << " " << profil_neu.getY(i) << std::endl;
     }
 
     //cout << "Bezugsprofil fertig" << endl;
-    profilx[genauigkeit] = p;
-    profil[genauigkeit] = 0;
+    //profilx[genauigkeit] = p;
+    //profil[genauigkeit] = 0;
 }
 
 Bezugsprofil::~Bezugsprofil(void)
 {
-    free(profil);
-    free(profilx);
+    //free(profil);
+    //free(profilx);
 }
-
+/*
 void Bezugsprofil::printProfile(std::ostream &stream)
 {
     for (int i = 0; i < genauigkeit; i++)
     {
+        stream <<
         stream << profilx[i] << " " << profil[i] << std::endl;
     }
 }
@@ -91,4 +103,4 @@ void Bezugsprofil::printProfileToMatlab(std::ostream &stream)
         stream << profilx[i] << ", " << profil[i] << ";" << std::endl;
     }
     stream << profilx[genauigkeit-1] << ", " << profil[genauigkeit-1] << "];";
-}
+}*/

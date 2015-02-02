@@ -3,8 +3,8 @@
 
 struct PointsPolar
 {
-    float angle_;
-    float length_;
+    float angle;
+    float length;
 };
 
 struct PointsCartesian
@@ -19,18 +19,21 @@ private:
     PointsPolar *points;
 
     int iteratX, iteratY;
+    int elemente;
 
     struct PointsCartesian polarToCartesian(float length, float angle);
     struct PointsCartesian polarToCartesian(struct PointsPolar in);
     struct PointsPolar cartesianToPolar(float x, float y);
     struct PointsPolar cartesianToPolar(struct PointsCartesian in);
 
+    void checkForIndexError(int id);
+
 public:
     Profil(int elemente);
     Profil(Profil& rhs);
     ~Profil(void);
 
-    int elemente;
+    int getElementCount(void);
 
     void setCartesian(int pos_id, float x, float y);
     void setPolar(int pos_id, float length, float angle);
