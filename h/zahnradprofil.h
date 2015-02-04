@@ -13,12 +13,13 @@ struct PointsCartesian
     float y;
 };
 
-class Profil
+class Profile
 {
 private:
     PointsPolar *points;
 
     int iteratX, iteratY;
+    int iteratLength, iteratAngle;
     int elemente;
 
     struct PointsCartesian polarToCartesian(float length, float angle);
@@ -29,9 +30,9 @@ private:
     void checkForIndexError(int id);
 
 public:
-    Profil(int elemente);
-    Profil(Profil& rhs);
-    ~Profil(void);
+    Profile(int elemente);
+    Profile(Profile& rhs);
+    ~Profile(void);
 
     int getElementCount(void);
 
@@ -46,10 +47,15 @@ public:
     float getX(int pos_id);
     float getY(int pos_id);
 
+    void rotate(float deg);
+    void move(float x, float y);
+
     void resetIterator(void);
     bool iteratorEndReached(void);
     float getNextX(void);
     float getNextY(void);
+    float getNextLength(void);
+    float getNextAngle(void);
 };
 
 #endif // ZAHNRADPROFIL_H

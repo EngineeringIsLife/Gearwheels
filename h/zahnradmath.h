@@ -33,8 +33,11 @@ public:
     int parts_per_tooth;
     int parts_per_flank;
 
-    Profil zahnprofil;
+    Profile zahnprofil;
     ProfilMathematisch(Zahnraddaten zahnrad, int genauigkeit);
+
+    void rotateGearwheel(float deg);
+    void moveGearwheel(float x, float y);
 
     void resetIterator(void);
     bool iteratorEndReached(void);

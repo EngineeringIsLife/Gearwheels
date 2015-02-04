@@ -4,10 +4,10 @@
 class GearwheelOutput
 {
 protected:
-    Profil& profil;
+    Profile& profil;
 
 public:
-    GearwheelOutput(Profil& profile);
+    GearwheelOutput(Profile& profile);
 
     void printProfile(std::ostream &stream);
     void printProfileToMatlab(std::ostream &stream);
@@ -17,7 +17,7 @@ public:
 class GearwheelOutputQt : public GearwheelOutput
 {
 public:
-    GearwheelOutputQt(Profil& profile) : GearwheelOutput(profile) { }
+    GearwheelOutputQt(Profile& profile) : GearwheelOutput(profile) { }
     void printToDisplay(QPainter& painter, int center_x, int center_y, float scale);
 };
 

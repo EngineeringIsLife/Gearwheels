@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include "zahnradprofil.h"
 
-Profil::Profil(int elemente)
+Profile::Profile(int elemente)
     : elemente(elemente)
 {
     points = (struct PointsPolar*)calloc(elemente, sizeof(struct PointsPolar));
@@ -12,8 +12,8 @@ Profil::Profil(int elemente)
     iteratY = 0;
 }
 
-Profil::Profil(Profil& rhs)
-    : Profil(rhs.elemente)
+Profile::Profile(Profile& rhs)
+    : Profile(rhs.elemente)
 {
     rhs.resetIterator();
     int i = 0;
@@ -23,69 +23,69 @@ Profil::Profil(Profil& rhs)
     }
 }
 
-Profil::~Profil(void)
+Profile::~Profile(void)
 {
     free(points);
 }
 
-int Profil::getElementCount(void) { return elemente; }
+int Profile::getElementCount(void) { return elemente; }
 
-void Profil::setCartesian(int pos_id, float x, float y)
+void Profile::setCartesian(int pos_id, float x, float y)
 {
     checkForIndexError(pos_id);
     points[pos_id] = cartesianToPolar(x, y);
 }
 
-void Profil::setPolar(int pos_id, float length, float angle)
+void Profile::setPolar(int pos_id, float length, float angle)
 {
     checkForIndexError(pos_id);
     points[pos_id].angle = angle;
     points[pos_id].length = length;
 }
 
-void Profil::setLength(int pos_id, float length)
+void Profile::setLength(int pos_id, float length)
 {
     checkForIndexError(pos_id);
     points[pos_id].length = length;
 }
 
-void Profil::setAngle(int pos_id, float angle)
+void Profile::setAngle(int pos_id, float angle)
 {
     checkForIndexError(pos_id);
     points[pos_id].angle = angle;
 }
 
-float Profil::getX(int pos_id)
+float Profile::getX(int pos_id)
 {
     checkForIndexError(pos_id);
     return polarToCartesian(points[pos_id]).x;
 }
 
-float Profil::getY(int pos_id)
+float Profile::getY(int pos_id)
 {
     checkForIndexError(pos_id);
     return polarToCartesian(points[pos_id]).y;
 }
 
-float Profil::getAngle(int pos_id)
+float Profile::getAngle(int pos_id)
 {
     checkForIndexError(pos_id);
     return points[pos_id].angle;
 }
 
-float Profil::getLength(int pos_id)
+float Profile::getLength(int pos_id)
 {
     checkForIndexError(pos_id);
     return points[pos_id].length;
 }
 
-void Profil::resetIterator(void)
+void Profile::resetIterator(void)
 {   
     iteratX = 0;
     iteratY = 0;
 }
 
-bool Profil::iteratorEndReached(void)
+bool Profile::iteratorEndReached(void)
 {
     if (iteratX >= elemente || iteratY >= elemente)
         return true;
@@ -93,31 +93,31 @@ bool Profil::iteratorEndReached(void)
         return false;
 }
 
-float Profil::getNextX(void)
+float Profile::getNextX(void)
 {
-    if (iteratX < elemente)
-        return getX(iteratX++);
-    else
-    {
-        iteratX++;
-        return -1;
-    }
+    checkForIndexError(iteratX);
+    return getX(iteratX++);
 }
 
-float Profil::getNextY(void)
+float Profile::getNextY(void)
 {
-    if (iteratY < elemente)
-    {
-        return getY(iteratY++);
-    }
-    else
-    {
-        iteratY++;
-        return -1;
-    }
+    checkForIndexError(iteratY);
+    return getY(iteratY++);
 }
 
-struct PointsCartesian Profil::polarToCartesian(float length, float angle)
+float Profile::getNextLength()
+{
+    checkForIndexError(iteratLength);
+    return getLength(iteratLength++);
+}
+
+float Profile::getNextAngle()
+{
+    checkForIndexError(iteratAngle);
+    return getAngle(iteratAngle++);
+}
+
+struct PointsCartesian Profile::polarToCartesian(float length, float angle)
 {
     struct PointsPolar pol;
     pol.angle = angle;
@@ -125,7 +125,7 @@ struct PointsCartesian Profil::polarToCartesian(float length, float angle)
     return polarToCartesian(pol);
 }
 
-struct PointsCartesian Profil::polarToCartesian(struct PointsPolar in)
+struct PointsCartesian Profile::polarToCartesian(struct PointsPolar in)
 {
     struct PointsCartesian out;
     out.x = in.length * cos(in.angle);
@@ -133,7 +133,7 @@ struct PointsCartesian Profil::polarToCartesian(struct PointsPolar in)
     return out;
 }
 
-struct PointsPolar Profil::cartesianToPolar(float x, float y)
+struct PointsPolar Profile::cartesianToPolar(float x, float y)
 {
     struct PointsCartesian cart;
     cart.x = x;
@@ -141,7 +141,7 @@ struct PointsPolar Profil::cartesianToPolar(float x, float y)
     return cartesianToPolar(cart);
 }
 
-struct PointsPolar Profil::cartesianToPolar(struct PointsCartesian in)
+struct PointsPolar Profile::cartesianToPolar(struct PointsCartesian in)
 {
     struct PointsPolar out;
     out.length = sqrt(in.x*in.x + in.y*in.y);
@@ -154,7 +154,23 @@ struct PointsPolar Profil::cartesianToPolar(struct PointsCartesian in)
     return out;
 }
 
-void Profil::checkForIndexError(int id)
+void Profile::rotate(float deg)
+{
+    for (int i = 0; i < elemente; i++)
+    {
+        setAngle(i, getAngle(i)+deg/2*M_PI/180);
+    }
+}
+
+void Profile::move(float x, float y)
+{
+    for (int i = 0; i < elemente; i++)
+    {
+        setCartesian(i, getX(i)+x, getY(i)+y);
+    }
+}
+
+void Profile::checkForIndexError(int id)
 {
     if (id < 0 || id >= elemente)
         throw std::out_of_range ("Index error: Out of range");

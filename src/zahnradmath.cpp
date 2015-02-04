@@ -152,6 +152,16 @@ void ProfilMathematisch::calcFullXY(void)
     }
 }
 
+void ProfilMathematisch::rotateGearwheel(float deg)
+{
+    zahnprofil.rotate(deg);
+}
+
+void ProfilMathematisch::moveGearwheel(float x, float y)
+{
+    zahnprofil.move(x,y);
+}
+
 // Grenzen des viergeteilten Zahns
 void ProfilMathematisch::calcLimits(void)
 {

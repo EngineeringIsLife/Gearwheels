@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
     GearwheelOutput output(bezugsprofil.profil);
     GearwheelOutput output2(prof.zahnprofil);
-    output.printProfileToMatlab(std::cout);
+    //output.printProfileToMatlab(std::cout);
 
     return a.exec();
 }

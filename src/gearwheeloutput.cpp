@@ -5,7 +5,7 @@
 #include "zahnradmath.h"
 #include "gearwheeloutput.h"
 
-GearwheelOutput::GearwheelOutput(Profil& profile)
+GearwheelOutput::GearwheelOutput(Profile& profile)
     : profil(profile)
 {
     std::cout << "Output Konstruktor" << std::endl;
@@ -19,9 +19,9 @@ void GearwheelOutput::printProfileToMatlab(std::ostream &stream)
     stream << profil.getNextX() << ", " << profil.getNextY();
     while (!profil.iteratorEndReached())
     {
-        stream << ";" << std::endl << profil.getNextX() << ", " << profil.getNextY() << ";" << std::endl;
+        stream << ";" << std::endl << profil.getNextX() << ", " << profil.getNextY();
     }
-    stream << "]";
+    stream << "]" << std::endl;
 }
 
 void GearwheelOutput::printProfile(std::ostream &stream)
@@ -39,8 +39,8 @@ void GearwheelOutput::printProfile(std::ostream &stream)
 void GearwheelOutputQt::printToDisplay(QPainter& painter, int center_x, int center_y, float scale)
 {
     profil.resetIterator();
-    int p1 = center_x;
-    int p2 = center_y;
+    int p1 = (int)(profil.getNextX() * scale) + center_x;
+    int p2 = (int)(profil.getNextY() * scale) + center_y;
 
     while(!profil.iteratorEndReached())
     {

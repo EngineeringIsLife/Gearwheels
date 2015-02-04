@@ -15,7 +15,7 @@ private:
     void calcBezugsprofil(void);
 
 public:
-    Profil profil;
+    Profile profil;
 
     Bezugsprofil(Zahnraddaten zahnrad, float schrittweite, float genauigkeit);
     Bezugsprofil(float alpha, float rho, float c, float schrittweite, float genauigkeit, float m, float x, float k, int z);
