@@ -170,6 +170,14 @@ void Profile::move(float x, float y)
     }
 }
 
+void Profile::mirror(void)
+{
+    for (int i = 0; i < elemente; i++)
+    {
+        setAngle(i, -1 * getAngle(i));
+    }
+}
+
 void Profile::checkForIndexError(int id)
 {
     if (id < 0 || id >= elemente)

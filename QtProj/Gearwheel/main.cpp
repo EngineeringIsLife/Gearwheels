@@ -1,11 +1,13 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QPainter>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 #include <iostream>
 #include <fstream>
 
-#include "bezugsprofil.h"
+#include "zahnradfertigung.h"
 #include "zahnradmath.h"
 #include "gearwheeloutput.h"
 
@@ -15,11 +17,10 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    w.show();
 
     Zahnraddaten zahnrad(20, .38, .25, 2.0, 0.0, 0.0, 5);
     ProfilMathematisch prof(zahnrad, 100);
-    Bezugsprofil bezugsprofil(zahnrad, 2, 20);
+    ZahnradFertigung bezugsprofil(zahnrad, 2, (int)20);
 
     //Zahnraddaten zahnrad(20, .38, .25, 2.0, 0.0, 0.0, 25);
     //ProfilMathematisch bezugMathe(zahnrad, 24);
@@ -29,9 +30,18 @@ int main(int argc, char *argv[])
     //bezugMathe.printProfileToMatlab(myfile);
     //myfile.close();
 
-    GearwheelOutput output(bezugsprofil.profil);
+    GearwheelOutput output(bezugsprofil.zahnprofil);
     GearwheelOutput output2(prof.zahnprofil);
+    output.printProfile(std::cout);
     //output.printProfileToMatlab(std::cout);
 
+    //QPushButton *button = new QPushButton("&Exit");
+    //QObject::connect(button, SIGNAL(clicked()), &a, SLOT(quit()));
+
+    //QObject::connect()
+    //QVBoxLayout *layout = new QVBoxLayout(&w);
+    //layout->addWidget(button);
+
+    w.show();
     return a.exec();
 }

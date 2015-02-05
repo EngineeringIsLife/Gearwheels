@@ -49,6 +49,7 @@ public:
 
     void rotate(float deg);
     void move(float x, float y);
+    void mirror(void);
 
     void resetIterator(void);
     bool iteratorEndReached(void);

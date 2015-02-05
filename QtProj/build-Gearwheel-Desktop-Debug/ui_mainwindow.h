@@ -13,10 +13,10 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -27,7 +27,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QGraphicsView *graphicsView;
+    QPushButton *pushButton;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -39,13 +39,9 @@ public:
         MainWindow->resize(500, 441);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        graphicsView = new QGraphicsView(centralWidget);
-        graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setGeometry(QRect(436, 322, 20, 20));
-        QBrush brush(QColor(0, 0, 0, 255));
-        brush.setStyle(Qt::SolidPattern);
-        graphicsView->setForegroundBrush(brush);
-        graphicsView->setRenderHints(QPainter::Antialiasing|QPainter::TextAntialiasing);
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(10, 0, 99, 27));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -59,6 +55,7 @@ public:
         MainWindow->setStatusBar(statusBar);
 
         retranslateUi(MainWindow);
+        QObject::connect(pushButton, SIGNAL(pressed()), MainWindow, SLOT(repaint()));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -66,6 +63,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        pushButton->setText(QApplication::translate("MainWindow", "Rotate", 0));
     } // retranslateUi
 
 };

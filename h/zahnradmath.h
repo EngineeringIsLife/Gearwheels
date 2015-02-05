@@ -14,8 +14,6 @@ class ProfilMathematisch
 private:
     Zahnraddaten zahnrad;
 
-    int genauigkeit;
-
     float phi_min;
     float phi_max;
 

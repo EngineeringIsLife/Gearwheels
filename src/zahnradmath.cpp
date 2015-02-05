@@ -1,7 +1,7 @@
 #include <math.h>
 #include <iostream>
 
-#include "bezugsprofil.h"
+#include "zahnradfertigung.h"
 #include "zahnradprofil.h"
 #include "zahnrad.h"
 #include "zahnradmath.h"
@@ -9,7 +9,7 @@
 /* --------------- Mathematische errechnetes Zahnradprofil ------------- */
 
 ProfilMathematisch::ProfilMathematisch(Zahnraddaten zahnrad, int genauigkeit)
-    : zahnrad(zahnrad), zahnprofil(zahnrad.z * (genauigkeit - genauigkeit % 4 + 4)), genauigkeit(genauigkeit)
+    : zahnrad(zahnrad), zahnprofil(zahnrad.z * (genauigkeit - genauigkeit % 4 + 4))//, genauigkeit(genauigkeit)
 {
     // Pruefe, ob Zahnfuss ueber Basisdurchmesser:
     phi_max = sqrt(zahnrad.durchmesser.d_a * zahnrad.durchmesser.d_a / (zahnrad.durchmesser.d_b * zahnrad.durchmesser.d_b) - 1);

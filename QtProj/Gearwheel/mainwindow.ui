@@ -14,26 +14,17 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>436</x>
-      <y>322</y>
-      <width>20</width>
-      <height>20</height>
+      <x>10</x>
+      <y>0</y>
+      <width>99</width>
+      <height>27</height>
      </rect>
     </property>
-    <property name="foregroundBrush">
-     <brush brushstyle="SolidPattern">
-      <color alpha="255">
-       <red>0</red>
-       <green>0</green>
-       <blue>0</blue>
-      </color>
-     </brush>
-    </property>
-    <property name="renderHints">
-     <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+    <property name="text">
+     <string>Rotate</string>
     </property>
    </widget>
   </widget>
@@ -59,5 +50,22 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>pressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>repaint()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>249</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

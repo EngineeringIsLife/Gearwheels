@@ -1,7 +1,7 @@
 #include <iostream>
 #include <qpainter.h>
 
-#include "bezugsprofil.h"
+#include "zahnradfertigung.h"
 #include "zahnradmath.h"
 #include "gearwheeloutput.h"
 
