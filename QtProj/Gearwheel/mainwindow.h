@@ -2,32 +2,37 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
-#include <QMainWindow>
 #include <QGraphicsView>
+//#include <QPainter>
+//#include <QMainWindow>
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+//class MainWindow : public QMainWindow
+class MainWidget : public QWidget
 {
     Q_OBJECT
-
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    void paintEvent(QPaintEvent *);
-    ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
-};
+    //Ui::MainWindow *ui;
+    QGraphicsScene *scene;
+    QTimer *timer;
 
-class graphicsView : public QGraphicsView
-{
-    Q_OBJECT
+    bool rotationStarted;
+    float zoom;
+    float angle;
+
+    void updateGearwheel(void);
+
+    //virtual void paintEvent(QPaintEvent *);
+    virtual void keyPressEvent(QKeyEvent *ev);
+    virtual void mousePressEvent(QMouseEvent *ev);  // Replace with wheelEvent
 
 public:
-    explicit graphicsView(QWidget *parent);
+    explicit MainWidget(QWidget *parent = 0);
+    ~MainWidget();
+
+public slots:
+    void rotationTimer(void);
+    void toggleRotation(void);
 };
 
 #endif // MAINWINDOW_H

@@ -29,4 +29,4 @@ HEADERS  += mainwindow.h \
 
 INCLUDEPATH += /home/daniel/Documents/dev/Gearwheel/h/
 
-FORMS    += mainwindow.ui
+FORMS    +=

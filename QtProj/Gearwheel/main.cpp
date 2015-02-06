@@ -1,8 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <QWidget>
 #include <QPainter>
-#include <QPushButton>
-#include <QVBoxLayout>
 
 #include <iostream>
 #include <fstream>
@@ -16,11 +15,11 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    MainWidget w;
 
-    Zahnraddaten zahnrad(20, .38, .25, 2.0, 0.0, 0.0, 5);
-    ProfilMathematisch prof(zahnrad, 100);
-    ZahnradFertigung bezugsprofil(zahnrad, 2, (int)20);
+    //Zahnraddaten zahnrad(20, .38, .25, 2.0, 0.0, 0.0, 5);
+    //ProfilMathematisch prof(zahnrad, 100);
+    //ZahnradFertigung bezugsprofil(zahnrad, 2, (int)20);
 
     //Zahnraddaten zahnrad(20, .38, .25, 2.0, 0.0, 0.0, 25);
     //ProfilMathematisch bezugMathe(zahnrad, 24);
@@ -30,9 +29,9 @@ int main(int argc, char *argv[])
     //bezugMathe.printProfileToMatlab(myfile);
     //myfile.close();
 
-    GearwheelOutput output(bezugsprofil.zahnprofil);
-    GearwheelOutput output2(prof.zahnprofil);
-    output.printProfile(std::cout);
+    //GearwheelOutput output(bezugsprofil.zahnprofil);
+    //GearwheelOutput output2(prof.zahnprofil);
+    //output.printProfile(std::cout);
     //output.printProfileToMatlab(std::cout);
 
     //QPushButton *button = new QPushButton("&Exit");

@@ -19,6 +19,7 @@ class GearwheelOutputQt : public GearwheelOutput
 public:
     GearwheelOutputQt(Profile& profile) : GearwheelOutput(profile) { }
     void printToDisplay(QPainter& painter, int center_x, int center_y, float scale);
+    void printToDisplay(QGraphicsScene& scene, int center_x, int center_y, float scale);
 };
 
 #endif // GEARWHEELOUTPUT_H

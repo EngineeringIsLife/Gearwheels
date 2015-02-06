@@ -55,7 +55,6 @@ public:
         MainWindow->setStatusBar(statusBar);
 
         retranslateUi(MainWindow);
-        QObject::connect(pushButton, SIGNAL(pressed()), MainWindow, SLOT(repaint()));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
