@@ -1,6 +1,8 @@
 #ifndef GEARWHEELOUTPUT_H
 #define GEARWHEELOUTPUT_H
 
+#include "zahnradprofil.h"
+
 class GearwheelOutput
 {
 protected:
