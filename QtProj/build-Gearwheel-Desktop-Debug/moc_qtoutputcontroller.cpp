@@ -30,19 +30,19 @@ struct qt_meta_stringdata_GearwheelOutputController_t {
 static const qt_meta_stringdata_GearwheelOutputController_t qt_meta_stringdata_GearwheelOutputController = {
     {
 QT_MOC_LITERAL(0, 0, 25),
-QT_MOC_LITERAL(1, 26, 10),
-QT_MOC_LITERAL(2, 37, 0),
-QT_MOC_LITERAL(3, 38, 8),
-QT_MOC_LITERAL(4, 47, 1),
-QT_MOC_LITERAL(5, 49, 1),
-QT_MOC_LITERAL(6, 51, 10),
-QT_MOC_LITERAL(7, 62, 11),
-QT_MOC_LITERAL(8, 74, 12),
-QT_MOC_LITERAL(9, 87, 21)
+QT_MOC_LITERAL(1, 26, 8),
+QT_MOC_LITERAL(2, 35, 0),
+QT_MOC_LITERAL(3, 36, 1),
+QT_MOC_LITERAL(4, 38, 1),
+QT_MOC_LITERAL(5, 40, 10),
+QT_MOC_LITERAL(6, 51, 11),
+QT_MOC_LITERAL(7, 63, 12),
+QT_MOC_LITERAL(8, 76, 21),
+QT_MOC_LITERAL(9, 98, 10)
     },
-    "GearwheelOutputController\0updateData\0"
-    "\0moveItem\0x\0y\0zoomItemIn\0zoomItemOut\0"
-    "rotateSingle\0toggleSecondGearwheel"
+    "GearwheelOutputController\0moveItem\0\0"
+    "x\0y\0zoomItemIn\0zoomItemOut\0rotateSingle\0"
+    "toggleSecondGearwheel\0rotate_fwd"
 };
 #undef QT_MOC_LITERAL
 
@@ -60,16 +60,16 @@ static const uint qt_meta_data_GearwheelOutputController[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x0a /* Public */,
-       3,    2,   45,    2, 0x0a /* Public */,
+       1,    2,   44,    2, 0x0a /* Public */,
+       5,    0,   49,    2, 0x0a /* Public */,
        6,    0,   50,    2, 0x0a /* Public */,
        7,    0,   51,    2, 0x0a /* Public */,
        8,    0,   52,    2, 0x0a /* Public */,
        9,    0,   53,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    4,    5,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -83,12 +83,12 @@ void GearwheelOutputController::qt_static_metacall(QObject *_o, QMetaObject::Cal
     if (_c == QMetaObject::InvokeMetaMethod) {
         GearwheelOutputController *_t = static_cast<GearwheelOutputController *>(_o);
         switch (_id) {
-        case 0: _t->updateData(); break;
-        case 1: _t->moveItem((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 2: _t->zoomItemIn(); break;
-        case 3: _t->zoomItemOut(); break;
-        case 4: _t->rotateSingle(); break;
-        case 5: _t->toggleSecondGearwheel(); break;
+        case 0: _t->moveItem((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 1: _t->zoomItemIn(); break;
+        case 2: _t->zoomItemOut(); break;
+        case 3: _t->rotateSingle(); break;
+        case 4: _t->toggleSecondGearwheel(); break;
+        case 5: _t->rotate_fwd(); break;
         default: ;
         }
     }

@@ -9,13 +9,6 @@
 
 #include <iostream>
 
-class GearwheelOutputScene : public QGraphicsScene
-{
-public:
-    GearwheelOutputScene(QObject *parent)
-        : QGraphicsScene(parent) { }
-};
-
 class GearwheelItem : public QGraphicsItem
 {
 private:
@@ -55,7 +48,6 @@ class GearwheelOutputController : public QObject
     Q_OBJECT
 
 private:
-    //GearwheelOutputScene* scene;
     QGraphicsScene *scene;
     GearwheelOutputView* view;
     ProfilMathematisch* gearwheel; // Modell
@@ -91,75 +83,19 @@ private:
         scene->removeItem(gearwheelitem2);
     }
 
+    void setConnections(void);
+
 public:
-   /* GearwheelOutputController(QObject* parent)
-        : QObject(parent) { }*/
+    GearwheelOutputController(QObject *parent, GearwheelOutputView* view, ProfilMathematisch* zahnrad);
+    ~GearwheelOutputController(void);
 
-    GearwheelOutputController(QObject *parent, GearwheelOutputView* view, ProfilMathematisch* zahnrad)
-        : QObject(parent), view(view), gearwheel(zahnrad)
-    {
-        posx = 250;
-        posy = 250;
-        zoomfactor = 5;
-
-        secondGearwheelVisible = false;
-
-        rotating = false;
-        scene = new QGraphicsScene(view); //GearwheelOutputScene(view);
-        outputobj = new GearwheelOutputQt(gearwheel->zahnprofil);
-        gearwheelitem = new GearwheelItem(*outputobj, posx, posy, zoomfactor);
-        view->setScene(scene);
-        scene->addItem(gearwheelitem);
-        view->adjustSize();
-
-        createSecondGearwheel();
-    }
-
-    ~GearwheelOutputController(void) {
-        delete scene;
-        delete outputobj;
-        delete outputobj2;
-        delete gearwheel2;
-        delete gearwheelitem;
-        delete gearwheelitem2;
-    }
-
-    void repaintItem(void)
-    {
-        scene->removeItem(gearwheelitem);
-        delete gearwheelitem;
-        gearwheelitem = new GearwheelItem(*outputobj, posx, posy, zoomfactor);
-        scene->addItem(gearwheelitem);
-
-        if (secondGearwheelVisible)
-            scene->removeItem(gearwheelitem2);
-        delete gearwheelitem2;
-        gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->zahnrad.durchmesser.d + gearwheel2->zahnrad.durchmesser.d)/2*zoomfactor, posy, zoomfactor);
-        if (secondGearwheelVisible)
-            scene->addItem(gearwheelitem2);
-    }
-
-    void rotate(float deg)
-    {
-        gearwheel->rotateGearwheel(deg);
-        gearwheel2->rotateGearwheel(-deg * gearwheel->zahnrad.z / gearwheel2->zahnrad.z);
-        repaintItem();
-    }
-
-    void rotate_fwd(void) { rotate(.5);  }
-    void rotate_bwd(void) { rotate(-.5); }
-
-    void toggleRotation(void) {
-        rotating = !rotating;
-    }
+    void repaintItem(void);
+    void rotate(float deg);
+    void rotate_bwd(void);
+    void toggleRotation(void);
 
 
 public slots:
-    void updateData()
-    {
-        std::cout << "Daten updaten" << std::endl;
-    }
-
     void moveItem(int x, int y)
     {
         posx = x;
@@ -191,6 +127,8 @@ public slots:
         if (secondGearwheelVisible) addSecondGearwheel();
         else removeSecondGearwheel();
     }
+
+    void rotate_fwd(void);
 
 };
 

@@ -18,14 +18,18 @@ SOURCES += main.cpp\
     ../../src/zahnradmath.cpp \
     ../../src/gearwheeloutput.cpp \
     ../../src/zahnradprofil.cpp \
-    ../../src/zahnradfertigung.cpp
+    ../../src/zahnradfertigung.cpp \
+    qtoutputcontroller.cpp \
+    qtoutputscene.cpp
 
 HEADERS  += mainwindow.h \
     ../../h/zahnrad.h \
     ../../h/zahnradmath.h \
     ../../h/gearwheeloutput.h \
     ../../h/zahnradprofil.h \
-    ../../h/zahnradfertigung.h
+    ../../h/zahnradfertigung.h \
+    qtoutputcontroller.h \
+    qtoutputscene.h
 
 INCLUDEPATH += /home/daniel/Documents/dev/Gearwheel/h/
 

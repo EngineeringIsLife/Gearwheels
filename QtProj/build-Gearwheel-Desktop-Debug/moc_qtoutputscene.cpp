@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GearwheelOutputView_t {
-    QByteArrayData data[9];
-    char stringdata[78];
+    QByteArrayData data[11];
+    char stringdata[111];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,14 +34,16 @@ QT_MOC_LITERAL(1, 20, 14),
 QT_MOC_LITERAL(2, 35, 0),
 QT_MOC_LITERAL(3, 36, 1),
 QT_MOC_LITERAL(4, 38, 1),
-QT_MOC_LITERAL(5, 40, 11),
-QT_MOC_LITERAL(6, 52, 6),
-QT_MOC_LITERAL(7, 59, 7),
-QT_MOC_LITERAL(8, 67, 10)
+QT_MOC_LITERAL(5, 40, 6),
+QT_MOC_LITERAL(6, 47, 7),
+QT_MOC_LITERAL(7, 55, 10),
+QT_MOC_LITERAL(8, 66, 10),
+QT_MOC_LITERAL(9, 77, 18),
+QT_MOC_LITERAL(10, 96, 14)
     },
     "GearwheelOutputView\0changePosition\0\0"
-    "x\0y\0changedView\0zoomIn\0zoomOut\0"
-    "rotateFine"
+    "x\0y\0zoomIn\0zoomOut\0rotateFine\0rotateFull\0"
+    "rotationTimerEvent\0toggleRotation"
 };
 #undef QT_MOC_LITERAL
 
@@ -51,7 +53,7 @@ static const uint qt_meta_data_GearwheelOutputView[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -59,16 +61,24 @@ static const uint qt_meta_data_GearwheelOutputView[] = {
        5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   39,    2, 0x06 /* Public */,
-       5,    0,   44,    2, 0x06 /* Public */,
-       6,    0,   45,    2, 0x06 /* Public */,
-       7,    0,   46,    2, 0x06 /* Public */,
-       8,    0,   47,    2, 0x06 /* Public */,
+       1,    2,   49,    2, 0x06 /* Public */,
+       5,    0,   54,    2, 0x06 /* Public */,
+       6,    0,   55,    2, 0x06 /* Public */,
+       7,    0,   56,    2, 0x06 /* Public */,
+       8,    0,   57,    2, 0x06 /* Public */,
+
+ // slots: name, argc, parameters, tag, flags
+       9,    0,   58,    2, 0x0a /* Public */,
+      10,    0,   59,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+
+ // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
 
@@ -81,10 +91,12 @@ void GearwheelOutputView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         GearwheelOutputView *_t = static_cast<GearwheelOutputView *>(_o);
         switch (_id) {
         case 0: _t->changePosition((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 1: _t->changedView(); break;
-        case 2: _t->zoomIn(); break;
-        case 3: _t->zoomOut(); break;
-        case 4: _t->rotateFine(); break;
+        case 1: _t->zoomIn(); break;
+        case 2: _t->zoomOut(); break;
+        case 3: _t->rotateFine(); break;
+        case 4: _t->rotateFull(); break;
+        case 5: _t->rotationTimerEvent(); break;
+        case 6: _t->toggleRotation(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -98,25 +110,25 @@ void GearwheelOutputView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         }
         {
             typedef void (GearwheelOutputView::*_t)();
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&GearwheelOutputView::changedView)) {
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&GearwheelOutputView::zoomIn)) {
                 *result = 1;
             }
         }
         {
             typedef void (GearwheelOutputView::*_t)();
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&GearwheelOutputView::zoomIn)) {
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&GearwheelOutputView::zoomOut)) {
                 *result = 2;
             }
         }
         {
             typedef void (GearwheelOutputView::*_t)();
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&GearwheelOutputView::zoomOut)) {
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&GearwheelOutputView::rotateFine)) {
                 *result = 3;
             }
         }
         {
             typedef void (GearwheelOutputView::*_t)();
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&GearwheelOutputView::rotateFine)) {
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&GearwheelOutputView::rotateFull)) {
                 *result = 4;
             }
         }
@@ -148,13 +160,13 @@ int GearwheelOutputView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }
@@ -167,25 +179,25 @@ void GearwheelOutputView::changePosition(int _t1, int _t2)
 }
 
 // SIGNAL 1
-void GearwheelOutputView::changedView()
+void GearwheelOutputView::zoomIn()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, 0);
 }
 
 // SIGNAL 2
-void GearwheelOutputView::zoomIn()
+void GearwheelOutputView::zoomOut()
 {
     QMetaObject::activate(this, &staticMetaObject, 2, 0);
 }
 
 // SIGNAL 3
-void GearwheelOutputView::zoomOut()
+void GearwheelOutputView::rotateFine()
 {
     QMetaObject::activate(this, &staticMetaObject, 3, 0);
 }
 
 // SIGNAL 4
-void GearwheelOutputView::rotateFine()
+void GearwheelOutputView::rotateFull()
 {
     QMetaObject::activate(this, &staticMetaObject, 4, 0);
 }
