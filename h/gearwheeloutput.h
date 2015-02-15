@@ -2,6 +2,9 @@
 #define GEARWHEELOUTPUT_H
 
 #include "zahnradprofil.h"
+#include <iostream>
+#include <QPainter>
+#include <QGraphicsScene>
 
 class GearwheelOutput
 {
@@ -21,6 +24,7 @@ class GearwheelOutputQt : public GearwheelOutput
 public:
     GearwheelOutputQt(Profile& profile) : GearwheelOutput(profile) { }
     void printToDisplay(QPainter& painter, int center_x, int center_y, float scale);
+    void printToDisplay(QPainter& painter, int center_x, int center_y, float scale, float rotation);
     void printToDisplay(QGraphicsScene& scene, int center_x, int center_y, float scale);
 };
 

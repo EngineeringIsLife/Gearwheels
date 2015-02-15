@@ -154,6 +154,39 @@ struct PointsPolar Profile::cartesianToPolar(struct PointsCartesian in)
     return out;
 }
 
+struct PointsPolar Profile::getRotatedPolar(int id, float deg)
+{
+    struct PointsPolar temp;
+    temp.length = getLength(id);
+    temp.angle = getRotatedAngle(id, deg);
+    return temp;
+}
+
+struct PointsCartesian Profile::getRotatedCartesian(int id, float deg)
+{
+    return polarToCartesian(getRotatedPolar(id, deg));
+}
+
+float Profile::getRotatedAngle(int id, float deg)
+{
+    return getAngle(id) + deg/2 * M_PI/180;
+}
+
+float Profile::getRotatedLength(int id, float deg)
+{
+    return getLength(id);
+}
+
+float Profile::getRotatedX(int id, float deg)
+{
+    return getRotatedCartesian(id, deg).x;
+}
+
+float Profile::getRotatedY(int id, float deg)
+{
+    return getRotatedCartesian(id, deg).y;
+}
+
 void Profile::rotate(float deg)
 {
     for (int i = 0; i < elemente; i++)

@@ -27,6 +27,9 @@ private:
     struct PointsPolar cartesianToPolar(float x, float y);
     struct PointsPolar cartesianToPolar(struct PointsCartesian in);
 
+    struct PointsPolar getRotatedPolar(int id, float deg);
+    struct PointsCartesian getRotatedCartesian(int id, float deg);
+
     void checkForIndexError(int id);
 
 public:
@@ -46,6 +49,11 @@ public:
     float getLength(int pos_id);
     float getX(int pos_id);
     float getY(int pos_id);
+
+    float getRotatedLength(int id, float deg);
+    float getRotatedAngle(int id, float deg);
+    float getRotatedX(int id, float deg);
+    float getRotatedY(int id, float deg);
 
     void rotate(float deg);
     void move(float x, float y);

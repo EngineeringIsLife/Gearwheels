@@ -8,11 +8,12 @@ public:
 };*/
 
 #include "zahnradprofil.h"
+#include "zahnrad.h"
 
 class ProfilMathematisch
 {
 private:
-    Zahnraddaten zahnrad;
+
 
     float phi_min;
     float phi_max;
@@ -28,6 +29,7 @@ private:
     void calcFoot(void);
 
 public:
+    Zahnraddaten zahnrad; // TODO: Move to private
     int parts_per_tooth;
     int parts_per_flank;
 

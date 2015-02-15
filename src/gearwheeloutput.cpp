@@ -53,6 +53,20 @@ void GearwheelOutputQt::printToDisplay(QPainter& painter, int center_x, int cent
     }
 }
 
+void GearwheelOutputQt::printToDisplay(QPainter& painter, int center_x, int center_y, float scale, float rotation_deg)
+{
+    int p1 = (int)(profil.getRotatedX(0,rotation_deg) * scale) + center_x;
+    int p2 = (int)(profil.getRotatedY(0,rotation_deg) * scale) + center_y;
+    for (int i = 1; i < profil.getElementCount(); i++)
+    {
+        int p3 = (int)(profil.getRotatedX(i, rotation_deg) * scale) + center_x;
+        int p4 = (int)(profil.getRotatedY(i, rotation_deg) * scale) + center_y;
+        painter.drawLine(p1, p2, p3, p4);
+        p1 = p3;
+        p2 = p4;
+    }
+}
+
 void GearwheelOutputQt::printToDisplay(QGraphicsScene& scene, int center_x, int center_y, float scale)
 {
     profil.resetIterator();

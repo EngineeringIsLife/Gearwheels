@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWidget_t {
     QByteArrayData data[4];
-    char stringdata[41];
+    char stringdata[46];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,11 +30,12 @@ struct qt_meta_stringdata_MainWidget_t {
 static const qt_meta_stringdata_MainWidget_t qt_meta_stringdata_MainWidget = {
     {
 QT_MOC_LITERAL(0, 0, 10),
-QT_MOC_LITERAL(1, 11, 13),
-QT_MOC_LITERAL(2, 25, 0),
-QT_MOC_LITERAL(3, 26, 14)
+QT_MOC_LITERAL(1, 11, 14),
+QT_MOC_LITERAL(2, 26, 0),
+QT_MOC_LITERAL(3, 27, 18)
     },
-    "MainWidget\0rotationTimer\0\0toggleRotation"
+    "MainWidget\0toggleRotation\0\0"
+    "rotationTimerEvent"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,8 +68,8 @@ void MainWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     if (_c == QMetaObject::InvokeMetaMethod) {
         MainWidget *_t = static_cast<MainWidget *>(_o);
         switch (_id) {
-        case 0: _t->rotationTimer(); break;
-        case 1: _t->toggleRotation(); break;
+        case 0: _t->toggleRotation(); break;
+        case 1: _t->rotationTimerEvent(); break;
         default: ;
         }
     }
