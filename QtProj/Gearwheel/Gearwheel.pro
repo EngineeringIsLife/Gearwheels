@@ -31,6 +31,6 @@ HEADERS  += mainwindow.h \
     qtoutputcontroller.h \
     qtoutputscene.h
 
-INCLUDEPATH += /home/daniel/Documents/dev/Gearwheel/h/
+INCLUDEPATH += ../../h/
 
 FORMS    +=
