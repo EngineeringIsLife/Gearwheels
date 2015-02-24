@@ -15,7 +15,7 @@ void GearwheelOutputView::mouseMoveEvent(QMouseEvent *ev)
 {
     if (ev->buttons() & Qt::LeftButton)// && ev->modifiers().testFlag(Qt::ControlModifier))
     {
-        QPointF pos = ev->localPos();
+        QPointF pos = ev->pos();
         posx = -startx + pos.x();
         posy = -starty + pos.y();
 

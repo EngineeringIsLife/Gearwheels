@@ -56,6 +56,7 @@ public:
     float getRotatedY(int id, float deg);
 
     void rotate(float deg);
+    void rotateRad(float rad);
     void move(float x, float y);
     void mirror(void);
 

@@ -43,6 +43,8 @@ public:
     bool iteratorEndReached(void);
     float getNextX(void);
     float getNextY(void);
+
+    void rotateToFlankPoint(void);
 };
 
 #endif // ZAHNRADMATH_H

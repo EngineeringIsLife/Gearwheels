@@ -18,6 +18,11 @@ GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelO
     view->adjustSize();
 
     createSecondGearwheel();
+    if (gearwheel->zahnrad.z % 2 == gearwheel2->zahnrad.z % 2)
+    {
+        gearwheel2->rotateGearwheel(360/gearwheel2->zahnrad.z);
+        std::cout << "Zusatz" << std::endl;
+    }
 
     setConnections();
 }
@@ -34,12 +39,15 @@ GearwheelOutputController::~GearwheelOutputController(void) {
 void GearwheelOutputController::repaintItem(void)
 {
     scene->removeItem(gearwheelitem);
+    if (secondGearwheelVisible)
+        scene->removeItem(gearwheelitem2);
+    scene->clear();
     delete gearwheelitem;
     gearwheelitem = new GearwheelItem(*outputobj, posx, posy, zoomfactor);
     scene->addItem(gearwheelitem);
+    //scene->addEllipse(-600+posx+(gearwheel->zahnrad.durchmesser.d + gearwheel2->zahnrad.durchmesser.d)/2*zoomfactor-gearwheel2->zahnrad.durchmesser.d/2*zoomfactor, -600+posy-gearwheel2->zahnrad.durchmesser.d/2*zoomfactor, gearwheel2->zahnrad.durchmesser.d*zoomfactor, gearwheel2->zahnrad.durchmesser.d*zoomfactor);
+    //scene->addEllipse(-600+posx-gearwheel->zahnrad.durchmesser.d/2*zoomfactor, -600+posy-gearwheel->zahnrad.durchmesser.d/2*zoomfactor, gearwheel->zahnrad.durchmesser.d*zoomfactor, gearwheel->zahnrad.durchmesser.d*zoomfactor);
 
-    if (secondGearwheelVisible)
-        scene->removeItem(gearwheelitem2);
     delete gearwheelitem2;
     gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->zahnrad.durchmesser.d + gearwheel2->zahnrad.durchmesser.d)/2*zoomfactor, posy, zoomfactor);
     if (secondGearwheelVisible)

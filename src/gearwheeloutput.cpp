@@ -42,7 +42,6 @@ void GearwheelOutputQt::printToDisplay(QPainter& painter, int center_x, int cent
     profil.resetIterator();
     int p1 = (int)(profil.getNextX() * scale) + center_x;
     int p2 = (int)(profil.getNextY() * scale) + center_y;
-
     while(!profil.iteratorEndReached())
     {
         int p3 = (int)(profil.getNextX() * scale) + center_x;

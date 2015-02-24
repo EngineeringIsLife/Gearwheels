@@ -67,7 +67,7 @@ private:
     void createSecondGearwheel(void)
     {
         Zahnraddaten tmp = gearwheel->zahnrad;
-        Zahnraddaten dataGW2 = Zahnraddaten(tmp.alpha, tmp.rho, tmp.c, tmp.m, tmp.x, tmp.k, tmp.z * 0.8);
+        Zahnraddaten dataGW2 = Zahnraddaten(tmp.alpha, tmp.rho, tmp.c, tmp.m, tmp.x, tmp.k, tmp.z * .7);
         gearwheel2 = new ProfilMathematisch(dataGW2, 50);
         outputobj2 = new GearwheelOutputQt(gearwheel2->zahnprofil);
         gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->zahnrad.durchmesser.d + gearwheel2->zahnrad.durchmesser.d)/2*zoomfactor, posy, zoomfactor);

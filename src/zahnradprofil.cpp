@@ -195,6 +195,14 @@ void Profile::rotate(float deg)
     }
 }
 
+void Profile::rotateRad(float rad)
+{
+    for (int i = 0; i < elemente; i++)
+    {
+        setAngle(i, getAngle(i) + rad);
+    }
+}
+
 void Profile::move(float x, float y)
 {
     for (int i = 0; i < elemente; i++)

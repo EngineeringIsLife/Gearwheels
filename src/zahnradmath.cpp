@@ -118,7 +118,6 @@ void ProfilMathematisch::calcFoot(void)
 
     else
     {
-        //std::cout << "Methode 2" << std::endl;
         // Endpunkte der Evolventen auf dem Fusskreis
         float gamma = 360.0 / zahnrad.z;
         limits[2] = atan2(zahnprofil.getY(parts_per_flank*3 - 1), zahnprofil.getX(parts_per_flank*3 - 1));
@@ -150,6 +149,7 @@ void ProfilMathematisch::calcFullXY(void)
             zahnprofil.setCartesian(i + j * parts_per_tooth, cos(gamma * j * DEG) * x - sin(gamma * j * DEG) * y, sin(gamma * j * DEG) * x + cos(gamma * j * DEG) * y);
         }
     }
+    rotateToFlankPoint();
 }
 
 void ProfilMathematisch::rotateGearwheel(float deg)
@@ -184,6 +184,22 @@ void ProfilMathematisch::calcLimits(void)
     limits[2] = 2 * beta + 2 * s / zahnrad.durchmesser.d;
     limits[1] = limits[2] - limits[0];
     limits[3] = gamma * DEG;
+}
+
+void ProfilMathematisch::rotateToFlankPoint(void)
+{
+    // Find best match for a point on flank that hits the diameter
+    int i = 0;
+    while (zahnprofil.getLength(i) < zahnrad.durchmesser.d/2 && i < parts_per_flank)
+    {
+        i++;
+    }
+
+    float diff = zahnrad.durchmesser.d / 2 - zahnprofil.getLength(i-1);
+    diff /= zahnprofil.getLength(i) - zahnprofil.getLength(i-1);
+    diff *= zahnprofil.getAngle(i) - zahnprofil.getAngle(i-1);
+
+    zahnprofil.rotateRad(-zahnprofil.getAngle(i-1)-diff);
 }
 
 void ProfilMathematisch::resetIterator(void) { zahnprofil.resetIterator(); }
