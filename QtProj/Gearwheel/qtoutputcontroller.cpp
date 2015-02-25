@@ -6,6 +6,7 @@ GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelO
     posx = 250;
     posy = 250;
     zoomfactor = 5;
+    rotationdeg = .5;
 
     secondGearwheelVisible = false;
 
@@ -61,8 +62,8 @@ void GearwheelOutputController::rotate(float deg)
     repaintItem();
 }
 
-void GearwheelOutputController::rotate_fwd(void) { rotate(.5);  }
-void GearwheelOutputController::rotate_bwd(void) { rotate(-.5); }
+void GearwheelOutputController::rotate_fwd(void) { rotate(rotationdeg); }
+void GearwheelOutputController::rotate_bwd(void) { rotate(-rotationdeg); }
 void GearwheelOutputController::toggleRotation(void) { rotating = !rotating; }
 
 void GearwheelOutputController::setConnections(void)

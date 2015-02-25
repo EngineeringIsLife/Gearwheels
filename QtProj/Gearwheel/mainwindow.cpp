@@ -13,6 +13,7 @@
 #include <QLabel>
 #include <QTextEdit>
 #include <QHBoxLayout>
+#include <QSlider>
 
 #include "zahnradfertigung.h"
 #include "zahnradmath.h"
@@ -64,9 +65,15 @@ MainWidget::MainWidget(QWidget *parent)
 
     QLabel* label_testtext = new QLabel(box_output);
     label_testtext->setText("Gearwheel");
+
+    QSlider* slider_rotspeed = new QSlider(Qt::Horizontal, box_output);
+    QSlider* slider_rotsteps = new QSlider(Qt::Horizontal, box_output);
+
     view = new GearwheelOutputView(box_output, &zahnrad);
     controller = new GearwheelOutputController(box_output, view, &zahnrad);
     layout_output->addWidget(label_testtext);
+    layout_output->addWidget(slider_rotspeed);
+    layout_output->addWidget(slider_rotsteps);
     layout_output->addWidget(view);
     view->adjustSize();
 
@@ -80,6 +87,8 @@ MainWidget::MainWidget(QWidget *parent)
 
 
     // Connections
+    connect(slider_rotspeed, SIGNAL(valueChanged(int)), controller, SLOT(changeSpeed(int)));
+    connect(slider_rotsteps, SIGNAL(valueChanged(int)), view, SLOT(changeSteps(int)));
     connect(rotateButton, SIGNAL(clicked()), view, SLOT(toggleRotation()));
     connect(secondGWButton, SIGNAL(clicked()), controller, SLOT(toggleSecondGearwheel()));
     connect(exitButton, SIGNAL(clicked()), this, SLOT(close()));

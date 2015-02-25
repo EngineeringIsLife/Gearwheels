@@ -63,6 +63,7 @@ private:
     int posx;
     int posy;
     float zoomfactor;
+    float rotationdeg;
 
     void createSecondGearwheel(void)
     {
@@ -126,6 +127,11 @@ public slots:
         secondGearwheelVisible = !secondGearwheelVisible;
         if (secondGearwheelVisible) addSecondGearwheel();
         else removeSecondGearwheel();
+    }
+
+    void changeSpeed(int newDeg)
+    {
+        rotationdeg = (float)newDeg/10;
     }
 
     void rotate_fwd(void);

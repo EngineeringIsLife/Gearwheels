@@ -22,12 +22,12 @@ static const uint qt_meta_data_GearwheelOutputView[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       5,       // signalCount
+       6,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
       25,   21,   20,   20, 0x05,
@@ -35,10 +35,13 @@ static const uint qt_meta_data_GearwheelOutputView[] = {
       58,   20,   20,   20, 0x05,
       68,   20,   20,   20, 0x05,
       81,   20,   20,   20, 0x05,
+      96,   94,   20,   20, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      94,   20,   20,   20, 0x0a,
      115,   20,   20,   20, 0x0a,
+     136,   20,   20,   20, 0x0a,
+     153,   94,   20,   20, 0x0a,
+     177,   94,   20,   20, 0x0a,
 
        0        // eod
 };
@@ -47,7 +50,9 @@ static const char qt_meta_stringdata_GearwheelOutputView[] = {
     "GearwheelOutputView\0\0x,y\0"
     "changePosition(int,int)\0zoomIn()\0"
     "zoomOut()\0rotateFine()\0rotateFull()\0"
-    "rotationTimerEvent()\0toggleRotation()\0"
+    "x\0changeSpeed(float)\0rotationTimerEvent()\0"
+    "toggleRotation()\0speedSliderChanged(int)\0"
+    "changeSteps(int)\0"
 };
 
 void GearwheelOutputView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -61,8 +66,11 @@ void GearwheelOutputView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         case 2: _t->zoomOut(); break;
         case 3: _t->rotateFine(); break;
         case 4: _t->rotateFull(); break;
-        case 5: _t->rotationTimerEvent(); break;
-        case 6: _t->toggleRotation(); break;
+        case 5: _t->changeSpeed((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 6: _t->rotationTimerEvent(); break;
+        case 7: _t->toggleRotation(); break;
+        case 8: _t->speedSliderChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->changeSteps((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -100,9 +108,9 @@ int GearwheelOutputView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 10;
     }
     return _id;
 }
@@ -136,5 +144,12 @@ void GearwheelOutputView::rotateFine()
 void GearwheelOutputView::rotateFull()
 {
     QMetaObject::activate(this, &staticMetaObject, 4, 0);
+}
+
+// SIGNAL 5
+void GearwheelOutputView::changeSpeed(float _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 5, _a);
 }
 QT_END_MOC_NAMESPACE
