@@ -7,23 +7,21 @@ GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelO
     posy = 250;
     zoomfactor = 5;
     rotationdeg = .5;
+    stepsize = 100;
 
     secondGearwheelVisible = false;
 
     rotating = false;
-    scene = new QGraphicsScene(view); //GearwheelOutputScene(view);
+    scene = new QGraphicsScene(view);
     outputobj = new GearwheelOutputQt(gearwheel->zahnprofil);
     gearwheelitem = new GearwheelItem(*outputobj, posx, posy, zoomfactor);
     view->setScene(scene);
     scene->addItem(gearwheelitem);
     view->adjustSize();
 
+    createTimer();
+
     createSecondGearwheel();
-    if (gearwheel->zahnrad.z % 2 == gearwheel2->zahnrad.z % 2)
-    {
-        gearwheel2->rotateGearwheel(360/gearwheel2->zahnrad.z);
-        std::cout << "Zusatz" << std::endl;
-    }
 
     setConnections();
 }
@@ -35,6 +33,7 @@ GearwheelOutputController::~GearwheelOutputController(void) {
     delete gearwheel2;
     delete gearwheelitem;
     delete gearwheelitem2;
+    delete rotationtimer;
 }
 
 void GearwheelOutputController::repaintItem(void)
@@ -64,7 +63,6 @@ void GearwheelOutputController::rotate(float deg)
 
 void GearwheelOutputController::rotate_fwd(void) { rotate(rotationdeg); }
 void GearwheelOutputController::rotate_bwd(void) { rotate(-rotationdeg); }
-void GearwheelOutputController::toggleRotation(void) { rotating = !rotating; }
 
 void GearwheelOutputController::setConnections(void)
 {
@@ -72,5 +70,33 @@ void GearwheelOutputController::setConnections(void)
     connect(view, SIGNAL(zoomIn()), this, SLOT(zoomItemIn()));
     connect(view, SIGNAL(zoomOut()), this, SLOT(zoomItemOut()));
     connect(view, SIGNAL(rotateFine()), this, SLOT(rotateSingle()));
-    connect(view, SIGNAL(rotateFull()), this, SLOT(rotate_fwd()));
+    connect(view, SIGNAL(toggleRotation()), this, SLOT(toggleRotation()));
+}
+
+void GearwheelOutputController::createTimer(void)
+{
+    rotationtimer = new QTimer(this);
+    connect(rotationtimer, SIGNAL(timeout()), this, SLOT(rotationTimerEvent()));
+}
+
+void GearwheelOutputController::createSecondGearwheel(void)
+{
+    Zahnraddaten tmp = gearwheel->zahnrad;
+    Zahnraddaten dataGW2 = Zahnraddaten(tmp.alpha, tmp.rho, tmp.c, tmp.m, tmp.x, tmp.k, tmp.z * .7);
+    gearwheel2 = new ProfilMathematisch(dataGW2, 50);
+    outputobj2 = new GearwheelOutputQt(gearwheel2->zahnprofil);
+    gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->zahnrad.durchmesser.d + gearwheel2->zahnrad.durchmesser.d)/2*zoomfactor, posy, zoomfactor);
+
+    if (gearwheel->zahnrad.z % 2 == gearwheel2->zahnrad.z % 2)
+        gearwheel2->rotateGearwheel(360/gearwheel2->zahnrad.z);
+}
+
+void GearwheelOutputController::addSecondGearwheel(void)
+{
+    scene->addItem(gearwheelitem2);
+}
+
+void GearwheelOutputController::removeSecondGearwheel(void)
+{
+    scene->removeItem(gearwheelitem2);
 }

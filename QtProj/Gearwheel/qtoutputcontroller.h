@@ -6,6 +6,7 @@
 #include "gearwheeloutput.h"
 #include <QGraphicsItem>
 #include <QObject>
+#include <QTimer>
 
 #include <iostream>
 
@@ -50,12 +51,14 @@ class GearwheelOutputController : public QObject
 private:
     QGraphicsScene *scene;
     GearwheelOutputView* view;
+
     ProfilMathematisch* gearwheel; // Modell
     ProfilMathematisch* gearwheel2;
     GearwheelOutputQt* outputobj;
     GearwheelOutputQt* outputobj2;
     GearwheelItem* gearwheelitem;
     GearwheelItem* gearwheelitem2;
+    QTimer* rotationtimer;
 
     bool rotating;
     bool secondGearwheelVisible;
@@ -65,24 +68,13 @@ private:
     float zoomfactor;
     float rotationdeg;
 
-    void createSecondGearwheel(void)
-    {
-        Zahnraddaten tmp = gearwheel->zahnrad;
-        Zahnraddaten dataGW2 = Zahnraddaten(tmp.alpha, tmp.rho, tmp.c, tmp.m, tmp.x, tmp.k, tmp.z * .7);
-        gearwheel2 = new ProfilMathematisch(dataGW2, 50);
-        outputobj2 = new GearwheelOutputQt(gearwheel2->zahnprofil);
-        gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->zahnrad.durchmesser.d + gearwheel2->zahnrad.durchmesser.d)/2*zoomfactor, posy, zoomfactor);
-    }
+    int stepsize;
 
-    void addSecondGearwheel(void)
-    {
-        scene->addItem(gearwheelitem2);
-    }
+    void createTimer(void);
+    void createSecondGearwheel(void);
 
-    void removeSecondGearwheel(void)
-    {
-        scene->removeItem(gearwheelitem2);
-    }
+    void addSecondGearwheel(void);
+    void removeSecondGearwheel(void);
 
     void setConnections(void);
 
@@ -93,10 +85,13 @@ public:
     void repaintItem(void);
     void rotate(float deg);
     void rotate_bwd(void);
-    void toggleRotation(void);
-
 
 public slots:
+    void rotationTimerEvent(void)
+    {
+        rotate_fwd();
+    }
+
     void moveItem(int x, int y)
     {
         posx = x;
@@ -135,6 +130,19 @@ public slots:
     }
 
     void rotate_fwd(void);
+
+    void changeSteps(int x)
+    {
+        std::cout << x << std::endl;
+        stepsize = (x+1)*10;
+        rotationtimer->setInterval(stepsize);
+    }
+
+    void toggleRotation()
+    {
+        if (rotationtimer->isActive()) rotationtimer->stop();
+        else rotationtimer->start(stepsize);
+    }
 
 };
 

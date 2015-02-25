@@ -22,7 +22,7 @@ static const uint qt_meta_data_GearwheelOutputController[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -30,23 +30,27 @@ static const uint qt_meta_data_GearwheelOutputController[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      31,   27,   26,   26, 0x0a,
-      49,   26,   26,   26, 0x0a,
-      62,   26,   26,   26, 0x0a,
-      76,   26,   26,   26, 0x0a,
-      91,   26,   26,   26, 0x0a,
-     122,  115,   26,   26, 0x0a,
-     139,   26,   26,   26, 0x0a,
+      27,   26,   26,   26, 0x0a,
+      52,   48,   26,   26, 0x0a,
+      70,   26,   26,   26, 0x0a,
+      83,   26,   26,   26, 0x0a,
+      97,   26,   26,   26, 0x0a,
+     112,   26,   26,   26, 0x0a,
+     143,  136,   26,   26, 0x0a,
+     160,   26,   26,   26, 0x0a,
+     175,  173,   26,   26, 0x0a,
+     192,   26,   26,   26, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_GearwheelOutputController[] = {
-    "GearwheelOutputController\0\0x,y\0"
-    "moveItem(int,int)\0zoomItemIn()\0"
-    "zoomItemOut()\0rotateSingle()\0"
+    "GearwheelOutputController\0\0"
+    "rotationTimerEvent()\0x,y\0moveItem(int,int)\0"
+    "zoomItemIn()\0zoomItemOut()\0rotateSingle()\0"
     "toggleSecondGearwheel()\0newDeg\0"
-    "changeSpeed(int)\0rotate_fwd()\0"
+    "changeSpeed(int)\0rotate_fwd()\0x\0"
+    "changeSteps(int)\0toggleRotation()\0"
 };
 
 void GearwheelOutputController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -55,13 +59,16 @@ void GearwheelOutputController::qt_static_metacall(QObject *_o, QMetaObject::Cal
         Q_ASSERT(staticMetaObject.cast(_o));
         GearwheelOutputController *_t = static_cast<GearwheelOutputController *>(_o);
         switch (_id) {
-        case 0: _t->moveItem((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 1: _t->zoomItemIn(); break;
-        case 2: _t->zoomItemOut(); break;
-        case 3: _t->rotateSingle(); break;
-        case 4: _t->toggleSecondGearwheel(); break;
-        case 5: _t->changeSpeed((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: _t->rotate_fwd(); break;
+        case 0: _t->rotationTimerEvent(); break;
+        case 1: _t->moveItem((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 2: _t->zoomItemIn(); break;
+        case 3: _t->zoomItemOut(); break;
+        case 4: _t->rotateSingle(); break;
+        case 5: _t->toggleSecondGearwheel(); break;
+        case 6: _t->changeSpeed((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 7: _t->rotate_fwd(); break;
+        case 8: _t->changeSteps((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->toggleRotation(); break;
         default: ;
         }
     }
@@ -99,9 +106,9 @@ int GearwheelOutputController::qt_metacall(QMetaObject::Call _c, int _id, void *
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 10;
     }
     return _id;
 }
