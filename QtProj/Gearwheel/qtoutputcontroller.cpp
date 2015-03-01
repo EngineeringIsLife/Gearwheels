@@ -8,6 +8,7 @@ GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelO
     zoomfactor = 5;
     rotationdeg = .5;
     stepsize = 100;
+    rotationdiff = 0;
 
     secondGearwheelVisible = false;
 
@@ -45,8 +46,8 @@ void GearwheelOutputController::repaintItem(void)
     delete gearwheelitem;
     gearwheelitem = new GearwheelItem(*outputobj, posx, posy, zoomfactor);
     scene->addItem(gearwheelitem);
-    //scene->addEllipse(-600+posx+(gearwheel->zahnrad.durchmesser.d + gearwheel2->zahnrad.durchmesser.d)/2*zoomfactor-gearwheel2->zahnrad.durchmesser.d/2*zoomfactor, -600+posy-gearwheel2->zahnrad.durchmesser.d/2*zoomfactor, gearwheel2->zahnrad.durchmesser.d*zoomfactor, gearwheel2->zahnrad.durchmesser.d*zoomfactor);
-    //scene->addEllipse(-600+posx-gearwheel->zahnrad.durchmesser.d/2*zoomfactor, -600+posy-gearwheel->zahnrad.durchmesser.d/2*zoomfactor, gearwheel->zahnrad.durchmesser.d*zoomfactor, gearwheel->zahnrad.durchmesser.d*zoomfactor);
+    scene->addEllipse(-600+posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor-gearwheel2->getDiameter()/2*zoomfactor, -600+posy-gearwheel2->getDiameter()/2*zoomfactor, gearwheel2->getDiameter()*zoomfactor, gearwheel2->getDiameter()*zoomfactor);
+    scene->addEllipse(-600+posx-gearwheel->getDiameter()/2*zoomfactor, -600+posy-gearwheel->getDiameter()/2*zoomfactor, gearwheel->getDiameter()*zoomfactor, gearwheel->getDiameter()*zoomfactor);
 
     delete gearwheelitem2;
     gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor, posy, zoomfactor);
@@ -57,7 +58,11 @@ void GearwheelOutputController::repaintItem(void)
 void GearwheelOutputController::rotate(float deg)
 {
     gearwheel->rotate(deg);
-    gearwheel2->rotate(-deg * gearwheel->getToothcount() / gearwheel2->getToothcount());
+    float seconddeg = -deg * gearwheel->getToothcount() / gearwheel2->getToothcount();
+    if (secondGearwheelVisible)
+        gearwheel2->rotate(seconddeg);
+    else
+        rotationdiff += seconddeg;
     repaintItem();
 }
 
@@ -99,4 +104,65 @@ void GearwheelOutputController::addSecondGearwheel(void)
 void GearwheelOutputController::removeSecondGearwheel(void)
 {
     scene->removeItem(gearwheelitem2);
+}
+
+void GearwheelOutputController::rotationTimerEvent(void)
+{
+    rotate_fwd();
+}
+
+void GearwheelOutputController::moveItem(int x, int y)
+{
+    posx = x;
+    posy = y;
+    repaintItem();
+}
+
+void GearwheelOutputController::zoomItemIn(void)
+{
+    zoomfactor *= 1.05;
+    repaintItem();
+}
+
+void GearwheelOutputController::zoomItemOut(void)
+{
+    zoomfactor /= 1.05;
+    repaintItem();
+}
+
+void GearwheelOutputController::rotateSingle(void)
+{
+    gearwheel->rotate(1);
+    repaintItem();
+}
+
+void GearwheelOutputController::toggleSecondGearwheel(void)
+{
+    secondGearwheelVisible = !secondGearwheelVisible;
+    if (secondGearwheelVisible)
+    {
+        gearwheel2->rotate(rotationdiff);
+        rotationdiff = 0;
+        addSecondGearwheel();
+    }
+
+    else removeSecondGearwheel();
+}
+
+void GearwheelOutputController::changeSpeed(int newDeg)
+{
+    rotationdeg = (float)newDeg/10;
+}
+
+void GearwheelOutputController::changeSteps(int x)
+{
+    std::cout << x << std::endl;
+    stepsize = (x+1)*10;
+    rotationtimer->setInterval(stepsize);
+}
+
+void GearwheelOutputController::toggleRotation(void)
+{
+    if (rotationtimer->isActive()) rotationtimer->stop();
+    else rotationtimer->start(stepsize);
 }

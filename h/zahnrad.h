@@ -47,6 +47,7 @@ protected:
 public:
     Profile zahnprofil;
     Zahnrad(Zahnraddaten zahnrad, int profilepoints);
+    virtual ~Zahnrad(void) { }
 
     void rotate(float deg);
     void move(float x, float y);

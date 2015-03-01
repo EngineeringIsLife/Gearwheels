@@ -23,10 +23,8 @@ public:
     int parts_per_flank;
 
     ProfilMathematisch(Zahnraddaten zahnrad, int profilepoints);
-    ~ProfilMathematisch(void) { }
+    virtual ~ProfilMathematisch(void) { }
 
-    //void rotate(float deg);
-    //void move(float x, float y);
     void rotateToFlankPoint(void);
 };
 

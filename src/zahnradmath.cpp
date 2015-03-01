@@ -182,8 +182,3 @@ void ProfilMathematisch::rotateToFlankPoint(void)
 
     zahnprofil.rotateRad(-zahnprofil.getAngle(i-1)-diff);
 }
-
-/*void ProfilMathematisch::resetIterator(void) { zahnprofil.resetIterator(); }
-bool ProfilMathematisch::iteratorEndReached(void) { return zahnprofil.iteratorEndReached(); }
-float ProfilMathematisch::getNextX(void) { return zahnprofil.getNextX(); }
-float ProfilMathematisch::getNextY(void) { return zahnprofil.getNextY(); }*/

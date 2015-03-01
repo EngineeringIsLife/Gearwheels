@@ -67,6 +67,7 @@ private:
     int posy;
     float zoomfactor;
     float rotationdeg;
+    float rotationdiff;
 
     int stepsize;
 
@@ -87,62 +88,16 @@ public:
     void rotate_bwd(void);
 
 public slots:
-    void rotationTimerEvent(void)
-    {
-        rotate_fwd();
-    }
-
-    void moveItem(int x, int y)
-    {
-        posx = x;
-        posy = y;
-        repaintItem();
-    }
-
-    void zoomItemIn(void)
-    {
-        zoomfactor *= 1.05;
-        repaintItem();
-    }
-
-    void zoomItemOut(void)
-    {
-        zoomfactor /= 1.05;
-        repaintItem();
-    }
-
-    void rotateSingle()
-    {
-        gearwheel->rotate(1);
-        repaintItem();
-    }
-
-    void toggleSecondGearwheel(void)
-    {
-        secondGearwheelVisible = !secondGearwheelVisible;
-        if (secondGearwheelVisible) addSecondGearwheel();
-        else removeSecondGearwheel();
-    }
-
-    void changeSpeed(int newDeg)
-    {
-        rotationdeg = (float)newDeg/10;
-    }
-
+    void rotationTimerEvent(void);
+    void moveItem(int x, int y);
+    void zoomItemIn(void);
+    void zoomItemOut(void);
+    void rotateSingle(void);
+    void toggleSecondGearwheel(void);
+    void changeSpeed(int newDeg);
     void rotate_fwd(void);
-
-    void changeSteps(int x)
-    {
-        std::cout << x << std::endl;
-        stepsize = (x+1)*10;
-        rotationtimer->setInterval(stepsize);
-    }
-
-    void toggleRotation()
-    {
-        if (rotationtimer->isActive()) rotationtimer->stop();
-        else rotationtimer->start(stepsize);
-    }
+    void changeSteps(int x);
+    void toggleRotation(void);
 
 };
 

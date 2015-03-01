@@ -2,6 +2,8 @@
 #include <QGraphicsView>
 #include <iostream>
 
+#include <QWheelEvent>
+
 
 GearwheelOutputView::GearwheelOutputView(QWidget *parent)
     : QGraphicsView(parent), parent(parent)
@@ -63,4 +65,12 @@ void GearwheelOutputView::keyPressEvent(QKeyEvent *event)
         emit changePosition(posx, posy);
         break;
     }
+}
+
+void GearwheelOutputView::wheelEvent(QWheelEvent *event)
+{
+    if (event->delta() >= 0)
+        zoomIn();
+    else
+        zoomOut();
 }
