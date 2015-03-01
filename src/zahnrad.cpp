@@ -33,3 +33,27 @@ void Zahnraddaten::calcDurchmesser(void)
     if (durchmesser.d_max < durchmesser.d_a)
         durchmesser.d_a = durchmesser.d_max;
 }
+
+
+Zahnrad::Zahnrad(Zahnraddaten zahnrad, int profile_size)
+    : zahnrad(zahnrad), profilepoints(profile_size), zahnprofil(profile_size)
+{ }
+
+void Zahnrad::resetIterator(void) { zahnprofil.resetIterator(); }
+bool Zahnrad::iteratorEndReached(void) { return zahnprofil.iteratorEndReached(); }
+float Zahnrad::getNextX(void) { return zahnprofil.getNextX(); }
+float Zahnrad::getNextY(void) { return zahnprofil.getNextY(); }
+
+float Zahnrad::getDiameter(void) { return zahnrad.durchmesser.d; }
+int Zahnrad::getToothcount(void) { return zahnrad.z; }
+Zahnraddaten Zahnrad::getGearwheelData(void) { return zahnrad; }
+
+void Zahnrad::rotate(float deg)
+{
+    zahnprofil.rotate(deg);
+}
+
+void Zahnrad::move(float x, float y)
+{
+    zahnprofil.move(x,y);
+}

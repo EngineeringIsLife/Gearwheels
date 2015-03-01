@@ -23,7 +23,7 @@
 
 using namespace std;
 
-Zahnraddaten zahnraddaten(20, .38, .25, 4.0, 0, 0, 15); // Daten eines Zahnrads
+Zahnraddaten zahnraddaten(20, .38, .25, 4.0, .5, 0, 15); // Daten eines Zahnrads
 ProfilMathematisch zahnrad(zahnraddaten, 50); // Klasse zur Berechnung des Zahnradprofils
 GearwheelOutputQt zahnradoutput(zahnrad.zahnprofil); // Hilfsklasse zum Zeichnen eines Zahnrads
 

@@ -113,7 +113,7 @@ public slots:
 
     void rotateSingle()
     {
-        gearwheel->rotateGearwheel(1);
+        gearwheel->rotate(1);
         repaintItem();
     }
 

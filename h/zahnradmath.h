@@ -1,23 +1,13 @@
 #ifndef ZAHNRADMATH_H
 #define ZAHNRADMATH_H
 
-/*class ZahnradMath
-{
-public:
-    ZahnradMath();
-};*/
-
-#include "zahnradprofil.h"
 #include "zahnrad.h"
 
-class ProfilMathematisch
+class ProfilMathematisch : public Zahnrad
 {
 private:
-
-
     float phi_min;
     float phi_max;
-
     float limits[4];
 
     void calcProfile(void);
@@ -29,21 +19,14 @@ private:
     void calcFoot(void);
 
 public:
-    Zahnraddaten zahnrad; // TODO: Move to private
     int parts_per_tooth;
     int parts_per_flank;
 
-    Profile zahnprofil;
-    ProfilMathematisch(Zahnraddaten zahnrad, int genauigkeit);
+    ProfilMathematisch(Zahnraddaten zahnrad, int profilepoints);
+    ~ProfilMathematisch(void) { }
 
-    void rotateGearwheel(float deg);
-    void moveGearwheel(float x, float y);
-
-    void resetIterator(void);
-    bool iteratorEndReached(void);
-    float getNextX(void);
-    float getNextY(void);
-
+    //void rotate(float deg);
+    //void move(float x, float y);
     void rotateToFlankPoint(void);
 };
 

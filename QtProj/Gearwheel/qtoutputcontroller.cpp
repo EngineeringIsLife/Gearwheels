@@ -49,15 +49,15 @@ void GearwheelOutputController::repaintItem(void)
     //scene->addEllipse(-600+posx-gearwheel->zahnrad.durchmesser.d/2*zoomfactor, -600+posy-gearwheel->zahnrad.durchmesser.d/2*zoomfactor, gearwheel->zahnrad.durchmesser.d*zoomfactor, gearwheel->zahnrad.durchmesser.d*zoomfactor);
 
     delete gearwheelitem2;
-    gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->zahnrad.durchmesser.d + gearwheel2->zahnrad.durchmesser.d)/2*zoomfactor, posy, zoomfactor);
+    gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor, posy, zoomfactor);
     if (secondGearwheelVisible)
         scene->addItem(gearwheelitem2);
 }
 
 void GearwheelOutputController::rotate(float deg)
 {
-    gearwheel->rotateGearwheel(deg);
-    gearwheel2->rotateGearwheel(-deg * gearwheel->zahnrad.z / gearwheel2->zahnrad.z);
+    gearwheel->rotate(deg);
+    gearwheel2->rotate(-deg * gearwheel->getToothcount() / gearwheel2->getToothcount());
     repaintItem();
 }
 
@@ -81,14 +81,14 @@ void GearwheelOutputController::createTimer(void)
 
 void GearwheelOutputController::createSecondGearwheel(void)
 {
-    Zahnraddaten tmp = gearwheel->zahnrad;
-    Zahnraddaten dataGW2 = Zahnraddaten(tmp.alpha, tmp.rho, tmp.c, tmp.m, tmp.x, tmp.k, tmp.z * .7);
+    Zahnraddaten tmp = gearwheel->getGearwheelData();
+    Zahnraddaten dataGW2 = Zahnraddaten(tmp.alpha, tmp.rho, tmp.c, tmp.m, -tmp.x, tmp.k, tmp.z * .7);
     gearwheel2 = new ProfilMathematisch(dataGW2, 50);
     outputobj2 = new GearwheelOutputQt(gearwheel2->zahnprofil);
-    gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->zahnrad.durchmesser.d + gearwheel2->zahnrad.durchmesser.d)/2*zoomfactor, posy, zoomfactor);
+    gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor, posy, zoomfactor);
 
-    if (gearwheel->zahnrad.z % 2 == gearwheel2->zahnrad.z % 2)
-        gearwheel2->rotateGearwheel(360/gearwheel2->zahnrad.z);
+    if (gearwheel->getToothcount() % 2 == gearwheel2->getToothcount() % 2)
+        gearwheel2->rotate(360/gearwheel2->getToothcount());
 }
 
 void GearwheelOutputController::addSecondGearwheel(void)

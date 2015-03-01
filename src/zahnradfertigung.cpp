@@ -1,18 +1,7 @@
-//#include <QCoreApplication>
 #include <math.h>
 #include <iostream>
-#include <stdlib.h>
-#include "zahnradprofil.h"
 #include "zahnradfertigung.h"
 
-Zahnrad::Zahnrad(Zahnraddaten zahnrad, int genauigkeit)
-    : zahnrad(zahnrad), genauigkeit(genauigkeit), zahnprofil(genauigkeit+1)
-{ }
-
-void Zahnrad::resetIterator(void) { zahnprofil.resetIterator(); }
-bool Zahnrad::iteratorEndReached(void) { return zahnprofil.iteratorEndReached(); }
-float Zahnrad::getNextX(void) { return zahnprofil.getNextX(); }
-float Zahnrad::getNextY(void) { return zahnprofil.getNextY(); }
 
 ZahnradFertigung::ZahnradFertigung(Zahnraddaten zahnrad, float schrittweite, int genauigkeit)
     : Zahnrad(zahnrad, genauigkeit), schrittweite(schrittweite)
