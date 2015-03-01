@@ -32,8 +32,8 @@ MainWidget::MainWidget(QWidget *parent)
 {
     this->setWindowTitle("Gearwheels");
 
-    view = new GearwheelOutputView(mainlayout.box_output);
-    controller = new GearwheelOutputController(mainlayout.box_output, view, &zahnrad);
+    view = new GearwheelOutputView(this);
+    controller = new GearwheelOutputController(this, view, &zahnrad);
     mainlayout.addView(view);
     view->adjustSize();
 
@@ -52,6 +52,7 @@ MainWidget::~MainWidget()
 }
 
 MainLayout::MainLayout(QWidget *parent)
+    : parent(parent)
 {
     createToplevelLayout(parent);
 }
@@ -59,10 +60,8 @@ MainLayout::MainLayout(QWidget *parent)
 MainLayout::~MainLayout(void)
 {
     delete layout_main;
-    delete box_title;
     delete box_buttons;
     delete box_output;
-    delete box_status;
     delete label_title;
     delete layout_buttons;
     delete rotateButton;
@@ -72,11 +71,10 @@ MainLayout::~MainLayout(void)
     delete label_testtext;
     delete slider_rotspeed;
     delete slider_rotsteps;
-    delete layout_status;
     delete label_status;
 }
 
 void MainLayout::addView(QGraphicsView *view)
 {
-    layout_output->addWidget(view);
+    layout_main->addWidget(view, 3,2,1,1);
 }

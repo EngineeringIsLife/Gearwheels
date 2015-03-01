@@ -21,54 +21,43 @@
 #include "qtoutputcontroller.h"
 #include "qtoutputscene.h"
 
-class MainLayout// : public QWidget
+class MainLayout
 {
 private:
+    QWidget* parent;
     // Layout-Items
-    QVBoxLayout* layout_main;
-    //QGridLayout* layout_main;
-    QGroupBox* box_title;
+    QGridLayout* layout_main;
     QGroupBox* box_buttons;
-    QGroupBox* box_status;
+    QGroupBox* box_output;
     QLabel* label_title;
     QHBoxLayout* layout_buttons;
-    QHBoxLayout* layout_output;
+    QVBoxLayout* layout_output;
     QLabel* label_testtext;
-    QHBoxLayout* layout_status;
     QLabel* label_status;
 
     void createToplevelLayout(QWidget *parent = 0)
     {
-        layout_main = new QVBoxLayout(parent);
-        //layout_main = new QGridLayout(parent);
+        layout_main = new QGridLayout(parent);
 
-        box_title = new QGroupBox(parent);
-        layout_main->addWidget(box_title);
         createTitleFrame();
-
-        box_buttons = new QGroupBox(parent);
-        layout_main->addWidget(box_buttons);
         createButtonsFrame();
-
-        box_output = new QGroupBox(parent);
-        layout_main->addWidget(box_output);
         createOutputFrame();
-
-        box_status = new QGroupBox(parent);
-        layout_main->addWidget(box_status);
         createStatusFrame();
     }
 
     void createTitleFrame(void)
     {
         // First frame - Title
-        label_title = new QLabel(box_title);
+        label_title = new QLabel();
+        layout_main->addWidget(label_title, 1, 1, 1, 2);
         label_title->setText("Gearwheel Visualization");
     }
 
     void createButtonsFrame(void)
     {
         // Second frame - Buttons
+        box_buttons = new QGroupBox(parent);
+        layout_main->addWidget(box_buttons, 2, 1, 1, 2);
         layout_buttons = new QHBoxLayout(box_buttons);
 
         rotateButton = new QPushButton("Rotate");
@@ -82,34 +71,32 @@ private:
 
     void createOutputFrame(void)
     {
-        // Third frame - In-/Output
-        layout_output = new QHBoxLayout(box_output);
+        // Third frame - Inputs for gearwheel
+        box_output = new QGroupBox(parent);
+        layout_main->addWidget(box_output, 3, 1, 1, 1);
+        layout_output = new QVBoxLayout(box_output);
 
         label_testtext = new QLabel(box_output);
         label_testtext->setText("Gearwheel");
+        layout_output->addWidget(label_testtext);
 
         slider_rotspeed = new QSlider(Qt::Horizontal, box_output);
-        slider_rotsteps = new QSlider(Qt::Horizontal, box_output);
-
-        layout_output->addWidget(label_testtext);
         layout_output->addWidget(slider_rotspeed);
+
+        slider_rotsteps = new QSlider(Qt::Horizontal, box_output);
         layout_output->addWidget(slider_rotsteps);
     }
 
     void createStatusFrame(void)
     {
         // Fourth frame - Status bar
-        layout_status = new QHBoxLayout(box_status);
-
-        label_status = new QLabel(box_status);
+        label_status = new QLabel();
         label_status->setText("Ready");
 
-        layout_status->addWidget(label_status);
+        layout_main->addWidget(label_status, 4, 1, 1, 2);
     }
 
 public:
-    QGroupBox* box_output;
-
     QPushButton* rotateButton;
     QPushButton* secondGWButton;
     QPushButton* exitButton;
