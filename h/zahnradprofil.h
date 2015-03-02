@@ -66,6 +66,8 @@ public:
     float getNextY(void);
     float getNextLength(void);
     float getNextAngle(void);
+
+    void setSizeAndResetProfile(int elements);
 };
 
 #endif // ZAHNRADPROFIL_H

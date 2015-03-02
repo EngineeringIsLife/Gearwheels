@@ -16,6 +16,8 @@
 #include <QPushButton>
 #include <QGridLayout>
 
+#include <QSpinBox>
+
 #include "zahnradmath.h"
 #include "gearwheeloutput.h"
 #include "qtoutputcontroller.h"
@@ -80,6 +82,10 @@ private:
         label_testtext->setText("Gearwheel");
         layout_output->addWidget(label_testtext);
 
+        output_toothcountspinner = new QSpinBox(box_output);
+        output_toothcountspinner->setRange(4,500);
+        layout_output->addWidget(output_toothcountspinner);
+
         slider_rotspeed = new QSlider(Qt::Horizontal, box_output);
         layout_output->addWidget(slider_rotspeed);
 
@@ -102,6 +108,7 @@ public:
     QPushButton* exitButton;
     QSlider* slider_rotspeed;
     QSlider* slider_rotsteps;
+    QSpinBox* output_toothcountspinner;
 
     MainLayout(QWidget *parent = 0);
     ~MainLayout(void);

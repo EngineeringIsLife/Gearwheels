@@ -98,6 +98,7 @@ public slots:
     void rotate_fwd(void);
     void changeSteps(int x);
     void toggleRotation(void);
+    void changeToothcount(int z);
 
 };
 

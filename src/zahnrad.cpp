@@ -9,6 +9,11 @@ Zahnraddaten::Zahnraddaten(float alpha, float rho, float c, float m, float x, fl
     calcDurchmesser();
 }
 
+void Zahnraddaten::changed(void)
+{
+    calcDurchmesser();
+}
+
 void Zahnraddaten::calcDurchmesser(void)
 {
     float h = 0; // TODO: ??

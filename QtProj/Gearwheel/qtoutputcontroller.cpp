@@ -166,3 +166,9 @@ void GearwheelOutputController::toggleRotation(void)
     if (rotationtimer->isActive()) rotationtimer->stop();
     else rotationtimer->start(stepsize);
 }
+
+void GearwheelOutputController::changeToothcount(int z)
+{
+    gearwheel->changeToothcount(z);
+    repaintItem();
+}

@@ -7,7 +7,7 @@
 /* --------------- Mathematische errechnetes Zahnradprofil ------------- */
 
 ProfilMathematisch::ProfilMathematisch(Zahnraddaten zahnrad, int genauigkeit)
-    : Zahnrad(zahnrad, zahnrad.z * (genauigkeit - genauigkeit % 4 + 4))
+    : Zahnrad(zahnrad, zahnrad.z * (genauigkeit - genauigkeit % 4 + 4)), steps(genauigkeit)
 {
     parts_per_tooth = genauigkeit - genauigkeit % 4 + 4;
     parts_per_flank = parts_per_tooth / 4;
@@ -181,4 +181,23 @@ void ProfilMathematisch::rotateToFlankPoint(void)
     diff *= zahnprofil.getAngle(i) - zahnprofil.getAngle(i-1);
 
     zahnprofil.rotateRad(-zahnprofil.getAngle(i-1)-diff);
+}
+
+void ProfilMathematisch::changeToothcount(int z)
+{
+    zahnrad.z = z;
+    zahnrad.changed();
+
+    parts_per_tooth = steps - steps % 4 + 4;
+    parts_per_flank = parts_per_tooth / 4;
+
+    // Pruefe, ob Zahnfuss ueber Basisdurchmesser:
+    phi_max = sqrt(zahnrad.durchmesser.d_a * zahnrad.durchmesser.d_a / (zahnrad.durchmesser.d_b * zahnrad.durchmesser.d_b) - 1);
+    if (zahnrad.durchmesser.d_b < zahnrad.durchmesser.d_f)      // Zahnflanke beginnt auf Fusskreis
+        phi_min = sqrt(zahnrad.durchmesser.d_f * zahnrad.durchmesser.d_f / (zahnrad.durchmesser.d_b * zahnrad.durchmesser.d_b) - 1);
+    else                // Zahnflanke beginnt auf Basiskreis
+        phi_min = 0;
+
+    zahnprofil.setSizeAndResetProfile(parts_per_tooth * z);
+    calcProfile();
 }

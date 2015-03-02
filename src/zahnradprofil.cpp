@@ -28,6 +28,12 @@ Profile::~Profile(void)
     free(points);
 }
 
+void Profile::setSizeAndResetProfile(int elements)
+{
+    elemente = elements;
+    points = (struct PointsPolar*)realloc(points, elemente*sizeof(struct PointsPolar));
+}
+
 int Profile::getElementCount(void) { return elemente; }
 
 void Profile::setCartesian(int pos_id, float x, float y)

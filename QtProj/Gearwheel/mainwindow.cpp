@@ -43,6 +43,7 @@ MainWidget::MainWidget(QWidget *parent)
     connect(mainlayout.rotateButton, SIGNAL(clicked()), controller, SLOT(toggleRotation()));
     connect(mainlayout.secondGWButton, SIGNAL(clicked()), controller, SLOT(toggleSecondGearwheel()));
     connect(mainlayout.exitButton, SIGNAL(clicked()), this, SLOT(close()));
+    connect(mainlayout.output_toothcountspinner, SIGNAL(valueChanged(int)), controller, SLOT(changeToothcount(int)));
 }
 
 MainWidget::~MainWidget()

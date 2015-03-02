@@ -9,6 +9,7 @@ private:
     float phi_min;
     float phi_max;
     float limits[4];
+    int steps;
 
     void calcProfile(void);
     void calcLimits(void);
@@ -26,6 +27,7 @@ public:
     virtual ~ProfilMathematisch(void) { }
 
     void rotateToFlankPoint(void);
+    void changeToothcount(int z);
 };
 
 #endif // ZAHNRADMATH_H

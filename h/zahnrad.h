@@ -33,6 +33,7 @@ public:
     } durchmesser;
 
     Zahnraddaten(float alpha, float rho, float c, float m, float x, float k, int z);
+    void changed(void);
 
 };
 
