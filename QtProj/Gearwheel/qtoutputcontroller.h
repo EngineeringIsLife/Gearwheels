@@ -87,6 +87,9 @@ public:
     void rotate(float deg);
     void rotate_bwd(void);
 
+    void setToInitialPosition(void);
+    void fitGearwheels(void);
+
 public slots:
     void rotationTimerEvent(void);
     void moveItem(int x, int y);
@@ -99,6 +102,8 @@ public slots:
     void changeSteps(int x);
     void toggleRotation(void);
     void changeToothcount(int z);
+    void changeToothcount2(int z);
+    void changeX(double x);
 
 };
 

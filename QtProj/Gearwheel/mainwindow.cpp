@@ -23,7 +23,7 @@
 
 using namespace std;
 
-Zahnraddaten zahnraddaten(20, .38, .25, 4.0, .5, 0, 15); // Daten eines Zahnrads
+Zahnraddaten zahnraddaten(20, .38, .25, 4.0, 0, 0, 15); // Daten eines Zahnrads
 ProfilMathematisch zahnrad(zahnraddaten, 50); // Klasse zur Berechnung des Zahnradprofils
 GearwheelOutputQt zahnradoutput(zahnrad.zahnprofil); // Hilfsklasse zum Zeichnen eines Zahnrads
 
@@ -37,6 +37,10 @@ MainWidget::MainWidget(QWidget *parent)
     mainlayout.addView(view);
     view->adjustSize();
 
+    mainlayout.output_toothcountspinner->setValue(zahnraddaten.z);
+    mainlayout.output_toothcount2spinner->setValue(zahnraddaten.z);
+
+
     // Connections
     connect(mainlayout.slider_rotspeed, SIGNAL(valueChanged(int)), controller, SLOT(changeSpeed(int)));
     connect(mainlayout.slider_rotsteps, SIGNAL(valueChanged(int)), controller, SLOT(changeSteps(int)));
@@ -44,6 +48,8 @@ MainWidget::MainWidget(QWidget *parent)
     connect(mainlayout.secondGWButton, SIGNAL(clicked()), controller, SLOT(toggleSecondGearwheel()));
     connect(mainlayout.exitButton, SIGNAL(clicked()), this, SLOT(close()));
     connect(mainlayout.output_toothcountspinner, SIGNAL(valueChanged(int)), controller, SLOT(changeToothcount(int)));
+    connect(mainlayout.output_toothcount2spinner, SIGNAL(valueChanged(int)), controller, SLOT(changeToothcount2(int)));
+    connect(mainlayout.output_xspinner, SIGNAL(valueChanged(double)), controller, SLOT(changeX(double)));
 }
 
 MainWidget::~MainWidget()
@@ -73,6 +79,9 @@ MainLayout::~MainLayout(void)
     delete slider_rotspeed;
     delete slider_rotsteps;
     delete label_status;
+    delete output_toothcountspinner;
+    delete output_toothcount2spinner;
+    delete output_xspinner;
 }
 
 void MainLayout::addView(QGraphicsView *view)

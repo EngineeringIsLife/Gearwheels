@@ -17,6 +17,7 @@
 #include <QGridLayout>
 
 #include <QSpinBox>
+#include <QDoubleSpinBox>
 
 #include "zahnradmath.h"
 #include "gearwheeloutput.h"
@@ -82,9 +83,24 @@ private:
         label_testtext->setText("Gearwheel");
         layout_output->addWidget(label_testtext);
 
+        QLabel* label_toothcount1 = new QLabel("Gearwheel 1 - Nr of tooth");
+        layout_output->addWidget(label_toothcount1);
         output_toothcountspinner = new QSpinBox(box_output);
-        output_toothcountspinner->setRange(4,500);
+        output_toothcountspinner->setRange(4,100);
         layout_output->addWidget(output_toothcountspinner);
+
+        QLabel* label_toothcount2 = new QLabel("Gearwheel 2 - Nr of tooth");
+        layout_output->addWidget(label_toothcount2);
+        output_toothcount2spinner = new QSpinBox(box_output);
+        output_toothcount2spinner->setRange(4,100);
+        layout_output->addWidget(output_toothcount2spinner);
+
+        QLabel* label_xmovement = new QLabel("Profilverschiebung");
+        layout_output->addWidget(label_xmovement);
+        output_xspinner = new QDoubleSpinBox;
+        output_xspinner->setRange(-1.0, 1.0);
+        output_xspinner->setSingleStep(0.1);
+        layout_output->addWidget(output_xspinner);
 
         slider_rotspeed = new QSlider(Qt::Horizontal, box_output);
         layout_output->addWidget(slider_rotspeed);
@@ -109,6 +125,8 @@ public:
     QSlider* slider_rotspeed;
     QSlider* slider_rotsteps;
     QSpinBox* output_toothcountspinner;
+    QSpinBox* output_toothcount2spinner;
+    QDoubleSpinBox* output_xspinner;
 
     MainLayout(QWidget *parent = 0);
     ~MainLayout(void);

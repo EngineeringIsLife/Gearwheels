@@ -201,3 +201,18 @@ void ProfilMathematisch::changeToothcount(int z)
     zahnprofil.setSizeAndResetProfile(parts_per_tooth * z);
     calcProfile();
 }
+
+void ProfilMathematisch::changeX(double x)
+{
+    zahnrad.x = x;
+    zahnrad.changed();
+
+    // Pruefe, ob Zahnfuss ueber Basisdurchmesser:
+    phi_max = sqrt(zahnrad.durchmesser.d_a * zahnrad.durchmesser.d_a / (zahnrad.durchmesser.d_b * zahnrad.durchmesser.d_b) - 1);
+    if (zahnrad.durchmesser.d_b < zahnrad.durchmesser.d_f)      // Zahnflanke beginnt auf Fusskreis
+        phi_min = sqrt(zahnrad.durchmesser.d_f * zahnrad.durchmesser.d_f / (zahnrad.durchmesser.d_b * zahnrad.durchmesser.d_b) - 1);
+    else                // Zahnflanke beginnt auf Basiskreis
+        phi_min = 0;
+
+    calcProfile();
+}

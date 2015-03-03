@@ -28,6 +28,7 @@ public:
 
     void rotateToFlankPoint(void);
     void changeToothcount(int z);
+    void changeX(double x);
 };
 
 #endif // ZAHNRADMATH_H
