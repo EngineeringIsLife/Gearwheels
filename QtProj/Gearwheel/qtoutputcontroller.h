@@ -62,11 +62,13 @@ private:
 
     bool rotating;
     bool secondGearwheelVisible;
+    bool diameterVisible;
 
     int posx;
     int posy;
     float zoomfactor;
     float rotationdeg;
+    float rotationpos;
     float rotationdiff;
 
     int stepsize;

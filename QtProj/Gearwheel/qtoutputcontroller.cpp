@@ -9,8 +9,10 @@ GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelO
     rotationdeg = .5;
     stepsize = 100;
     rotationdiff = 0;
+    rotationpos = 0;
 
     secondGearwheelVisible = false;
+    diameterVisible = true;
 
     rotating = false;
     scene = new QGraphicsScene(view);
@@ -46,8 +48,13 @@ void GearwheelOutputController::repaintItem(void)
     delete gearwheelitem;
     gearwheelitem = new GearwheelItem(*outputobj, posx, posy, zoomfactor);
     scene->addItem(gearwheelitem);
-    //scene->addEllipse(-600+posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor-gearwheel2->getDiameter()/2*zoomfactor, -600+posy-gearwheel2->getDiameter()/2*zoomfactor, gearwheel2->getDiameter()*zoomfactor, gearwheel2->getDiameter()*zoomfactor);
-    //scene->addEllipse(-600+posx-gearwheel->getDiameter()/2*zoomfactor, -600+posy-gearwheel->getDiameter()/2*zoomfactor, gearwheel->getDiameter()*zoomfactor, gearwheel->getDiameter()*zoomfactor);
+
+    if (diameterVisible) {
+        scene->addEllipse(-600+posx-gearwheel->getDiameter()/2*zoomfactor, -600+posy-gearwheel->getDiameter()/2*zoomfactor, gearwheel->getDiameter()*zoomfactor, gearwheel->getDiameter()*zoomfactor);
+        if (secondGearwheelVisible) {
+            scene->addEllipse(-600+posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor-gearwheel2->getDiameter()/2*zoomfactor, -600+posy-gearwheel2->getDiameter()/2*zoomfactor, gearwheel2->getDiameter()*zoomfactor, gearwheel2->getDiameter()*zoomfactor);
+        }
+    }
 
     delete gearwheelitem2;
     gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor, posy, zoomfactor);
@@ -63,6 +70,7 @@ void GearwheelOutputController::rotate(float deg)
         gearwheel2->rotate(seconddeg);
     else
         rotationdiff += seconddeg;
+    rotationpos += deg;
     repaintItem();
 }
 
@@ -196,7 +204,8 @@ void GearwheelOutputController::fitGearwheels(void)
         std::cout << "Rotate2" << std::endl;
         gearwheel2->rotate(360/gearwheel2->getToothcount());
     }
-
+    rotate(rotationpos);
+    rotationpos /= 2;
 }
 
 void GearwheelOutputController::changeX(double x)
