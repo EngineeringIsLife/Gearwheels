@@ -18,6 +18,7 @@
 
 #include <QSpinBox>
 #include <QDoubleSpinBox>
+#include <QCheckBox>
 
 #include "zahnradmath.h"
 #include "gearwheeloutput.h"
@@ -95,9 +96,18 @@ private:
         output_toothcount2spinner->setRange(4,100);
         layout_output->addWidget(output_toothcount2spinner);
 
+        output_diametercheckbox = new QCheckBox("Show diameter", box_output);
+        layout_output->addWidget(output_diametercheckbox);
+        output_footdiametercheckbox = new QCheckBox("Show foot diameter", box_output);
+        layout_output->addWidget(output_footdiametercheckbox);
+        output_outerdiametercheckbox = new QCheckBox("Show outer diameter", box_output);
+        layout_output->addWidget(output_outerdiametercheckbox);
+        output_basediametercheckbox = new QCheckBox("Show base diameter", box_output);
+        layout_output->addWidget(output_basediametercheckbox);
+
         QLabel* label_xmovement = new QLabel("Profilverschiebung");
         layout_output->addWidget(label_xmovement);
-        output_xspinner = new QDoubleSpinBox;
+        output_xspinner = new QDoubleSpinBox(box_output);
         output_xspinner->setRange(-1.0, 1.0);
         output_xspinner->setSingleStep(0.1);
         layout_output->addWidget(output_xspinner);
@@ -127,6 +137,10 @@ public:
     QSpinBox* output_toothcountspinner;
     QSpinBox* output_toothcount2spinner;
     QDoubleSpinBox* output_xspinner;
+    QCheckBox* output_diametercheckbox;
+    QCheckBox* output_footdiametercheckbox;
+    QCheckBox* output_outerdiametercheckbox;
+    QCheckBox* output_basediametercheckbox;
 
     MainLayout(QWidget *parent = 0);
     ~MainLayout(void);

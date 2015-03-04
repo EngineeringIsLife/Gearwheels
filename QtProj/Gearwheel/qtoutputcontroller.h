@@ -63,6 +63,9 @@ private:
     bool rotating;
     bool secondGearwheelVisible;
     bool diameterVisible;
+    bool footdiameterVisible;
+    bool outerdiameterVisible;
+    bool basediameterVisible;
 
     int posx;
     int posy;
@@ -106,6 +109,10 @@ public slots:
     void changeToothcount(int z);
     void changeToothcount2(int z);
     void changeX(double x);
+    void setDiameterVisibility(int state);
+    void setFootdiameterVisibility(int state);
+    void setOuterdiameterVisibility(int state);
+    void setBasediameterVisibility(int state);
 
 };
 

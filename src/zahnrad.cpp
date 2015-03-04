@@ -50,6 +50,9 @@ float Zahnrad::getNextX(void) { return zahnprofil.getNextX(); }
 float Zahnrad::getNextY(void) { return zahnprofil.getNextY(); }
 
 float Zahnrad::getDiameter(void) { return zahnrad.durchmesser.d; }
+float Zahnrad::getFootdiameter(void) { return zahnrad.durchmesser.d_f; }
+float Zahnrad::getBasediameter(void) { return zahnrad.durchmesser.d_b; }
+float Zahnrad::getOuterdiameter(void) { return zahnrad.durchmesser.d_a; }
 int Zahnrad::getToothcount(void) { return zahnrad.z; }
 Zahnraddaten Zahnrad::getGearwheelData(void) { return zahnrad; }
 

@@ -59,6 +59,9 @@ public:
     float getNextY(void);
 
     float getDiameter(void);
+    float getFootdiameter(void);
+    float getBasediameter(void);
+    float getOuterdiameter(void);
     int getToothcount(void);
     Zahnraddaten getGearwheelData(void);
 };

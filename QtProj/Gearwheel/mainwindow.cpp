@@ -50,6 +50,11 @@ MainWidget::MainWidget(QWidget *parent)
     connect(mainlayout.output_toothcountspinner, SIGNAL(valueChanged(int)), controller, SLOT(changeToothcount(int)));
     connect(mainlayout.output_toothcount2spinner, SIGNAL(valueChanged(int)), controller, SLOT(changeToothcount2(int)));
     connect(mainlayout.output_xspinner, SIGNAL(valueChanged(double)), controller, SLOT(changeX(double)));
+    connect(mainlayout.output_diametercheckbox, SIGNAL(stateChanged(int)), controller, SLOT(setDiameterVisibility(int)));
+    connect(mainlayout.output_footdiametercheckbox, SIGNAL(stateChanged(int)), controller, SLOT(setFootdiameterVisibility(int)));
+    connect(mainlayout.output_outerdiametercheckbox, SIGNAL(stateChanged(int)), controller, SLOT(setOuterdiameterVisibility(int)));
+    connect(mainlayout.output_basediametercheckbox, SIGNAL(stateChanged(int)), controller, SLOT(setBasediameterVisibility(int)));
+
 }
 
 MainWidget::~MainWidget()
