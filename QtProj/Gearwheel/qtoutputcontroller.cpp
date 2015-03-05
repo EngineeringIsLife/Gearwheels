@@ -120,7 +120,7 @@ void GearwheelOutputController::createTimer(void)
 void GearwheelOutputController::createSecondGearwheel(void)
 {
     Zahnraddaten tmp = gearwheel->getGearwheelData();
-    Zahnraddaten dataGW2 = Zahnraddaten(tmp.alpha, tmp.rho, tmp.c, tmp.m, -tmp.x, tmp.k, tmp.z);
+    Zahnraddaten dataGW2 = Zahnraddaten(tmp.alpha(), tmp.rho(), tmp.c(), tmp.m(), -tmp.x(), tmp.k(), tmp.z());
     gearwheel2 = new ProfilMathematisch(dataGW2, 50);
     outputobj2 = new GearwheelOutputQt(gearwheel2->zahnprofil);
     gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor, posy, zoomfactor);

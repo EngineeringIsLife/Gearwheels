@@ -37,8 +37,8 @@ MainWidget::MainWidget(QWidget *parent)
     mainlayout.addView(view);
     view->adjustSize();
 
-    mainlayout.output_toothcountspinner->setValue(zahnraddaten.z);
-    mainlayout.output_toothcount2spinner->setValue(zahnraddaten.z);
+    mainlayout.output_toothcountspinner->setValue(zahnraddaten.z());
+    mainlayout.output_toothcount2spinner->setValue(zahnraddaten.z());
 
 
     // Connections

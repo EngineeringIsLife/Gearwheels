@@ -11,12 +11,12 @@ ZahnradFertigung::ZahnradFertigung(Zahnraddaten zahnrad, float schrittweite, int
 
 void ZahnradFertigung::calcProfile(void)
 {
-    const float alpha2 = 90 - zahnrad.alpha;
-    float rho_f = zahnrad.rho * zahnrad.m;
-    float h_a = zahnrad.m * (1 - zahnrad.k);
-    float h_f = zahnrad.m * (1 + zahnrad.c);
-    float s_p = M_PI_2 * zahnrad.m;
-    float p = M_PI * zahnrad.m;
+    const float alpha2 = 90 - zahnrad.alpha();
+    float rho_f = zahnrad.rho() * zahnrad.m();
+    float h_a = zahnrad.m() * (1 - zahnrad.k());
+    float h_f = zahnrad.m() * (1 + zahnrad.c());
+    float s_p = M_PI_2 * zahnrad.m();
+    float p = M_PI * zahnrad.m();
     float skalierung = zahnprofil.getElementCount() / p;
 
     // Linke Fussrundung

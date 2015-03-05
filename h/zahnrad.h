@@ -11,16 +11,15 @@ private:
     const int itersteps;
     void calcDurchmesser(void);
 
-public:
-    float alpha;        // Profilwinkel
-    float rho;          // Fussrundungsradius
-    float c;            // Kopfspiel-Faktor
+    float _alpha;        // Profilwinkel
+    float _rho;          // Fussrundungsradius
+    float _c;            // Kopfspiel-Faktor
 
-    float m;            // Modul
-    float x;            // Profilverschiebungsfaktor
-    float k;            // Kopfkuerzungsfaktor
+    float _m;            // Modul
+    float _x;            // Profilverschiebungsfaktor
+    float _k;            // Kopfkuerzungsfaktor
 
-    int z;              // Zaehnezahl
+    int _z;              // Zaehnezahl
 
     struct
     {
@@ -32,9 +31,29 @@ public:
         float d_max; // Maximaler Aussendurchmesser
     } durchmesser;
 
+public:
     Zahnraddaten(float alpha, float rho, float c, float m, float x, float k, int z);
-    void changed(void);
 
+    void setAlpha(float alpha);
+    void setRho(float rho);
+    void setC(float c);
+    void setM(float m);
+    void setX(float x);
+    void setK(float k);
+    void setZ(int z);
+
+    float alpha(void);
+    float rho(void);
+    float c(void);
+    float m(void);
+    float x(void);
+    float k(void);
+    int z(void);
+
+    float diameter(void);
+    float diameter_outer(void);
+    float diameter_base(void);
+    float diameter_foot(void);
 };
 
 class Zahnrad
