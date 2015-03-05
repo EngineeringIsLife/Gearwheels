@@ -30,6 +30,7 @@ private:
     struct PointsPolar getRotatedPolar(int id, float deg);
     struct PointsCartesian getRotatedCartesian(int id, float deg);
 
+    void prepareProfile(void);
     void checkForIndexError(int id);
 
 public:
@@ -67,7 +68,7 @@ public:
     float getNextLength(void);
     float getNextAngle(void);
 
-    void setSizeAndResetProfile(int elements);
+    void resizeProfile(int elements);
 };
 
 #endif // ZAHNRADPROFIL_H

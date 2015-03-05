@@ -7,14 +7,12 @@
 Profile::Profile(int elemente)
     : elemente(elemente)
 {
-    points = (struct PointsPolar*)calloc(elemente, sizeof(struct PointsPolar));
-    iteratX = 0;
-    iteratY = 0;
+    prepareProfile();
 }
 
 Profile::Profile(Profile& rhs)
-    : Profile(rhs.elemente)
 {
+    prepareProfile();
     rhs.resetIterator();
     int i = 0;
     while(!rhs.iteratorEndReached())
@@ -28,7 +26,13 @@ Profile::~Profile(void)
     free(points);
 }
 
-void Profile::setSizeAndResetProfile(int elements)
+void Profile::prepareProfile(void)
+{
+    points = (struct PointsPolar*)calloc(elemente, sizeof(struct PointsPolar));
+    resetIterator();
+}
+
+void Profile::resizeProfile(int elements)
 {
     elemente = elements;
     points = (struct PointsPolar*)realloc(points, elemente*sizeof(struct PointsPolar));

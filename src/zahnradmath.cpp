@@ -197,7 +197,7 @@ void ProfilMathematisch::changeToothcount(int z)
     else                // Zahnflanke beginnt auf Basiskreis
         phi_min = 0;
 
-    zahnprofil.setSizeAndResetProfile(parts_per_tooth * z);
+    zahnprofil.resizeProfile(parts_per_tooth * z);
     calcProfile();
 }
 

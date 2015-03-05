@@ -61,11 +61,15 @@ private:
     QTimer* rotationtimer;
 
     bool rotating;
-    bool secondGearwheelVisible;
-    bool diameterVisible;
-    bool footdiameterVisible;
-    bool outerdiameterVisible;
-    bool basediameterVisible;
+
+    struct
+    {
+        bool secondGearwheel;
+        bool diameter;
+        bool diameter_foot;
+        bool diameter_outer;
+        bool diameter_base;
+    } visibility;
 
     int posx;
     int posy;

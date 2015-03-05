@@ -11,11 +11,11 @@ GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelO
     rotationdiff = 0;
     rotationpos = 0;
 
-    secondGearwheelVisible = false;
-    diameterVisible = false;
-    footdiameterVisible = false;
-    outerdiameterVisible = false;
-    basediameterVisible = false;
+    visibility.secondGearwheel = false;
+    visibility.diameter = false;
+    visibility.diameter_base = false;
+    visibility.diameter_foot = false;
+    visibility.diameter_outer = false;
 
     rotating = false;
     scene = new QGraphicsScene(view);
@@ -26,9 +26,7 @@ GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelO
     view->adjustSize();
 
     createTimer();
-
     createSecondGearwheel();
-
     setConnections();
 }
 
@@ -45,45 +43,49 @@ GearwheelOutputController::~GearwheelOutputController(void) {
 void GearwheelOutputController::repaintItem(void)
 {
     scene->removeItem(gearwheelitem);
-    if (secondGearwheelVisible)
+    if (visibility.secondGearwheel)
         scene->removeItem(gearwheelitem2);
     scene->clear();
     delete gearwheelitem;
     gearwheelitem = new GearwheelItem(*outputobj, posx, posy, zoomfactor);
     scene->addItem(gearwheelitem);
 
-    if (diameterVisible) {
-        scene->addEllipse(-600+posx-gearwheel->getDiameter()/2*zoomfactor, -600+posy-gearwheel->getDiameter()/2*zoomfactor, gearwheel->getDiameter()*zoomfactor, gearwheel->getDiameter()*zoomfactor);
-        if (secondGearwheelVisible) {
-            scene->addEllipse(-600+posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor-gearwheel2->getDiameter()/2*zoomfactor, -600+posy-gearwheel2->getDiameter()/2*zoomfactor, gearwheel2->getDiameter()*zoomfactor, gearwheel2->getDiameter()*zoomfactor);
+    float achsabstand = (gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor;
+    float corner_x = -600 + posx;
+    float corner_y = -600 + posy;
+
+    if (visibility.diameter) {
+        scene->addEllipse(corner_x-gearwheel->getDiameter()/2*zoomfactor, corner_y-gearwheel->getDiameter()/2*zoomfactor, gearwheel->getDiameter()*zoomfactor, gearwheel->getDiameter()*zoomfactor);
+        if (visibility.secondGearwheel) {
+            scene->addEllipse(corner_x+achsabstand-gearwheel2->getDiameter()/2*zoomfactor, corner_y-gearwheel2->getDiameter()/2*zoomfactor, gearwheel2->getDiameter()*zoomfactor, gearwheel2->getDiameter()*zoomfactor);
         }
     }
 
-    if (footdiameterVisible) {
+    if (visibility.diameter_foot) {
         // x, y, h, w
-        scene->addEllipse(-600+posx-gearwheel->getFootdiameter()/2*zoomfactor, -600+posy-gearwheel->getFootdiameter()/2*zoomfactor, gearwheel->getFootdiameter()*zoomfactor, gearwheel->getFootdiameter()*zoomfactor);
-        if (secondGearwheelVisible) {
-            scene->addEllipse(-600+posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor-gearwheel2->getFootdiameter()/2*zoomfactor, -600+posy-gearwheel2->getFootdiameter()/2*zoomfactor, gearwheel2->getFootdiameter()*zoomfactor, gearwheel2->getFootdiameter()*zoomfactor);
+        scene->addEllipse(corner_x-gearwheel->getFootdiameter()/2*zoomfactor, corner_y-gearwheel->getFootdiameter()/2*zoomfactor, gearwheel->getFootdiameter()*zoomfactor, gearwheel->getFootdiameter()*zoomfactor);
+        if (visibility.secondGearwheel) {
+            scene->addEllipse(corner_x+achsabstand-gearwheel2->getFootdiameter()/2*zoomfactor, corner_y-gearwheel2->getFootdiameter()/2*zoomfactor, gearwheel2->getFootdiameter()*zoomfactor, gearwheel2->getFootdiameter()*zoomfactor);
         }
     }
 
-    if (outerdiameterVisible) {
-        scene->addEllipse(-600+posx-gearwheel->getOuterdiameter()/2*zoomfactor, -600+posy-gearwheel->getOuterdiameter()/2*zoomfactor, gearwheel->getOuterdiameter()*zoomfactor, gearwheel->getOuterdiameter()*zoomfactor);
-        if (secondGearwheelVisible) {
-            scene->addEllipse(-600+posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor-gearwheel2->getOuterdiameter()/2*zoomfactor, -600+posy-gearwheel2->getOuterdiameter()/2*zoomfactor, gearwheel2->getOuterdiameter()*zoomfactor, gearwheel2->getOuterdiameter()*zoomfactor);
+    if (visibility.diameter_outer) {
+        scene->addEllipse(corner_x-gearwheel->getOuterdiameter()/2*zoomfactor, corner_y-gearwheel->getOuterdiameter()/2*zoomfactor, gearwheel->getOuterdiameter()*zoomfactor, gearwheel->getOuterdiameter()*zoomfactor);
+        if (visibility.secondGearwheel) {
+            scene->addEllipse(corner_x+achsabstand-gearwheel2->getOuterdiameter()/2*zoomfactor, corner_y-gearwheel2->getOuterdiameter()/2*zoomfactor, gearwheel2->getOuterdiameter()*zoomfactor, gearwheel2->getOuterdiameter()*zoomfactor);
         }
     }
 
-    if (basediameterVisible) {
-        scene->addEllipse(-600+posx-gearwheel->getBasediameter()/2*zoomfactor, -600+posy-gearwheel->getBasediameter()/2*zoomfactor, gearwheel->getBasediameter()*zoomfactor, gearwheel->getBasediameter()*zoomfactor);
-        if (secondGearwheelVisible) {
-            scene->addEllipse(-600+posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor-gearwheel2->getBasediameter()/2*zoomfactor, -600+posy-gearwheel2->getBasediameter()/2*zoomfactor, gearwheel2->getBasediameter()*zoomfactor, gearwheel2->getBasediameter()*zoomfactor);
+    if (visibility.diameter_base) {
+        scene->addEllipse(corner_x-gearwheel->getBasediameter()/2*zoomfactor, corner_y-gearwheel->getBasediameter()/2*zoomfactor, gearwheel->getBasediameter()*zoomfactor, gearwheel->getBasediameter()*zoomfactor);
+        if (visibility.secondGearwheel) {
+            scene->addEllipse(corner_x+achsabstand-gearwheel2->getBasediameter()/2*zoomfactor, corner_y-gearwheel2->getBasediameter()/2*zoomfactor, gearwheel2->getBasediameter()*zoomfactor, gearwheel2->getBasediameter()*zoomfactor);
         }
     }
 
     delete gearwheelitem2;
-    gearwheelitem2 = new GearwheelItem(*outputobj2, posx+(gearwheel->getDiameter() + gearwheel2->getDiameter())/2*zoomfactor, posy, zoomfactor);
-    if (secondGearwheelVisible)
+    gearwheelitem2 = new GearwheelItem(*outputobj2, posx+achsabstand, posy, zoomfactor);
+    if (visibility.secondGearwheel)
         scene->addItem(gearwheelitem2);
 }
 
@@ -91,7 +93,7 @@ void GearwheelOutputController::rotate(float deg)
 {
     gearwheel->rotate(deg);
     float seconddeg = -deg * gearwheel->getToothcount() / gearwheel2->getToothcount();
-    if (secondGearwheelVisible)
+    if (visibility.secondGearwheel)
         gearwheel2->rotate(seconddeg);
     else
         rotationdiff += seconddeg;
@@ -177,8 +179,8 @@ void GearwheelOutputController::rotateSingle(void)
 
 void GearwheelOutputController::toggleSecondGearwheel(void)
 {
-    secondGearwheelVisible = !secondGearwheelVisible;
-    if (secondGearwheelVisible)
+    visibility.secondGearwheel = !visibility.secondGearwheel;
+    if (visibility.secondGearwheel)
     {
         gearwheel2->rotate(rotationdiff);
         rotationdiff = 0;
@@ -186,6 +188,7 @@ void GearwheelOutputController::toggleSecondGearwheel(void)
     }
 
     else removeSecondGearwheel();
+    repaintItem();
 }
 
 void GearwheelOutputController::changeSpeed(int newDeg)
@@ -222,11 +225,9 @@ void GearwheelOutputController::changeToothcount2(int z)
 
 void GearwheelOutputController::fitGearwheels(void)
 {
-    // TODO: Nicht zurücksetzen, stattdessen auf aktuellen Rotationswinkel beziehen
     setToInitialPosition();
     if (gearwheel2->getToothcount() % 2 != 0)
     {
-        std::cout << "Rotate2" << std::endl;
         gearwheel2->rotate(360/gearwheel2->getToothcount());
     }
     rotate(rotationpos);
@@ -243,24 +244,24 @@ void GearwheelOutputController::changeX(double x)
 
 void GearwheelOutputController::setDiameterVisibility(int state)
 {
-    diameterVisible = (bool)state;
+    visibility.diameter = (bool)state;
     repaintItem();
 }
 
 void GearwheelOutputController::setFootdiameterVisibility(int state)
 {
-    footdiameterVisible = (bool)state;
+    visibility.diameter_foot = (bool)state;
     repaintItem();
 }
 
 void GearwheelOutputController::setOuterdiameterVisibility(int state)
 {
-    outerdiameterVisible = (bool)state;
+    visibility.diameter_outer = (bool)state;
     repaintItem();
 }
 
 void GearwheelOutputController::setBasediameterVisibility(int state)
 {
-    basediameterVisible = (bool)state;
+    visibility.diameter_base = (bool)state;
     repaintItem();
 }
