@@ -112,9 +112,13 @@ private:
         output_xspinner->setSingleStep(0.1);
         layout_output->addWidget(output_xspinner);
 
+        QLabel* label_rotspeed = new QLabel("Rotationsgeschwindigkeit");
+        layout_output->addWidget(label_rotspeed);
         slider_rotspeed = new QSlider(Qt::Horizontal, box_output);
         layout_output->addWidget(slider_rotspeed);
 
+        QLabel* label_rotdetail = new QLabel("Rotationsschrittweite");
+        layout_output->addWidget(label_rotdetail);
         slider_rotsteps = new QSlider(Qt::Horizontal, box_output);
         layout_output->addWidget(slider_rotsteps);
     }

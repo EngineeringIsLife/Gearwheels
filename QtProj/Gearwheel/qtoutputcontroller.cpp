@@ -11,6 +11,9 @@ GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelO
     rotationdiff = 0;
     rotationpos = 0;
 
+    rot_vel = rotationdeg / stepsize;
+    std::cout << "Geschwindigkeit: " << rot_vel << std::endl;
+
     visibility.secondGearwheel = false;
     visibility.diameter = false;
     visibility.diameter_base = false;
@@ -193,13 +196,14 @@ void GearwheelOutputController::toggleSecondGearwheel(void)
 
 void GearwheelOutputController::changeSpeed(int newDeg)
 {
-    rotationdeg = (float)newDeg/10;
+    rot_vel = (float)newDeg / 1000;
+    rotationdeg = rot_vel * stepsize;
 }
 
 void GearwheelOutputController::changeSteps(int x)
 {
-    std::cout << x << std::endl;
     stepsize = (x+1)*10;
+    rotationdeg = rot_vel * stepsize;
     rotationtimer->setInterval(stepsize);
 }
 

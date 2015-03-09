@@ -35,6 +35,10 @@ signals:
     void zoomOut();
     void toggleRotation();
     void rotateFine();
+
+public slots:
+    void passPlus(void);
+    void passMinus(void);
 };
 
 #endif // QTOUTPUTSCENE_H

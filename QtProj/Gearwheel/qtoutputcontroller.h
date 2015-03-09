@@ -80,6 +80,8 @@ private:
 
     int stepsize;
 
+    float rot_vel;
+
     void createTimer(void);
     void createSecondGearwheel(void);
 

@@ -22,7 +22,7 @@ static const uint qt_meta_data_GearwheelOutputView[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,6 +36,10 @@ static const uint qt_meta_data_GearwheelOutputView[] = {
       68,   20,   20,   20, 0x05,
       85,   20,   20,   20, 0x05,
 
+ // slots: signature, parameters, type, tag, flags
+      98,   20,   20,   20, 0x0a,
+     109,   20,   20,   20, 0x0a,
+
        0        // eod
 };
 
@@ -43,6 +47,7 @@ static const char qt_meta_stringdata_GearwheelOutputView[] = {
     "GearwheelOutputView\0\0x,y\0"
     "changePosition(int,int)\0zoomIn()\0"
     "zoomOut()\0toggleRotation()\0rotateFine()\0"
+    "passPlus()\0passMinus()\0"
 };
 
 void GearwheelOutputView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -56,6 +61,8 @@ void GearwheelOutputView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         case 2: _t->zoomOut(); break;
         case 3: _t->toggleRotation(); break;
         case 4: _t->rotateFine(); break;
+        case 5: _t->passPlus(); break;
+        case 6: _t->passMinus(); break;
         default: ;
         }
     }
@@ -93,9 +100,9 @@ int GearwheelOutputView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }

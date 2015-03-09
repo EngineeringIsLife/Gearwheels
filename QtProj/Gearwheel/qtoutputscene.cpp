@@ -2,12 +2,23 @@
 #include <QGraphicsView>
 #include <iostream>
 
+#include <QPushButton>
 #include <QWheelEvent>
-
 
 GearwheelOutputView::GearwheelOutputView(QWidget *parent)
     : QGraphicsView(parent), parent(parent)
-{ posx = 200; posy = 200; }
+{
+    posx = 200;
+    posy = 200;
+    QPushButton *button_plus = new QPushButton("+", parent=this);
+    QPushButton *button_minus = new QPushButton("-", parent=this);
+
+    button_plus->setGeometry(10,10,20,25);
+    button_minus->setGeometry(10,30,20,25);
+
+    connect(button_plus, SIGNAL(clicked()), this, SLOT(passPlus()));
+    connect(button_minus, SIGNAL(clicked()), this, SLOT(passMinus()));
+}
 
 GearwheelOutputView::~GearwheelOutputView(void)
 { }
@@ -73,4 +84,14 @@ void GearwheelOutputView::wheelEvent(QWheelEvent *event)
         zoomIn();
     else
         zoomOut();
+}
+
+void GearwheelOutputView::passPlus(void)
+{
+    emit zoomIn();
+}
+
+void GearwheelOutputView::passMinus(void)
+{
+    emit zoomOut();
 }
