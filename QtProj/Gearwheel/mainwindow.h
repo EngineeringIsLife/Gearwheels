@@ -64,9 +64,9 @@ private:
         layout_main->addWidget(box_buttons, 2, 1, 1, 2);
         layout_buttons = new QHBoxLayout(box_buttons);
 
-        rotateButton = new QPushButton("Rotate");
-        secondGWButton = new QPushButton("Second Gearwheel");
-        exitButton = new QPushButton("Exit");
+        rotateButton = new QPushButton("Rotatieren");
+        secondGWButton = new QPushButton("Zweites Zahnrad");
+        exitButton = new QPushButton("Beenden");
 
         layout_buttons->addWidget(rotateButton);
         layout_buttons->addWidget(secondGWButton);
@@ -84,25 +84,25 @@ private:
         label_testtext->setText("Gearwheel");
         layout_output->addWidget(label_testtext);
 
-        QLabel* label_toothcount1 = new QLabel("Gearwheel 1 - Nr of tooth");
+        QLabel* label_toothcount1 = new QLabel("Zahnrad 1 - Zähnezahl");
         layout_output->addWidget(label_toothcount1);
         output_toothcountspinner = new QSpinBox(box_output);
         output_toothcountspinner->setRange(4,100);
         layout_output->addWidget(output_toothcountspinner);
 
-        QLabel* label_toothcount2 = new QLabel("Gearwheel 2 - Nr of tooth");
+        QLabel* label_toothcount2 = new QLabel("Zahnrad 2 - Zähnezahl");
         layout_output->addWidget(label_toothcount2);
         output_toothcount2spinner = new QSpinBox(box_output);
         output_toothcount2spinner->setRange(4,100);
         layout_output->addWidget(output_toothcount2spinner);
 
-        output_diametercheckbox = new QCheckBox("Show diameter", box_output);
+        output_diametercheckbox = new QCheckBox("Zeige Durchmesser", box_output);
         layout_output->addWidget(output_diametercheckbox);
-        output_footdiametercheckbox = new QCheckBox("Show foot diameter", box_output);
+        output_footdiametercheckbox = new QCheckBox("Zeige Fußkreisdurchmesser", box_output);
         layout_output->addWidget(output_footdiametercheckbox);
-        output_outerdiametercheckbox = new QCheckBox("Show outer diameter", box_output);
+        output_outerdiametercheckbox = new QCheckBox("Zeige Außendurchmesser", box_output);
         layout_output->addWidget(output_outerdiametercheckbox);
-        output_basediametercheckbox = new QCheckBox("Show base diameter", box_output);
+        output_basediametercheckbox = new QCheckBox("Zeige Basiskreis", box_output);
         layout_output->addWidget(output_basediametercheckbox);
 
         QLabel* label_xmovement = new QLabel("Profilverschiebung");
@@ -117,7 +117,7 @@ private:
         slider_rotspeed = new QSlider(Qt::Horizontal, box_output);
         layout_output->addWidget(slider_rotspeed);
 
-        QLabel* label_rotdetail = new QLabel("Rotationsschrittweite");
+        QLabel* label_rotdetail = new QLabel("Rechenschrittweite");
         layout_output->addWidget(label_rotdetail);
         slider_rotsteps = new QSlider(Qt::Horizontal, box_output);
         layout_output->addWidget(slider_rotsteps);

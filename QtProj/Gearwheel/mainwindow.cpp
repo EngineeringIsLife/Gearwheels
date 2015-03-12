@@ -55,6 +55,10 @@ MainWidget::MainWidget(QWidget *parent)
     connect(mainlayout.output_outerdiametercheckbox, SIGNAL(stateChanged(int)), controller, SLOT(setOuterdiameterVisibility(int)));
     connect(mainlayout.output_basediametercheckbox, SIGNAL(stateChanged(int)), controller, SLOT(setBasediameterVisibility(int)));
 
+    mainlayout.slider_rotspeed->setSliderPosition(50);
+    mainlayout.slider_rotsteps->setSliderPosition(20);
+    controller->changeSpeed(50);
+    controller->changeSteps(20);
 }
 
 MainWidget::~MainWidget()

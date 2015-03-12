@@ -1,4 +1,5 @@
 #include "qtoutputcontroller.h"
+#include <math.h>
 
 GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelOutputView* view, ProfilMathematisch* zahnrad)
     : QObject(parent), view(view), gearwheel(zahnrad)
@@ -6,13 +7,11 @@ GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelO
     posx = 250;
     posy = 250;
     zoomfactor = 5;
-    rotationdeg = .5;
     stepsize = 100;
+    rot_vel = 0.5;
     rotationdiff = 0;
     rotationpos = 0;
-
-    rot_vel = rotationdeg / stepsize;
-    std::cout << "Geschwindigkeit: " << rot_vel << std::endl;
+    updateRotationspeed();
 
     visibility.secondGearwheel = false;
     visibility.diameter = false;
@@ -104,8 +103,8 @@ void GearwheelOutputController::rotate(float deg)
     repaintItem();
 }
 
-void GearwheelOutputController::rotate_fwd(void) { rotate(rotationdeg); }
-void GearwheelOutputController::rotate_bwd(void) { rotate(-rotationdeg); }
+void GearwheelOutputController::rotate_fwd(void) { rotate(getRotationspeed()); }
+void GearwheelOutputController::rotate_bwd(void) { rotate(-getRotationspeed()); }
 
 void GearwheelOutputController::setConnections(void)
 {
@@ -196,15 +195,28 @@ void GearwheelOutputController::toggleSecondGearwheel(void)
 
 void GearwheelOutputController::changeSpeed(int newDeg)
 {
-    rot_vel = (float)newDeg / 1000;
-    rotationdeg = rot_vel * stepsize;
+    rot_vel = pow(10, (float)(1 + 2) / 99 * newDeg - 2);
+    updateRotationspeed();
+    std::cout << newDeg << " " << rot_vel << std::endl;
 }
 
 void GearwheelOutputController::changeSteps(int x)
 {
-    stepsize = (x+1)*10;
-    rotationdeg = rot_vel * stepsize;
+    float tempstepsize = pow(10, (float)-x * 3 / 100) * 500;
+    stepsize = (int)tempstepsize;
+    updateRotationspeed();
     rotationtimer->setInterval(stepsize);
+    std::cout << x << " " << stepsize << std::endl;
+}
+
+void GearwheelOutputController::updateRotationspeed(void)
+{
+    rotationdeg = rot_vel * DEG * stepsize;
+}
+
+float GearwheelOutputController::getRotationspeed(void)
+{
+    return rotationdeg;
 }
 
 void GearwheelOutputController::toggleRotation(void)

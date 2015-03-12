@@ -90,6 +90,9 @@ private:
 
     void setConnections(void);
 
+    float getRotationspeed(void);
+    void updateRotationspeed(void);
+
 public:
     GearwheelOutputController(QObject *parent, GearwheelOutputView* view, ProfilMathematisch* zahnrad);
     ~GearwheelOutputController(void);
