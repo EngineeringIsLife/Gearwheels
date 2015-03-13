@@ -10,6 +10,8 @@
 
 #include <iostream>
 
+#include "mainlayout.h"
+
 class GearwheelItem : public QGraphicsItem
 {
 private:
@@ -51,6 +53,7 @@ class GearwheelOutputController : public QObject
 private:
     QGraphicsScene *scene;
     GearwheelOutputView* view;
+    MainLayout* mainlayout;
 
     ProfilMathematisch* gearwheel; // Modell
     ProfilMathematisch* gearwheel2;
@@ -94,7 +97,7 @@ private:
     void updateRotationspeed(void);
 
 public:
-    GearwheelOutputController(QObject *parent, GearwheelOutputView* view, ProfilMathematisch* zahnrad);
+    GearwheelOutputController(QObject *parent, GearwheelOutputView* view, MainLayout* mainlayout, ProfilMathematisch* zahnrad);
     ~GearwheelOutputController(void);
 
     void repaintItem(void);
@@ -123,6 +126,9 @@ public slots:
     void setOuterdiameterVisibility(int state);
     void setBasediameterVisibility(int state);
 
+signals:
+    void rotationStateChanged(bool state);
+    void secondGearwheelVisChanged(bool state);
 };
 
 #endif // QTOUTPUTCONTROLLER_H

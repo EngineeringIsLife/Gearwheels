@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     ../../src/zahnradprofil.cpp \
     ../../src/zahnradfertigung.cpp \
     qtoutputcontroller.cpp \
-    qtoutputscene.cpp
+    qtoutputscene.cpp \
+    mainlayout.cpp
 
 HEADERS  += mainwindow.h \
     ../../h/zahnrad.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
     ../../h/zahnradprofil.h \
     ../../h/zahnradfertigung.h \
     qtoutputcontroller.h \
-    qtoutputscene.h
+    qtoutputscene.h \
+    mainlayout.h
 
 INCLUDEPATH += ../../h/
 

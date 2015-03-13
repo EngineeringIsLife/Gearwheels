@@ -22,44 +22,50 @@ static const uint qt_meta_data_GearwheelOutputController[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   14, // methods
+      19,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       2,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      33,   27,   26,   26, 0x05,
+      60,   27,   26,   26, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      27,   26,   26,   26, 0x0a,
-      52,   48,   26,   26, 0x0a,
-      70,   26,   26,   26, 0x0a,
-      83,   26,   26,   26, 0x0a,
-      97,   26,   26,   26, 0x0a,
-     112,   26,   26,   26, 0x0a,
-     143,  136,   26,   26, 0x0a,
-     160,   26,   26,   26, 0x0a,
-     175,  173,   26,   26, 0x0a,
-     192,   26,   26,   26, 0x0a,
-     211,  209,   26,   26, 0x0a,
-     233,  209,   26,   26, 0x0a,
-     256,  173,   26,   26, 0x0a,
-     278,  272,   26,   26, 0x0a,
-     305,  272,   26,   26, 0x0a,
-     336,  272,   26,   26, 0x0a,
-     368,  272,   26,   26, 0x0a,
+      92,   26,   26,   26, 0x0a,
+     117,  113,   26,   26, 0x0a,
+     135,   26,   26,   26, 0x0a,
+     148,   26,   26,   26, 0x0a,
+     162,   26,   26,   26, 0x0a,
+     177,   26,   26,   26, 0x0a,
+     208,  201,   26,   26, 0x0a,
+     225,   26,   26,   26, 0x0a,
+     240,  238,   26,   26, 0x0a,
+     257,   26,   26,   26, 0x0a,
+     276,  274,   26,   26, 0x0a,
+     298,  274,   26,   26, 0x0a,
+     321,  238,   26,   26, 0x0a,
+     337,   27,   26,   26, 0x0a,
+     364,   27,   26,   26, 0x0a,
+     395,   27,   26,   26, 0x0a,
+     427,   27,   26,   26, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_GearwheelOutputController[] = {
-    "GearwheelOutputController\0\0"
+    "GearwheelOutputController\0\0state\0"
+    "rotationStateChanged(bool)\0"
+    "secondGearwheelVisChanged(bool)\0"
     "rotationTimerEvent()\0x,y\0moveItem(int,int)\0"
     "zoomItemIn()\0zoomItemOut()\0rotateSingle()\0"
     "toggleSecondGearwheel()\0newDeg\0"
     "changeSpeed(int)\0rotate_fwd()\0x\0"
     "changeSteps(int)\0toggleRotation()\0z\0"
     "changeToothcount(int)\0changeToothcount2(int)\0"
-    "changeX(double)\0state\0setDiameterVisibility(int)\0"
+    "changeX(double)\0setDiameterVisibility(int)\0"
     "setFootdiameterVisibility(int)\0"
     "setOuterdiameterVisibility(int)\0"
     "setBasediameterVisibility(int)\0"
@@ -71,23 +77,25 @@ void GearwheelOutputController::qt_static_metacall(QObject *_o, QMetaObject::Cal
         Q_ASSERT(staticMetaObject.cast(_o));
         GearwheelOutputController *_t = static_cast<GearwheelOutputController *>(_o);
         switch (_id) {
-        case 0: _t->rotationTimerEvent(); break;
-        case 1: _t->moveItem((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 2: _t->zoomItemIn(); break;
-        case 3: _t->zoomItemOut(); break;
-        case 4: _t->rotateSingle(); break;
-        case 5: _t->toggleSecondGearwheel(); break;
-        case 6: _t->changeSpeed((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 7: _t->rotate_fwd(); break;
-        case 8: _t->changeSteps((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 9: _t->toggleRotation(); break;
-        case 10: _t->changeToothcount((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->changeToothcount2((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: _t->changeX((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 13: _t->setDiameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 14: _t->setFootdiameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 15: _t->setOuterdiameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 16: _t->setBasediameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 0: _t->rotationStateChanged((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 1: _t->secondGearwheelVisChanged((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 2: _t->rotationTimerEvent(); break;
+        case 3: _t->moveItem((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 4: _t->zoomItemIn(); break;
+        case 5: _t->zoomItemOut(); break;
+        case 6: _t->rotateSingle(); break;
+        case 7: _t->toggleSecondGearwheel(); break;
+        case 8: _t->changeSpeed((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->rotate_fwd(); break;
+        case 10: _t->changeSteps((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: _t->toggleRotation(); break;
+        case 12: _t->changeToothcount((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: _t->changeToothcount2((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->changeX((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 15: _t->setDiameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->setFootdiameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: _t->setOuterdiameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: _t->setBasediameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -125,10 +133,24 @@ int GearwheelOutputController::qt_metacall(QMetaObject::Call _c, int _id, void *
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 17)
+        if (_id < 19)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 17;
+        _id -= 19;
     }
     return _id;
+}
+
+// SIGNAL 0
+void GearwheelOutputController::rotationStateChanged(bool _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void GearwheelOutputController::secondGearwheelVisChanged(bool _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_END_MOC_NAMESPACE

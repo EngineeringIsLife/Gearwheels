@@ -1,8 +1,8 @@
 #include "qtoutputcontroller.h"
 #include <math.h>
 
-GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelOutputView* view, ProfilMathematisch* zahnrad)
-    : QObject(parent), view(view), gearwheel(zahnrad)
+GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelOutputView* view, MainLayout* mainlayout, ProfilMathematisch* zahnrad)
+    : QObject(parent), view(view), mainlayout(mainlayout), gearwheel(zahnrad)
 {
     posx = 250;
     posy = 250;
@@ -93,6 +93,7 @@ void GearwheelOutputController::repaintItem(void)
 
 void GearwheelOutputController::rotate(float deg)
 {
+    mainlayout->changeStatusText("Rotiere...");
     gearwheel->rotate(deg);
     float seconddeg = -deg * gearwheel->getToothcount() / gearwheel2->getToothcount();
     if (visibility.secondGearwheel)
@@ -187,9 +188,13 @@ void GearwheelOutputController::toggleSecondGearwheel(void)
         gearwheel2->rotate(rotationdiff);
         rotationdiff = 0;
         addSecondGearwheel();
+        secondGearwheelVisChanged(true);
     }
 
-    else removeSecondGearwheel();
+    else {
+        secondGearwheelVisChanged(false);
+        removeSecondGearwheel();
+    }
     repaintItem();
 }
 
@@ -221,8 +226,14 @@ float GearwheelOutputController::getRotationspeed(void)
 
 void GearwheelOutputController::toggleRotation(void)
 {
-    if (rotationtimer->isActive()) rotationtimer->stop();
-    else rotationtimer->start(stepsize);
+    if (rotationtimer->isActive()) {
+        rotationtimer->stop();
+        emit rotationStateChanged(false);
+    }
+    else {
+        rotationtimer->start(stepsize);
+        emit rotationStateChanged(true);
+    }
 }
 
 void GearwheelOutputController::changeToothcount(int z)
