@@ -96,6 +96,8 @@ private:
     float getRotationspeed(void);
     void updateRotationspeed(void);
 
+    void zoomCentered(float factor, int centerx, int centery);
+
 public:
     GearwheelOutputController(QObject *parent, GearwheelOutputView* view, MainLayout* mainlayout, ProfilMathematisch* zahnrad);
     ~GearwheelOutputController(void);
@@ -110,8 +112,8 @@ public:
 public slots:
     void rotationTimerEvent(void);
     void moveItem(int x, int y);
-    void zoomItemIn(void);
-    void zoomItemOut(void);
+    void zoomItemIn(int x, int y);
+    void zoomItemOut(int x, int y);
     void rotateSingle(void);
     void toggleSecondGearwheel(void);
     void centerGearwheel(void);

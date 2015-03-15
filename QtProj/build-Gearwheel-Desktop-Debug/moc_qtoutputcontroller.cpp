@@ -36,22 +36,22 @@ static const uint qt_meta_data_GearwheelOutputController[] = {
  // slots: signature, parameters, type, tag, flags
       92,   26,   26,   26, 0x0a,
      117,  113,   26,   26, 0x0a,
-     135,   26,   26,   26, 0x0a,
-     148,   26,   26,   26, 0x0a,
-     162,   26,   26,   26, 0x0a,
-     177,   26,   26,   26, 0x0a,
-     201,   26,   26,   26, 0x0a,
-     226,  219,   26,   26, 0x0a,
-     243,   26,   26,   26, 0x0a,
-     258,  256,   26,   26, 0x0a,
-     275,   26,   26,   26, 0x0a,
-     294,  292,   26,   26, 0x0a,
-     316,  292,   26,   26, 0x0a,
-     339,  256,   26,   26, 0x0a,
-     355,   27,   26,   26, 0x0a,
-     382,   27,   26,   26, 0x0a,
-     413,   27,   26,   26, 0x0a,
-     445,   27,   26,   26, 0x0a,
+     135,  113,   26,   26, 0x0a,
+     155,  113,   26,   26, 0x0a,
+     176,   26,   26,   26, 0x0a,
+     191,   26,   26,   26, 0x0a,
+     215,   26,   26,   26, 0x0a,
+     240,  233,   26,   26, 0x0a,
+     257,   26,   26,   26, 0x0a,
+     272,  270,   26,   26, 0x0a,
+     289,   26,   26,   26, 0x0a,
+     308,  306,   26,   26, 0x0a,
+     330,  306,   26,   26, 0x0a,
+     353,  270,   26,   26, 0x0a,
+     369,   27,   26,   26, 0x0a,
+     396,   27,   26,   26, 0x0a,
+     427,   27,   26,   26, 0x0a,
+     459,   27,   26,   26, 0x0a,
 
        0        // eod
 };
@@ -61,12 +61,13 @@ static const char qt_meta_stringdata_GearwheelOutputController[] = {
     "rotationStateChanged(bool)\0"
     "secondGearwheelVisChanged(bool)\0"
     "rotationTimerEvent()\0x,y\0moveItem(int,int)\0"
-    "zoomItemIn()\0zoomItemOut()\0rotateSingle()\0"
-    "toggleSecondGearwheel()\0centerGearwheel()\0"
-    "newDeg\0changeSpeed(int)\0rotate_fwd()\0"
-    "x\0changeSteps(int)\0toggleRotation()\0"
-    "z\0changeToothcount(int)\0changeToothcount2(int)\0"
-    "changeX(double)\0setDiameterVisibility(int)\0"
+    "zoomItemIn(int,int)\0zoomItemOut(int,int)\0"
+    "rotateSingle()\0toggleSecondGearwheel()\0"
+    "centerGearwheel()\0newDeg\0changeSpeed(int)\0"
+    "rotate_fwd()\0x\0changeSteps(int)\0"
+    "toggleRotation()\0z\0changeToothcount(int)\0"
+    "changeToothcount2(int)\0changeX(double)\0"
+    "setDiameterVisibility(int)\0"
     "setFootdiameterVisibility(int)\0"
     "setOuterdiameterVisibility(int)\0"
     "setBasediameterVisibility(int)\0"
@@ -82,8 +83,8 @@ void GearwheelOutputController::qt_static_metacall(QObject *_o, QMetaObject::Cal
         case 1: _t->secondGearwheelVisChanged((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 2: _t->rotationTimerEvent(); break;
         case 3: _t->moveItem((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 4: _t->zoomItemIn(); break;
-        case 5: _t->zoomItemOut(); break;
+        case 4: _t->zoomItemIn((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 5: _t->zoomItemOut((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 6: _t->rotateSingle(); break;
         case 7: _t->toggleSecondGearwheel(); break;
         case 8: _t->centerGearwheel(); break;

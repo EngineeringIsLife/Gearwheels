@@ -111,8 +111,8 @@ void GearwheelOutputController::rotate_bwd(void) { rotate(-getRotationspeed()); 
 void GearwheelOutputController::setConnections(void)
 {
     connect(view, SIGNAL(changePosition(int,int)), this, SLOT(moveItem(int,int)));
-    connect(view, SIGNAL(zoomIn()), this, SLOT(zoomItemIn()));
-    connect(view, SIGNAL(zoomOut()), this, SLOT(zoomItemOut()));
+    connect(view, SIGNAL(zoomIn(int, int)), this, SLOT(zoomItemIn(int, int)));
+    connect(view, SIGNAL(zoomOut(int, int)), this, SLOT(zoomItemOut(int, int)));
     connect(view, SIGNAL(rotateFine()), this, SLOT(rotateSingle()));
     connect(view, SIGNAL(toggleRotation()), this, SLOT(toggleRotation()));
 }
@@ -163,16 +163,30 @@ void GearwheelOutputController::moveItem(int x, int y)
     repaintItem();
 }
 
-void GearwheelOutputController::zoomItemIn(void)
+void GearwheelOutputController::zoomCentered(float factor, int centerx, int centery)
 {
-    zoomfactor *= 1.05;
+    if (centerx == -1 || centery == -1) {
+        centerx = scene->sceneRect().width() / 2;
+        centery = scene->sceneRect().height() / 2;
+    }
+
+    posx = posx * factor + (float)centerx * (1.0 - factor);
+    posy = posy * factor + (float)centery * (1.0 - factor);
+
+    view->setPos(posx, posy);
+
+    zoomfactor *= factor;
     repaintItem();
 }
 
-void GearwheelOutputController::zoomItemOut(void)
+void GearwheelOutputController::zoomItemIn(int x, int y)
 {
-    zoomfactor /= 1.05;
-    repaintItem();
+    zoomCentered(1.05, x, y);
+}
+
+void GearwheelOutputController::zoomItemOut(int x, int y)
+{
+    zoomCentered(1.0/1.05, x, y);
 }
 
 void GearwheelOutputController::rotateSingle(void)

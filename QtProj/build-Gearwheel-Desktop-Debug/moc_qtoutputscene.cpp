@@ -31,23 +31,23 @@ static const uint qt_meta_data_GearwheelOutputView[] = {
 
  // signals: signature, parameters, type, tag, flags
       25,   21,   20,   20, 0x05,
-      49,   20,   20,   20, 0x05,
-      58,   20,   20,   20, 0x05,
-      68,   20,   20,   20, 0x05,
-      85,   20,   20,   20, 0x05,
+      49,   21,   20,   20, 0x05,
+      65,   21,   20,   20, 0x05,
+      82,   20,   20,   20, 0x05,
+      99,   20,   20,   20, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      98,   20,   20,   20, 0x0a,
-     109,   20,   20,   20, 0x0a,
+     112,   20,   20,   20, 0x0a,
+     123,   20,   20,   20, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_GearwheelOutputView[] = {
     "GearwheelOutputView\0\0x,y\0"
-    "changePosition(int,int)\0zoomIn()\0"
-    "zoomOut()\0toggleRotation()\0rotateFine()\0"
-    "passPlus()\0passMinus()\0"
+    "changePosition(int,int)\0zoomIn(int,int)\0"
+    "zoomOut(int,int)\0toggleRotation()\0"
+    "rotateFine()\0passPlus()\0passMinus()\0"
 };
 
 void GearwheelOutputView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -57,8 +57,8 @@ void GearwheelOutputView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         GearwheelOutputView *_t = static_cast<GearwheelOutputView *>(_o);
         switch (_id) {
         case 0: _t->changePosition((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 1: _t->zoomIn(); break;
-        case 2: _t->zoomOut(); break;
+        case 1: _t->zoomIn((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 2: _t->zoomOut((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 3: _t->toggleRotation(); break;
         case 4: _t->rotateFine(); break;
         case 5: _t->passPlus(); break;
@@ -115,15 +115,17 @@ void GearwheelOutputView::changePosition(int _t1, int _t2)
 }
 
 // SIGNAL 1
-void GearwheelOutputView::zoomIn()
+void GearwheelOutputView::zoomIn(int _t1, int _t2)
 {
-    QMetaObject::activate(this, &staticMetaObject, 1, 0);
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 
 // SIGNAL 2
-void GearwheelOutputView::zoomOut()
+void GearwheelOutputView::zoomOut(int _t1, int _t2)
 {
-    QMetaObject::activate(this, &staticMetaObject, 2, 0);
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 
 // SIGNAL 3

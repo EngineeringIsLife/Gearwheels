@@ -24,9 +24,6 @@ private:
     virtual void keyPressEvent(QKeyEvent *event);
     virtual void wheelEvent(QWheelEvent *event);
 
-    void fitInView(qreal x, qreal y, qreal w, qreal h,
-                          Qt::AspectRatioMode aspectRadioMode = Qt::IgnoreAspectRatio) {return; }
-
 public:
     explicit GearwheelOutputView(QWidget *parent); //, ProfilMathematisch* zahnrad);
     ~GearwheelOutputView(void);
@@ -34,8 +31,8 @@ public:
 
 signals:
     void changePosition(int x, int y);
-    void zoomIn();
-    void zoomOut();
+    void zoomIn(int x, int y);
+    void zoomOut(int x, int y);
     void toggleRotation();
     void rotateFine();
 

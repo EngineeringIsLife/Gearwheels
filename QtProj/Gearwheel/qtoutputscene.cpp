@@ -16,11 +16,6 @@ GearwheelOutputView::GearwheelOutputView(QWidget *parent)
     button_plus->setGeometry(10,10,20,25);
     button_minus->setGeometry(10,30,20,25);
 
-    //setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //setDragMode(NoDrag);
-    //setSceneRect(-0.5,-0.5,1,1);
-
     connect(button_plus, SIGNAL(clicked()), this, SLOT(passPlus()));
     connect(button_minus, SIGNAL(clicked()), this, SLOT(passMinus()));
 }
@@ -59,10 +54,10 @@ void GearwheelOutputView::keyPressEvent(QKeyEvent *event)
     switch(event->key())
     {
     case Qt::Key_Plus:
-        emit zoomIn();
+        emit zoomIn(-1,-1);
         break;
     case Qt::Key_Minus:
-        emit zoomOut();
+        emit zoomOut(-1,-1);
         break;
     case Qt::Key_F:
         emit rotateFine();
@@ -92,17 +87,17 @@ void GearwheelOutputView::keyPressEvent(QKeyEvent *event)
 void GearwheelOutputView::wheelEvent(QWheelEvent *event)
 {
     if (event->delta() >= 0)
-        zoomIn();
+        zoomIn(event->pos().x(), event->pos().y());
     else
-        zoomOut();
+        zoomOut(event->pos().x(), event->pos().y());
 }
 
 void GearwheelOutputView::passPlus(void)
 {
-    emit zoomIn();
+    emit zoomIn(-1,-1);
 }
 
 void GearwheelOutputView::passMinus(void)
 {
-    emit zoomOut();
+    emit zoomOut(-1,-1);
 }
