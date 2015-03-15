@@ -138,8 +138,6 @@ void GearwheelOutputController::createSecondGearwheel(void)
 void GearwheelOutputController::addSecondGearwheel(void)
 {
     scene->addItem(gearwheelitem2);
-    std::cout << scene->sceneRect().x() << " " << scene->sceneRect().y() << std::endl;
-    std::cout << scene->sceneRect().width() << " " << scene->sceneRect().height() << std::endl;
 }
 
 void GearwheelOutputController::removeSecondGearwheel(void)
@@ -191,6 +189,7 @@ void GearwheelOutputController::toggleSecondGearwheel(void)
         gearwheel2->rotate(rotationdiff);
         rotationdiff = 0;
         addSecondGearwheel();
+        fitGearwheels();
         secondGearwheelVisChanged(true);
     }
 
@@ -205,6 +204,7 @@ void GearwheelOutputController::centerGearwheel(void)
 {
     posx = scene->sceneRect().width() / 2;
     posy = scene->sceneRect().height() / 2;
+    view->setPos(posx, posy);
     repaintItem();
 }
 

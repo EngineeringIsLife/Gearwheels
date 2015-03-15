@@ -28,6 +28,12 @@ GearwheelOutputView::GearwheelOutputView(QWidget *parent)
 GearwheelOutputView::~GearwheelOutputView(void)
 { }
 
+void GearwheelOutputView::setPos(int x, int y)
+{
+    posx = x;
+    posy = y;
+}
+
 void GearwheelOutputView::mousePressEvent(QMouseEvent *event)
 {
     if (event->buttons() & Qt::LeftButton)

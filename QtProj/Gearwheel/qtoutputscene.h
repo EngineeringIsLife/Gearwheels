@@ -28,9 +28,9 @@ private:
                           Qt::AspectRatioMode aspectRadioMode = Qt::IgnoreAspectRatio) {return; }
 
 public:
-
     explicit GearwheelOutputView(QWidget *parent); //, ProfilMathematisch* zahnrad);
     ~GearwheelOutputView(void);
+    void setPos(int x, int y);
 
 signals:
     void changePosition(int x, int y);
