@@ -21,11 +21,12 @@ GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelO
 
     rotating = false;
     scene = new QGraphicsScene(view);
+    scene->setSceneRect(-600,-600,600,600);
     outputobj = new GearwheelOutputQt(gearwheel->zahnprofil);
     gearwheelitem = new GearwheelItem(*outputobj, posx, posy, zoomfactor);
-    view->setScene(scene);
     scene->addItem(gearwheelitem);
-    view->adjustSize();
+    view->setScene(scene);
+    //view->adjustSize();
 
     createTimer();
     createSecondGearwheel();
@@ -137,6 +138,8 @@ void GearwheelOutputController::createSecondGearwheel(void)
 void GearwheelOutputController::addSecondGearwheel(void)
 {
     scene->addItem(gearwheelitem2);
+    std::cout << scene->sceneRect().x() << " " << scene->sceneRect().y() << std::endl;
+    std::cout << scene->sceneRect().width() << " " << scene->sceneRect().height() << std::endl;
 }
 
 void GearwheelOutputController::removeSecondGearwheel(void)
@@ -198,11 +201,18 @@ void GearwheelOutputController::toggleSecondGearwheel(void)
     repaintItem();
 }
 
+void GearwheelOutputController::centerGearwheel(void)
+{
+    posx = scene->sceneRect().width() / 2;
+    posy = scene->sceneRect().height() / 2;
+    repaintItem();
+}
+
 void GearwheelOutputController::changeSpeed(int newDeg)
 {
     rot_vel = pow(10, (float)(1 + 2) / 99 * newDeg - 2);
     updateRotationspeed();
-    std::cout << newDeg << " " << rot_vel << std::endl;
+    //std::cout << newDeg << " " << rot_vel << std::endl;
 }
 
 void GearwheelOutputController::changeSteps(int x)
@@ -211,7 +221,7 @@ void GearwheelOutputController::changeSteps(int x)
     stepsize = (int)tempstepsize;
     updateRotationspeed();
     rotationtimer->setInterval(stepsize);
-    std::cout << x << " " << stepsize << std::endl;
+    //std::cout << x << " " << stepsize << std::endl;
 }
 
 void GearwheelOutputController::updateRotationspeed(void)

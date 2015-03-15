@@ -1,7 +1,9 @@
 #include <math.h>
 #include "zahnrad.h"
 
+#ifndef DEG
 #define DEG (M_PI/180.0)
+#endif
 
 Zahnraddaten::Zahnraddaten(float alpha, float rho, float c, float m, float x, float k, int z)
     : itersteps(10), _alpha(alpha), _rho(rho), _c(c), _m(m), _x(x), _k(k), _z(z)
@@ -23,7 +25,7 @@ void Zahnraddaten::calcDurchmesser(void)
     // Schnittpunkt der Evolventen:
     float s = _m * (M_PI_2 + 2 * _x * tan(_alpha * DEG));
     float inv_a = s / durchmesser.d + tan(_alpha * DEG) - _alpha * DEG;
-    float alpha_strich = pow(3 * inv_a, 1.0/3.0);
+    float alpha_strich = pow((double)3 * inv_a, (double)1.0/3.0);
 
     // Iteration (siehe Wikipedia)
     for (int i = 0; i < itersteps; i++)

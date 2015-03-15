@@ -16,6 +16,11 @@ GearwheelOutputView::GearwheelOutputView(QWidget *parent)
     button_plus->setGeometry(10,10,20,25);
     button_minus->setGeometry(10,30,20,25);
 
+    //setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //setDragMode(NoDrag);
+    //setSceneRect(-0.5,-0.5,1,1);
+
     connect(button_plus, SIGNAL(clicked()), this, SLOT(passPlus()));
     connect(button_minus, SIGNAL(clicked()), this, SLOT(passMinus()));
 }

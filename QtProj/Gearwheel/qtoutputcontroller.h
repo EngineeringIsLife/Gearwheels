@@ -114,6 +114,7 @@ public slots:
     void zoomItemOut(void);
     void rotateSingle(void);
     void toggleSecondGearwheel(void);
+    void centerGearwheel(void);
     void changeSpeed(int newDeg);
     void rotate_fwd(void);
     void changeSteps(int x);

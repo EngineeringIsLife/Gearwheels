@@ -3,6 +3,11 @@
 
 #include "zahnradprofil.h"
 
+#ifndef M_PI
+#define M_PI 3.1415926535897932384626433832795
+#define M_PI_2 1.5707963267948966192313216916398
+#endif
+
 #define DEG (M_PI/180.0)
 
 class Zahnraddaten

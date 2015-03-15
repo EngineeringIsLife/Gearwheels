@@ -47,9 +47,12 @@ MainWidget::MainWidget(QWidget *parent)
     // Connections
     connect(mainlayout->slider_rotspeed, SIGNAL(valueChanged(int)), controller, SLOT(changeSpeed(int)));
     connect(mainlayout->slider_rotsteps, SIGNAL(valueChanged(int)), controller, SLOT(changeSteps(int)));
+
     connect(mainlayout->rotateButton, SIGNAL(clicked()), controller, SLOT(toggleRotation()));
     connect(mainlayout->secondGWButton, SIGNAL(clicked()), controller, SLOT(toggleSecondGearwheel()));
+    connect(mainlayout->centerGWButton, SIGNAL(clicked()), controller, SLOT(centerGearwheel()));
     connect(mainlayout->exitButton, SIGNAL(clicked()), this, SLOT(close()));
+
     connect(mainlayout->output_toothcountspinner, SIGNAL(valueChanged(int)), controller, SLOT(changeToothcount(int)));
     connect(mainlayout->output_toothcount2spinner, SIGNAL(valueChanged(int)), controller, SLOT(changeToothcount2(int)));
     connect(mainlayout->output_xspinner, SIGNAL(valueChanged(double)), controller, SLOT(changeX(double)));
