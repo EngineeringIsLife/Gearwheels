@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Gearwheel
 TEMPLATE = app
 
+#QMAKE_LFLAGS += /INCREMENTAL:NO
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -20,8 +21,8 @@ SOURCES += main.cpp\
     ../../src/zahnradprofil.cpp \
     ../../src/zahnradfertigung.cpp \
     qtoutputcontroller.cpp \
-    qtoutputscene.cpp \
-    mainlayout.cpp
+    mainlayout.cpp \
+    qtoutputview.cpp
 
 HEADERS  += mainwindow.h \
     ../../h/zahnrad.h \
@@ -30,8 +31,9 @@ HEADERS  += mainwindow.h \
     ../../h/zahnradprofil.h \
     ../../h/zahnradfertigung.h \
     qtoutputcontroller.h \
-    qtoutputscene.h \
-    mainlayout.h
+    mainlayout.h \
+    qtoutputview.h \
+    ../../h/setup.h
 
 INCLUDEPATH += ../../h/
 

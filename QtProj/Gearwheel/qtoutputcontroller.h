@@ -2,7 +2,7 @@
 #define QTOUTPUTCONTROLLER_H
 
 #include "zahnradmath.h"
-#include "qtoutputscene.h"
+#include "qtoutputview.h"
 #include "gearwheeloutput.h"
 #include <QGraphicsItem>
 #include <QObject>

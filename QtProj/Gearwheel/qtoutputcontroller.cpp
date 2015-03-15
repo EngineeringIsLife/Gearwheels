@@ -1,4 +1,5 @@
 #include "qtoutputcontroller.h"
+#include "setup.h"
 #include <math.h>
 
 GearwheelOutputController::GearwheelOutputController(QObject *parent, GearwheelOutputView* view, MainLayout* mainlayout, ProfilMathematisch* zahnrad)
@@ -181,12 +182,12 @@ void GearwheelOutputController::zoomCentered(float factor, int centerx, int cent
 
 void GearwheelOutputController::zoomItemIn(int x, int y)
 {
-    zoomCentered(1.05, x, y);
+    zoomCentered(ZOOMSTEP, x, y);
 }
 
 void GearwheelOutputController::zoomItemOut(int x, int y)
 {
-    zoomCentered(1.0/1.05, x, y);
+    zoomCentered(1.0/ZOOMSTEP, x, y);
 }
 
 void GearwheelOutputController::rotateSingle(void)

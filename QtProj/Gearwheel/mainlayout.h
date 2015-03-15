@@ -20,7 +20,7 @@
 #include <QDoubleSpinBox>
 #include <QCheckBox>
 
-#include "qtoutputscene.h"
+#include "qtoutputview.h"
 
 class MainLayout : public QObject
 {

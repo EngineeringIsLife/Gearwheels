@@ -19,7 +19,7 @@
 #include "zahnradmath.h"
 #include "gearwheeloutput.h"
 
-#include "qtoutputscene.h"
+#include "qtoutputview.h"
 
 using namespace std;
 
@@ -30,7 +30,7 @@ GearwheelOutputQt zahnradoutput(zahnrad.zahnprofil); // Hilfsklasse zum Zeichnen
 MainWidget::MainWidget(QWidget *parent)
     : QWidget(parent)
 {
-    this->setWindowTitle("Gearwheels");
+    this->setWindowTitle("Zahnformdarstellung v2.0b");
 
     mainlayout = new MainLayout(this);
     view = new GearwheelOutputView(this);

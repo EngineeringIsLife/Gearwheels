@@ -1,4 +1,4 @@
-#include "qtoutputscene.h"
+#include "qtoutputview.h"
 #include <QGraphicsView>
 #include <iostream>
 

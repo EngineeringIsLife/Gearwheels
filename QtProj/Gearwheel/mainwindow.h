@@ -25,7 +25,7 @@
 #include "zahnradmath.h"
 #include "gearwheeloutput.h"
 #include "qtoutputcontroller.h"
-#include "qtoutputscene.h"
+#include "qtoutputview.h"
 
 
 

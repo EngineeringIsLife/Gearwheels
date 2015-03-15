@@ -1,4 +1,5 @@
 #include "mainlayout.h"
+#include "setup.h"
 
 MainLayout::MainLayout(QWidget *parent)
     : parent(parent)
@@ -87,7 +88,7 @@ void MainLayout::createTitleFrame(void)
     // First frame - Title
     label_title = new QLabel();
     layout_main->addWidget(label_title, 1, 1, 1, 2);
-    label_title->setText("Gearwheel Visualization");
+    label_title->setText("Softwaretool zur Generierung evolventischer Zahnformen");
 }
 
 void MainLayout::createButtonsFrame(void)
@@ -115,20 +116,20 @@ void MainLayout::createOutputFrame(void)
     layout_main->addWidget(box_output, 3, 1, 1, 1);
     layout_output = new QVBoxLayout(box_output);
 
-    label_testtext = new QLabel(box_output);
-    label_testtext->setText("Gearwheel");
-    layout_output->addWidget(label_testtext);
+    //label_testtext = new QLabel(box_output);
+    //label_testtext->setText("Einstellungen");
+    //layout_output->addWidget(label_testtext);
 
     QLabel* label_toothcount1 = new QLabel("Zahnrad 1 - Zähnezahl");
     layout_output->addWidget(label_toothcount1);
     output_toothcountspinner = new QSpinBox(box_output);
-    output_toothcountspinner->setRange(4,100);
+    output_toothcountspinner->setRange(GW_Z_MIN,GW_Z_MAX);
     layout_output->addWidget(output_toothcountspinner);
 
     QLabel* label_toothcount2 = new QLabel("Zahnrad 2 - Zähnezahl");
     layout_output->addWidget(label_toothcount2);
     output_toothcount2spinner = new QSpinBox(box_output);
-    output_toothcount2spinner->setRange(4,100);
+    output_toothcount2spinner->setRange(GW_Z_MIN,GW_Z_MAX);
     layout_output->addWidget(output_toothcount2spinner);
 
     output_diametercheckbox = new QCheckBox("Zeige Durchmesser", box_output);
@@ -143,7 +144,7 @@ void MainLayout::createOutputFrame(void)
     QLabel* label_xmovement = new QLabel("Profilverschiebung");
     layout_output->addWidget(label_xmovement);
     output_xspinner = new QDoubleSpinBox(box_output);
-    output_xspinner->setRange(-1.0, 1.0);
+    output_xspinner->setRange(GW_X_MIN, GW_X_MAX);
     output_xspinner->setSingleStep(0.1);
     layout_output->addWidget(output_xspinner);
 
@@ -162,7 +163,7 @@ void MainLayout::createStatusFrame(void)
 {
     // Fourth frame - Status bar
     label_status = new QLabel();
-    label_status->setText("Ready");
+    label_status->setText("Bereit");
 
     layout_main->addWidget(label_status, 4, 1, 1, 2);
 }
