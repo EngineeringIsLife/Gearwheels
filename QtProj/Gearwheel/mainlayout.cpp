@@ -19,13 +19,14 @@ MainLayout::~MainLayout(void)
     delete centerGWButton;
     delete exitButton;
     delete layout_output;
-    delete label_testtext;
+    delete label_modul;
     delete slider_rotspeed;
     delete slider_rotsteps;
     delete label_status;
     delete output_toothcountspinner;
     delete output_toothcount2spinner;
     delete output_xspinner;
+    delete output_modulcombo;
 }
 
 void MainLayout::addView(QGraphicsView *view)
@@ -111,14 +112,26 @@ void MainLayout::createButtonsFrame(void)
 
 void MainLayout::createOutputFrame(void)
 {
+    char *ModulRow1[] = {"0.05", "0.06", "0.08", "0.10", "0.12", "0.16", "0.20", "0.25", "0.30", "0.40", "0.50", "0.60", "0.70", "0.80", \
+                        "0.90", "1.00", "1.25", "1.5", "2.0", "2.5", "3", "4", "5", "6", "8", \
+                        "10", "12", "16", "20", "25", "32", "40", "50", "60"};
+    char *ModulRow2[] = {"0.055", "0.07", "0.09", "0.11", "0.14", "0.18", "0.22", "0.28", "0.35", "0.45", "0.55", "0.65", "0.75", "0.85", \
+                        "0.95", "1.125", "1.375", "1.75", "2.25", "2.75", "3.5", "4.5", "5.5", "7", "9", \
+                        "11", "14", "18", "22", "28", "36", "45", "55", "70"};
+
     // Third frame - Inputs for gearwheel
     box_output = new QGroupBox(parent);
     layout_main->addWidget(box_output, 3, 1, 1, 1);
     layout_output = new QVBoxLayout(box_output);
 
-    //label_testtext = new QLabel(box_output);
-    //label_testtext->setText("Einstellungen");
-    //layout_output->addWidget(label_testtext);
+    QLabel* label_modul = new QLabel("Modul - Reihe 1");
+    layout_output->addWidget(label_modul);
+    output_modulcombo = new QComboBox(box_output);
+    for (int i = 0; i < 31; i++) {
+        QString str(ModulRow1[i]);
+        output_modulcombo->addItem(str);
+    }
+    layout_output->addWidget(output_modulcombo);
 
     QLabel* label_toothcount1 = new QLabel("Zahnrad 1 - Zähnezahl");
     layout_output->addWidget(label_toothcount1);

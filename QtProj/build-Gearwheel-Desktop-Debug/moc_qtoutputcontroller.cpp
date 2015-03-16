@@ -22,7 +22,7 @@ static const uint qt_meta_data_GearwheelOutputController[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      20,   14, // methods
+      22,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -52,6 +52,8 @@ static const uint qt_meta_data_GearwheelOutputController[] = {
      396,   27,   26,   26, 0x0a,
      427,   27,   26,   26, 0x0a,
      459,   27,   26,   26, 0x0a,
+     496,  490,   26,   26, 0x0a,
+     514,  490,   26,   26, 0x0a,
 
        0        // eod
 };
@@ -70,7 +72,8 @@ static const char qt_meta_stringdata_GearwheelOutputController[] = {
     "setDiameterVisibility(int)\0"
     "setFootdiameterVisibility(int)\0"
     "setOuterdiameterVisibility(int)\0"
-    "setBasediameterVisibility(int)\0"
+    "setBasediameterVisibility(int)\0modul\0"
+    "setModul(QString)\0setModul(float)\0"
 };
 
 void GearwheelOutputController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -99,6 +102,8 @@ void GearwheelOutputController::qt_static_metacall(QObject *_o, QMetaObject::Cal
         case 17: _t->setFootdiameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 18: _t->setOuterdiameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 19: _t->setBasediameterVisibility((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: _t->setModul((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 21: _t->setModul((*reinterpret_cast< float(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -136,9 +141,9 @@ int GearwheelOutputController::qt_metacall(QMetaObject::Call _c, int _id, void *
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 20)
+        if (_id < 22)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 20;
+        _id -= 22;
     }
     return _id;
 }

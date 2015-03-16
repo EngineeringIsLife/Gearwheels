@@ -317,3 +317,16 @@ void GearwheelOutputController::setBasediameterVisibility(int state)
     visibility.diameter_base = (bool)state;
     repaintItem();
 }
+
+void GearwheelOutputController::setModul(QString modul)
+{
+    setModul(modul.toFloat());
+}
+
+void GearwheelOutputController::setModul(float modul)
+{
+    gearwheel->changeM(modul);
+    gearwheel2->changeM(modul);
+    fitGearwheels();
+    repaintItem();
+}

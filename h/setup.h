@@ -9,4 +9,7 @@
 
 #define ZOOMSTEP 1.05
 
+//extern char *ModulRow1[32];
+//extern char *ModulRow2[32];
+
 #endif // SETUP_H

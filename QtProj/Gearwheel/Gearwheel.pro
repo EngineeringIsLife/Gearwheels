@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     ../../src/zahnradfertigung.cpp \
     qtoutputcontroller.cpp \
     mainlayout.cpp \
-    qtoutputview.cpp
+    qtoutputview.cpp \
+    setup.c
 
 HEADERS  += mainwindow.h \
     ../../h/zahnrad.h \

@@ -128,6 +128,8 @@ public slots:
     void setFootdiameterVisibility(int state);
     void setOuterdiameterVisibility(int state);
     void setBasediameterVisibility(int state);
+    void setModul(QString modul);
+    void setModul(float modul);
 
 signals:
     void rotationStateChanged(bool state);

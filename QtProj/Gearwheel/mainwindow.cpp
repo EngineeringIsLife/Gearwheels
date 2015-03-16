@@ -62,11 +62,14 @@ MainWidget::MainWidget(QWidget *parent)
     connect(mainlayout->output_outerdiametercheckbox, SIGNAL(stateChanged(int)), controller, SLOT(setOuterdiameterVisibility(int)));
     connect(mainlayout->output_basediametercheckbox, SIGNAL(stateChanged(int)), controller, SLOT(setBasediameterVisibility(int)));
 
+    connect(mainlayout->output_modulcombo, SIGNAL(activated(QString)), controller, SLOT(setModul(QString)));
+
     connect(controller, SIGNAL(rotationStateChanged(bool)), mainlayout, SLOT(gearwheelRotationState(bool)));
     connect(controller, SIGNAL(secondGearwheelVisChanged(bool)), mainlayout, SLOT(secondGWVisibility(bool)));
 
     mainlayout->slider_rotspeed->setSliderPosition(50);
     mainlayout->slider_rotsteps->setSliderPosition(20);
+    mainlayout->output_modulcombo->setCurrentIndex(21);
     controller->changeSpeed(50);
     controller->changeSteps(20);
 }

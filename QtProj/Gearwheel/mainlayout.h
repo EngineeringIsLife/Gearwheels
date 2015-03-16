@@ -19,6 +19,7 @@
 #include <QSpinBox>
 #include <QDoubleSpinBox>
 #include <QCheckBox>
+#include <QComboBox>
 
 #include "qtoutputview.h"
 
@@ -35,7 +36,7 @@ private:
     QLabel* label_title;
     QHBoxLayout* layout_buttons;
     QVBoxLayout* layout_output;
-    QLabel* label_testtext;
+    QLabel* label_modul;
     QLabel* label_status;
 
     void createToplevelLayout(QWidget *parent = 0);
@@ -58,6 +59,7 @@ public:
     QCheckBox* output_footdiametercheckbox;
     QCheckBox* output_outerdiametercheckbox;
     QCheckBox* output_basediametercheckbox;
+    QComboBox* output_modulcombo;
 
     MainLayout(QWidget *parent = 0);
     ~MainLayout(void);
